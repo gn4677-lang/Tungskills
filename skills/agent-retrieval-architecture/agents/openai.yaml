@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Retrieval Architecture"
+  short_description: "Own search, retrieval, document-read fallback, and RAG boundaries for agent systems."
+  default_prompt: "Use $agent-retrieval-architecture when search is weak or you need to decide between state, retrieval, docs, and RAG."
