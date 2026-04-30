@@ -1,6 +1,6 @@
 ---
 name: agent-runtime-activation-ladder
-description: Use when deciding when to run live LLM/provider tests, diagnostic canaries, shadow mode, canary rollout, user-facing rollout, mutation authority, fake-to-live promotion, provider/tool activation, or runtime rollout maturity. Use when Codex encounters 要不要上線, 開給使用者, 寫入真實資料, live test, shadow, canary, or whether a built agent capability may become live, user-facing, or mutation-bearing.
+description: Use when deciding when to run live LLM/provider tests, diagnostic canaries, shadow mode, canary rollout, user-facing rollout, mutation authority, fake-to-live promotion, provider/tool activation, or runtime rollout maturity. Use when Codex encounters 要不要上線, 開給使用者, 寫入真實資料, live test, B2 strict pass, three-round stability, shadow, canary, or whether a built agent capability may become live, user-facing, or mutation-bearing.
 ---
 
 # Agent Runtime Activation Ladder
@@ -46,6 +46,7 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 8. Use `evidence-claim-integrity` before claiming rollout readiness.
 9. Use `agentic-eval-development` when the primary task is designing the eval suite, grader, trace replay, or regression seed rather than deciding activation stage.
 10. Use `llm-deterministic-boundary` when activation would change whether LLM output, deterministic code, or a human owns runtime truth.
+11. Passing strict B2, diagnostic, or repeated stability rounds is activation evidence only; it does not freeze guard/repair architecture, prove model portability, or skip shadow/canary checks on stronger models.
 
 ## Heuristics
 
@@ -54,6 +55,7 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 | Fake provider green -> live user-facing | Stop; require live diagnostic and shadow first. |
 | Closure gate green -> live diagnostic with no product change | Proceed if traces and fallback exist. |
 | Shadow looks better once -> write canonical state | Stop; mutation-bearing needs rollout evidence. |
+| B2 strict passes three rounds -> freeze scaffold | Narrow; compare stronger-model shadow behavior before treating guard/repair weight as product architecture. |
 | All providers live in parallel | Narrow; isolate one provider/model first or route fallback concerns. |
 | Capability built -> activate for users | Stop; build completion is not activation permission. |
 

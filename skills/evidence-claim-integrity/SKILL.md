@@ -1,6 +1,6 @@
 ---
 name: evidence-claim-integrity
-description: Use when claiming or summarizing done, complete, fixed, ready, safe, all passed, green, can proceed, no issues, test/eval/CI/benchmark status, runner reports, trace evidence, parity, coverage, human review, production readiness, skipped tests, timeouts, mocks, partial failures, or incomplete reports. Use when Codex encounters 可以說完成嗎, ready 嗎, 能不能上傳, 有證據嗎, 測試沒跑, or 不要亂說全過.
+description: Use when claiming or summarizing done, complete, fixed, ready, safe, all passed, green, can proceed, no issues, test/eval/CI/benchmark status, runner reports, trace evidence, parity, coverage, human review, production readiness, skipped tests, timeouts, mocks, partial failures, repeated strict passes, or incomplete reports. Use when Codex encounters 可以說完成嗎, ready 嗎, 能不能上傳, 有證據嗎, B2 三輪都過, 測試沒跑, or 不要亂說全過.
 ---
 
 # Evidence Claim Integrity
@@ -46,6 +46,7 @@ Decision: proceed | narrow | stop
 | One benchmark case fixed | That case is fixed. | Failure family closed. |
 | All visible checks passed | Visible checks passed. | No issues or production ready. |
 | Timeout, skipped tests, mocks, or partial report | Evidence is incomplete. | All passed. |
+| Three strict B2 rounds passed | That harness passed under those model/scaffold/environment settings. | Generally stable, model-portable, production ready, or architecture optimal. |
 
 ## Stop Signals
 
