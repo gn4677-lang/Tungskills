@@ -1,6 +1,6 @@
 ---
 name: agentic-eval-development
-description: Use when designing or revising evals for agentic products, Eval Driven Development, 評測驅動開發, manager agents, multi-agent systems, tool orchestration, guardrails, handoffs, traces, graders/rubrics, product-truth validation, capability evals, regression seeds, benchmark replay governance, fixture-shape drift, strict eval overfitting, path-specific grading, or scaffold overfitting. Use when Codex encounters eval dataset, trace replay, regression case, B2 strict cases, or product truth vs fixture truth.
+description: Use when designing or revising evals for agentic products, Eval Driven Development, 評測驅動開發, manager agents, multi-agent systems, tool orchestration, guardrails, handoffs, traces, graders/rubrics, product-truth validation, capability evals, regression seeds, benchmark replay governance, fixture-shape drift, eval/test-set overfitting, path-specific grading, harness/scaffold confounders, or product truth vs fixture truth.
 ---
 
 # Agentic Eval Development
@@ -39,7 +39,7 @@ Decision: proceed | narrow | stop
 8. Use `llm-deterministic-boundary` when an eval failure exposes a truth-owner conflict between LLM judgment, prompt behavior, deterministic code, validators, or guards.
 9. Use `agent-runtime-activation-ladder` when the primary question is whether an evaluated capability may run live, user-facing, canary, shadow, or mutation-bearing.
 10. When converting trace replay into regression seeds, name seed provenance, replay selection criteria, rubric calibration, and the acceptance threshold.
-11. Do not let strict cases, path-specific pass criteria, repair success, or three-round stability define product architecture; include outcome-based grading, negative/holdout cases, and model-tier comparison when scaffold overfitting is a risk.
+11. Do not let fixed strict cases, path-specific pass criteria, repair success, or repeated stability runs define product architecture; include outcome-based grading, negative/holdout cases, and model-tier comparison when eval or scaffold overfitting is a risk.
 
 ## Heuristics
 
@@ -51,7 +51,7 @@ Decision: proceed | narrow | stop
 | One SKU or one case fixed by a prompt | Check the broader failure family before patching. |
 | Provider timeout, rate limit, or failover issue | Route to `agent-fallback-eval`. |
 | Subjective quality claim | Add rubric plus human calibration or sampling. |
-| Strict eval checks exact steps instead of useful outcomes | Prefer outcome grading, partial credit, and negative cases that catch overtriggering. |
+| Eval checks exact steps or tool order instead of useful outcomes | Prefer outcome grading, partial credit, and negative cases that catch overtriggering. |
 
 ## Stop Signals
 
@@ -62,7 +62,7 @@ Do not proceed when:
 - capability and regression evals are mixed into one pass/fail claim
 - a judge prompt is treated as truth without calibration
 - evals optimize a happy path while hiding tool, guard, or handoff failures
-- strict evals make a guard, repair loop, or scaffold look necessary without testing whether stronger models need it
+- repeated eval passes make a guard, repair loop, or scaffold look necessary without testing holdout cases, model tiers, and harness confounders
 
 ## Verification
 

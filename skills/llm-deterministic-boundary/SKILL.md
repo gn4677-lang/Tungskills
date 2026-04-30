@@ -1,6 +1,6 @@
 ---
 name: llm-deterministic-boundary
-description: Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, semantic routing, post-pass overrides, or agent decision authority should own a product/workflow decision. Use when Codex encounters 該寫 prompt 還是 code, weak model vs strong model, 弱模型/好模型, model capability, scaffold overfitting, 過擬合, guard/repair 太重, 綁手綁腳, validator ownership, or code overwriting an LLM semantic decision.
+description: Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, semantic routing, post-pass overrides, or agent decision authority should own a product/workflow decision. Use when Codex encounters 該寫 prompt 還是 code, model-tier portability, weak-model compensation, scaffold dependency, scaffold/eval overfitting, guardrail overconstraint, repair-loop dependency, 模型泛化, 測試集過擬合, guard 太重, or code overwriting an LLM semantic decision.
 ---
 
 # LLM Deterministic Boundary
@@ -36,7 +36,7 @@ Decision: proceed | narrow | stop
 7. Prefer a validator or repair contract before changing prompts for one-off failures.
 8. Use `architecture-boundary-governance` when the ownership decision changes module placement, public API, data model, dependency direction, or runtime boundary.
 9. Use `agentic-eval-development` when the boundary must be validated through eval datasets, graders, traces, or regression seeds.
-10. Do not harden guard, repair, or deterministic override policy only because a weaker model needs help on a small strict eval set; compare whether stronger models solve the same product decision without the scaffold.
+10. Do not harden guard, repair, or deterministic override policy only because one model tier needs help on a small or repeated eval set; compare whether other capable models solve the same product decision without the scaffold.
 
 ## Heuristics
 
@@ -47,7 +47,7 @@ Decision: proceed | narrow | stop
 | LLM asked to enforce exact schema or threshold | Move that role to deterministic validation. |
 | Deterministic keyword router for semantic intent | Use it only as guard, prior, or reject rule unless product truth approves it. |
 | Repair loop with no attempt limit | Add bounded repair and stop condition. |
-| Weak model passes only with heavy guard/repair scaffold | Treat as a model-capability/scaffold tradeoff; do not freeze the scaffold until strong-model behavior and product truth are checked. |
+| A model passes only with heavy guard/repair scaffold | Treat as a model-capability/scaffold tradeoff; do not freeze the scaffold until cross-model behavior and product truth are checked. |
 
 ## Verification
 
