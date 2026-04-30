@@ -1,6 +1,6 @@
 ---
 name: agent-durability-ops
-description: Use when the main problem is background runtime durability or operational continuity, especially agent 背景任務, crash recovery, worker/job lifecycle, checkpointing, snapshot bootstrapping, budget/quota guards, state restoration across sessions/devices, or background memory sync. Use when Codex encounters worker 掛掉, 失敗恢復, 重試避免重複寫入, or quota 用完. Do not use as the primary skill for search/RAG, active context packing, proactive reminders, or provider/model failover.
+description: Use when the main problem is background runtime durability or operational continuity, especially agent 背景任務, crash recovery, worker/job lifecycle, checkpointing, snapshot bootstrapping, budget/quota guards, state restoration across sessions/devices, or background memory sync. Trigger on failure modes such as worker crash, recovery after partial completion, duplicate execution, idempotency risk, or quota exhaustion. Do not use as primary for search/RAG, active context packing, proactive reminders, or provider/model failover.
 ---
 
 # Agent Durability Ops

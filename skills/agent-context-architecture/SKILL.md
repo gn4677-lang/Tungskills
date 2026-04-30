@@ -1,6 +1,6 @@
 ---
 name: agent-context-architecture
-description: Use when the main problem is agent memory or context continuity, especially agent 記憶, forgetting, session leakage, identity confusion, context packing, compaction, memory scope, checkpoint vs memory, or cross-project/user memory carryover. Use when Codex encounters prompts like agent 忘記了, 記憶外洩, 同一使用者切專案, or context 太亂. Do not use as the primary skill for search, RAG, or external-document retrieval problems.
+description: Use when the main problem is agent memory or context continuity, especially agent 記憶, forgetting, session leakage, identity confusion, context packing, compaction, memory scope, checkpoint vs memory, or cross-project/user memory carryover. Trigger on symptoms such as forgotten state, memory leakage, cross-project memory mixing, tenant/user scope confusion, or context 太亂. Do not use as primary for search, RAG, or external-document retrieval.
 ---
 
 # Agent Context Architecture

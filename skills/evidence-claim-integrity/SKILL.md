@@ -1,6 +1,6 @@
 ---
 name: evidence-claim-integrity
-description: Use when claiming or summarizing done, complete, fixed, ready, safe, all passed, green, can proceed, no issues, test/eval/CI/benchmark status, runner reports, trace evidence, parity, coverage, human review, production readiness, skipped tests, timeouts, mocks, partial failures, repeated strict passes, model portability, or incomplete reports. Use when Codex encounters 可以說完成嗎, ready 嗎, 能不能上傳, 有證據嗎, 連續多輪都過, 測試沒跑, or 不要亂說全過.
+description: Use when claiming or summarizing done, complete, fixed, ready, safe, all passed, green, can proceed, no issues, test/eval/CI/benchmark status, runner reports, trace evidence, parity, coverage, human review, production readiness, skipped tests, timeouts, mocks, partial failures, repeated strict passes, model portability, or incomplete reports. Trigger on readiness or evidence questions, including 可以說完成嗎, ready 嗎, 能不能上傳, 有證據嗎, repeated pass claims, unrun tests, or overbroad success claims.
 ---
 
 # Evidence Claim Integrity

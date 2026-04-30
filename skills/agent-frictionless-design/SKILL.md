@@ -1,6 +1,6 @@
 ---
 name: agent-frictionless-design
-description: Use when the main problem is interaction friction, especially 使用很卡, heavy onboarding, too many clarifying questions, weak progress cues, blocked state, poor surface choice, slow-feeling interaction, or correction without losing work. Use when Codex encounters prompts like 不要一直問我, 進度要看得到, or 這個 agent 用起來很慢. Do not use as primary for memory, retrieval, or failover policy.
+description: Use when the main problem is interaction friction, especially 使用很卡, heavy onboarding, too many clarifying questions, weak progress cues, blocked state, poor surface choice, slow-feeling interaction, or correction without losing work. Trigger on UX symptoms such as repeated clarification, invisible progress, poor first-value path, missing correction path, or slow-feeling agent flow. Do not use as primary for memory, retrieval, or failover policy.
 ---
 
 # Agent Frictionless Design

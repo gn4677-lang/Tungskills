@@ -1,6 +1,6 @@
 ---
 name: agent-retrieval-architecture
-description: Use when the main problem is search, retrieval, document lookup, or RAG boundaries, especially agent 搜尋, RAG, source routing, deterministic state vs retrieved knowledge, full-document read fallback, stale citations, or multi-corpus scope. Use when Codex encounters prompts like 找資料找錯, 文件要不要整篇讀, search quality, or retrieval eval. Do not use as primary for session continuity or memory leakage.
+description: Use when the main problem is search, retrieval, document lookup, or RAG boundaries, especially agent 搜尋, RAG, source routing, deterministic state vs retrieved knowledge, full-document read fallback, stale citations, or multi-corpus scope. Trigger on retrieval symptoms such as wrong source selection, stale grounding, corpus ambiguity, full-document-read decisions, or retrieval-vs-answer eval design. Do not use as primary for session continuity or memory leakage.
 ---
 
 # Agent Retrieval Architecture

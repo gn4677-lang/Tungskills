@@ -1,6 +1,6 @@
 ---
 name: uiux-intent-designer
-description: Use when Codex is asked to design, redesign, build, modify, or critique user-facing UI/UX and must clarify user intent, product purpose, system concept, interaction behavior, animation purpose, visual direction, or human alignment before implementation. Use for 介面設計, 使用者流程, 畫面互動, UX, visual direction. If interface means module/API/type/method shape, route to architecture-boundary-governance.
+description: Use when Codex is asked to design, redesign, build, modify, or critique user-facing UI/UX and must clarify user intent, product purpose, system concept, interaction behavior, animation purpose, visual direction, or human alignment before implementation. Trigger on user-facing 介面設計, 使用者流程, 畫面互動, UX, visual direction, or interaction concept work. If interface means module/API/type/method shape, route to architecture-boundary-governance.
 ---
 
 # UI/UX Intent Designer

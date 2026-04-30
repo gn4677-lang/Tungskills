@@ -1,6 +1,6 @@
 ---
 name: agent-proactive-architecture
-description: Use when the main problem is proactive agent behavior, especially agent 主動提醒, scheduled work, reminders, follow-ups, wake triggers, cron/event/state threshold signals, autonomy tiers, approval/dismiss/undo surfaces, or false-positive silence. Use when Codex encounters prompts like 要不要主動叫醒, 什麼時候提醒我, or 低信心先不要打擾. Do not use as primary for provider failure, retry, or fallback policy.
+description: Use when the main problem is proactive agent behavior, especially agent 主動提醒, scheduled work, reminders, follow-ups, wake triggers, cron/event/state threshold signals, autonomy tiers, approval/dismiss/undo surfaces, or false-positive silence. Trigger on decisions about when to wake, remind, stay silent, ask approval, allow dismissal, or undo proactive actions. Do not use as primary for provider failure, retry, or fallback policy.
 ---
 
 # Agent Proactive Architecture

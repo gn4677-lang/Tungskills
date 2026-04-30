@@ -1,6 +1,6 @@
 ---
 name: uiux-objective-review
-description: Use when Codex needs to review, verify, QA, or improve rendered UI/UX with screenshots, accessibility, responsive checks, interaction states, visual hierarchy, heuristic review, objective rejection criteria, or design readiness before claiming a UI is polished/ready. Use when Codex encounters UI 看起來怪, layout overlap, mobile 版壞掉, screenshot QA, or 可以說設計完成嗎.
+description: Use when Codex needs to review, verify, QA, or improve rendered UI/UX with screenshots, accessibility, responsive checks, interaction states, visual hierarchy, heuristic review, objective rejection criteria, or design readiness before claiming a UI is polished/ready. Trigger on rendered-UI defects such as layout overlap, mobile/responsive breakage, screenshot QA findings, accessibility issues, or readiness claims about visual quality.
 ---
 
 # UI/UX Objective Review

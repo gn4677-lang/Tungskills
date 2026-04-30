@@ -1,6 +1,6 @@
 ---
 name: agent-fallback-eval
-description: Use when the main problem is runtime failure handling, especially retry, timeout, rate limit, provider/model failover, degraded mode, trace fields, eval loops for failures, concurrency budgets, or guardrail stop/approval boundaries. Use when Codex encounters tool timeout, provider 掛掉, 降級回應, 失敗恢復 policy, or retry/failover confusion. Do not use as primary for proactive reminders or general eval-suite design.
+description: Use when the main problem is runtime failure handling, especially retry, timeout, rate limit, provider/model failover, degraded mode, trace fields, eval loops for failures, concurrency budgets, or guardrail stop/approval boundaries. Trigger on failure modes such as tool timeout, provider outage, degraded response, retry/failover confusion, stop-condition gaps, or guardrail placement. Do not use as primary for proactive reminders or general eval-suite design.
 ---
 
 # Agent Fallback Eval

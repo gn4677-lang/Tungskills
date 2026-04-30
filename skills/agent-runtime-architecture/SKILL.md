@@ -1,6 +1,6 @@
 ---
 name: agent-runtime-architecture
-description: Use when unsure which runtime skill should own an AI agent problem, or when a request spans agent 記憶, 搜尋/RAG, 背景任務, 主動提醒/喚醒, 失敗恢復/降級, or 使用摩擦 and needs high-level routing before context, retrieval, durability, proactive, fallback, or frictionless design. Use when Codex encounters mixed runtime complaints or asks whether the six runtime skills are ready.
+description: Use when unsure which runtime skill should own an AI agent problem, or when a request spans agent 記憶, 搜尋/RAG, 背景任務, 主動提醒/喚醒, 失敗恢復/降級, or 使用摩擦 and needs high-level routing before context, retrieval, durability, proactive, fallback, or frictionless design. Trigger on mixed runtime complaints, cross-skill routing uncertainty, or runtime skill readiness checks.
 ---
 
 # Agent Runtime Architecture
@@ -70,4 +70,4 @@ This skill does not own:
 - Treat code-confirmed and doc-confirmed patterns differently.
 - Do not use second-hand videos as source-of-truth.
 - Keep capability skills procedural: intake, decision, action, output contract, and verification.
-- Do not treat the final acceptance future research queue as a Wave 5 trigger; start another promotion pass only after a real usage failure, new source, or explicit user request.
+- Do not treat a future research queue as a promotion trigger; start another promotion pass only after a real usage failure, new source, or explicit user request.
