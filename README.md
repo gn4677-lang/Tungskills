@@ -4,7 +4,7 @@ Personal Codex skill collection for agent architecture, evals, UI/UX, CJK text i
 
 ## Contents
 
-This repository contains 16 custom skills under `skills/`:
+This repository contains 18 custom skills under `skills/`:
 
 - `agent-context-architecture`
 - `agent-durability-ops`
@@ -17,6 +17,8 @@ This repository contains 16 custom skills under `skills/`:
 - `agent-runtime-architecture`
 - `architecture-boundary-governance`
 - `capability-dependency-build-order`
+- `delivery-pipeline-governance`
+- `development-environment-parity`
 - `evidence-claim-integrity`
 - `llm-deterministic-boundary`
 - `uiux-intent-designer`

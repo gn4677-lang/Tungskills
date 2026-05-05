@@ -1,6 +1,6 @@
 ---
 name: capability-dependency-build-order
-description: Use before planning or editing when the agent may choose files, tests, classes, modules, services, eval fixes, local next steps, issue slices, PRD slices, HITL/AFK work, shared/platform work, implementation order, or 先做哪個 before deciding real capability dependency, domain glossary, bounded context, product slicing, dependency order, or capability sequencing.
+description: Use before planning or editing when the agent may choose files, tests, classes, modules, services, eval fixes, local next steps, issue slices, PRD slices, HITL/AFK work, shared/platform work, implementation order, parallel capability work, MVP mainline vs future-wave scope, contract-first slices, trunk-safe slices, or 先做哪個 before deciding real capability dependency, domain glossary, bounded context, product slicing, dependency order, or capability sequencing.
 ---
 
 # Capability Dependency Build Order
@@ -36,6 +36,7 @@ If the task is small and already inside one stable interface, state only `Build 
 4. Assign behavior to the object/module with the needed information and responsibility.
 5. Point dependencies toward stable policy, abstractions, or domain behavior; avoid cycles.
 6. Build the smallest capability that unblocks the next capability.
+7. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
 
 Use `architecture-boundary-governance` when the sequence crosses ownership, public APIs, data models, runtime boundaries, or subagent responsibilities.
 
@@ -52,6 +53,8 @@ Read `references/domain-language-and-product-slicing.md` when capability order d
 | UI or infrastructure before domain behavior | Testable domain behavior first when possible. |
 | Cross-context data access | Explicit integration contract, event, API, or adapter. |
 | Circular domain dependency | Split responsibility, invert dependency, or introduce a stable contract. |
+| Future capability appears before MVP dependency is stable | Merge only guard/contract/no-runtime-effect slices; keep implementation draft or shadow. |
+| Multiple agents build adjacent capabilities | Define track ownership and trunk-safe slice boundaries before implementation order. |
 
 ## Stop Signals
 
@@ -63,6 +66,8 @@ Do not proceed with the proposed order when:
 - one module owns multiple business meanings
 - dependencies point from stable domain policy to volatile infrastructure
 - subagent tasks are split by file count instead of capability ownership
+- future-wave implementation is treated as mergeable before its contract, guard, or activation boundary exists
+- parallel branches are sequenced by PR age instead of capability dependency and trunk integration safety
 
 ## Verification
 

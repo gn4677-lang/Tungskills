@@ -1,6 +1,6 @@
 ---
 name: agent-runtime-activation-ladder
-description: Use when deciding when to run live LLM/provider tests, diagnostic canaries, shadow mode, canary rollout, user-facing rollout, mutation authority, fake-to-live promotion, provider/tool activation, or runtime rollout maturity. Use when Codex encounters 要不要上線, 開給使用者, 寫入真實資料, strict harness pass, repeated stability runs, model portability, shadow, canary, or whether a built agent capability may become live, user-facing, or mutation-bearing.
+description: Use when deciding when to run live LLM/provider tests, diagnostic canaries, shadow mode, canary rollout, user-facing rollout, mutation authority, fake-to-live promotion, provider/tool activation, runtime rollout maturity, future-wave PR mergeability, shadow implementation, feature flag, activation gate, runtime effect, or whether a built agent capability may become live, user-facing, or mutation-bearing. Use when Codex encounters 要不要上線, 開給使用者, 寫入真實資料, future capability 要不要 merge, strict harness pass, repeated stability runs, single-profile evidence, full-suite diagnostic pass, pass after hardening, model portability, shadow, or canary.
 ---
 
 # Agent Runtime Activation Ladder
@@ -47,6 +47,10 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 9. Use `agentic-eval-development` when the primary task is designing the eval suite, grader, trace replay, or regression seed rather than deciding activation stage.
 10. Use `llm-deterministic-boundary` when activation would change whether LLM output, deterministic code, or a human owns runtime truth.
 11. Passing a strict harness, diagnostic suite, or repeated stability runs is activation evidence only; it does not freeze guard/repair architecture, prove model portability, or skip shadow/canary checks across model tiers.
+12. Single-profile live evidence or full-suite diagnostic pass remains `live-diagnostic` evidence until model/profile diversity, holdout coverage, claim boundaries, and rollback/no-commit fallback are present.
+13. A pass that appears only after prompt, schema, guard, or contract hardening must not advance activation until overfit risk and legal-flow representability are reviewed.
+14. A future-wave PR being implemented, reviewed, or green is not activation permission; merging active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority requires an activation-stage decision.
+15. Guard, contract, schema, and no-runtime-effect slices may enter main as activation controls; hidden or shadow implementation must remain non-authoritative until the next ladder step has evidence.
 
 ## Heuristics
 
@@ -56,8 +60,12 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 | Closure gate green -> live diagnostic with no product change | Proceed if traces and fallback exist. |
 | Shadow looks better once -> write canonical state | Stop; mutation-bearing needs rollout evidence. |
 | Strict harness passes repeatedly -> freeze scaffold | Narrow; compare shadow behavior across model tiers before treating guard/repair weight as product architecture. |
+| Single-profile live pass -> private use or canary | Stop; require portability evidence and explicit activation review. |
+| Full-suite pass after hardening -> readiness | Narrow; check overfit risk, representability, and holdout coverage first. |
 | All providers live in parallel | Narrow; isolate one provider/model first or route fallback concerns. |
 | Capability built -> activate for users | Stop; build completion is not activation permission. |
+| Future-wave PR wants merge because implementation is complete | Narrow; merge only activation controls unless the capability is promoted. |
+| Hidden code touches route, scheduler, or mutation path | Stop; that is activation, not passive shadow code. |
 
 ## Stop Signals
 
