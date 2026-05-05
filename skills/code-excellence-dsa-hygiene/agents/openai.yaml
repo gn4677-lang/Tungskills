@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Excellence & DSA Hygiene"
+  short_description: "Review code clarity, algorithms, and maintainability"
+  default_prompt: "Review this code for readability, unnecessary abstraction, algorithm/data-structure fit, hot-path efficiency, and no-behavior refactor safety."

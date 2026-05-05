@@ -42,6 +42,8 @@ Use `architecture-boundary-governance` when the sequence crosses ownership, publ
 
 Use `llm-deterministic-boundary` when the next slice depends on whether an LLM, prompt, validator, guard, or deterministic rule should own a product decision.
 
+Use `code-excellence-dsa-hygiene` when the build order question is whether to pay down readability, unnecessary abstraction, hot-path, algorithm, or data-structure debt before adding more product behavior.
+
 Read `references/domain-language-and-product-slicing.md` when capability order depends on domain glossary terms, `CONTEXT.md`, ADRs, PRD shape, vertical issue slicing, HITL/AFK labels, or issue-publishing approval boundaries.
 
 ## Build-Order Heuristics
@@ -55,6 +57,7 @@ Read `references/domain-language-and-product-slicing.md` when capability order d
 | Circular domain dependency | Split responsibility, invert dependency, or introduce a stable contract. |
 | Future capability appears before MVP dependency is stable | Merge only guard/contract/no-runtime-effect slices; keep implementation draft or shadow. |
 | Multiple agents build adjacent capabilities | Define track ownership and trunk-safe slice boundaries before implementation order. |
+| Quality cleanup competes with feature work | Baseline/gate first; then target hot-path or responsibility-bound refactors. |
 
 ## Stop Signals
 

@@ -1,6 +1,6 @@
 ---
 name: architecture-boundary-governance
-description: Use before planning or editing when a local fix, file choice, shared helper, eval fix, import/provider/tool/runtime change, protected legacy touch, active-code ownership change, subagent split, module/API interface design, parallel PR split, future-wave implementation, truth-owner change, or local-vs-global optimization may cross 架構邊界, ownership, dependency direction, public API, data model, runtime, capability, or responsibility boundaries. Route user-facing UI interface design elsewhere.
+description: Use before planning or editing when a local fix, file choice, shared helper, eval fix, import/provider/tool/runtime change, protected legacy touch, active-code ownership change, subagent split, module/API interface design, parallel PR split, future-wave implementation, truth-owner change, code excellence refactor, unnecessary abstraction, or local-vs-global optimization may cross 架構邊界, ownership, dependency direction, public API, data model, runtime, capability, or responsibility boundaries. Route user-facing UI interface design elsewhere.
 ---
 
 # Architecture Boundary Governance
@@ -55,6 +55,7 @@ Do not require diagrams, full inventories, or ADRs for low-risk work.
 - If "interface" means module/API/type/method/caller contract, keep it in architecture; if it means user-facing UI or interaction surface, route to `uiux-intent-designer`.
 - If the contested decision is whether prompt/LLM output or deterministic code owns product truth, route to `llm-deterministic-boundary` before choosing placement.
 - In parallel PR trains, treat active routes, manager/orchestration assembly, schedulers, DB migrations, truth-owner changes, and public contracts as high-risk boundaries; route merge readiness to `delivery-pipeline-governance` and activation risk to `agent-runtime-activation-ladder`.
+- If the primary problem is readability, cognitive complexity, algorithm/data-structure fit, hot-path efficiency, no-behavior refactor hygiene, or unnecessary abstraction that does not change ownership boundaries, route to `code-excellence-dsa-hygiene`.
 - Ports and adapters: keep core/domain independent of UI, database, network, framework, and tool adapters.
 - C4 level check: do not solve a system/container problem only at component/code level.
 - Team/API ownership: one module, task, or subagent should have one primary responsibility.
