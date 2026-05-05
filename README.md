@@ -47,12 +47,12 @@ This repository contains 19 custom skills under `skills/`.
 This repo intentionally does not include:
 
 - local Codex config, sessions, logs, or secrets
-- `.system` skills
+- system skills or generated runtime files
 - plugin cache skills
-- Superpowers itself
+- third-party skill packs
 - project-specific repo instructions such as `AGENTS.md`
 
-Some local Superpowers prompts may be patched on the Windows machine for reviewer behavior, but those are managed separately from Tungskills.
+Third-party or generated skills should be managed from their own source repos, installers, or plugin systems, not vendored into this collection.
 
 ## Install
 
