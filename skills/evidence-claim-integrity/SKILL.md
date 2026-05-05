@@ -1,6 +1,6 @@
 ---
 name: evidence-claim-integrity
-description: Use when claiming or summarizing done, complete, fixed, ready, safe, clean, maintainable, efficient, optimized, all passed, green, can proceed, no issues, test/eval/CI/benchmark status, PR green, merge-ready, deploy-ready, stale base, base drift, draft PR, PR debt, code quality, lint pass, refactor preserved behavior, runner reports, trace evidence, parity, coverage, AI-generated tests, agent-written tests, self-confirming tests, vibe-coded tests, tests only prove implementation details, full-suite false green, pass after hardening, single-profile evidence, model portability, output truncated, rg output too large, terminal truncated, partial scan, context overflow, large scan truncated, human review, production readiness, skipped tests, timeouts, mocks, partial failures, repeated strict passes, or incomplete reports. Trigger on readiness or evidence questions, including 可以說完成嗎, ready 嗎, 能不能上傳, 有證據嗎, PR 可以 merge 嗎, code 乾淨嗎, repeated pass claims, unrun tests, or overbroad success claims.
+description: Use when claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, all passed, green, no issues, test/eval/CI/benchmark/PR status, pre-PR pass, queue-ready, merge queue, merge_group, required report, merge-ready, deploy-ready, production-ready, stale base, base drift, PR debt, AI-generated or self-confirming tests, full-suite false green, pass after hardening, single-profile evidence, model portability, truncated output, partial scan, skipped tests, timeouts, mocks, partial failures, or incomplete reports. Trigger on 可以說完成嗎, ready 嗎, 有證據嗎, PR 可以 merge 嗎, 進 queue 嗎, code 乾淨嗎, unrun tests, or overbroad success claims.
 ---
 
 # Evidence Claim Integrity
@@ -40,6 +40,9 @@ Decision: proceed | narrow | stop
 11. A passing PR check on a stale branch proves only that checked ref passed; it does not prove the PR is merge-ready against the current target branch.
 12. A draft or open PR proves work exists for review; it does not prove the capability is still in scope, current with main, or safe to merge.
 13. Lint, type, formatting, or unit-test passes do not by themselves prove code is clean, maintainable, readable, or efficient; route code-health claims through `code-excellence-dsa-hygiene`.
+14. A pre-PR gate pass supports only "ready to open PR"; it does not prove queue-ready, merge-ready, deploy-ready, or product-ready.
+15. A PR readiness pass supports only queue eligibility; it does not prove the merge queue candidate will pass.
+16. A merge queue pass supports the tested target-branch candidate; it does not prove deployment or production readiness unless deploy gates also passed.
 
 ## Heuristics
 
@@ -60,6 +63,9 @@ Decision: proceed | narrow | stop
 | Branch CI passed before main advanced | That branch ref passed those checks. | Current-base merge-ready. |
 | Draft PR exists for future work | The future work has a review artifact. | Mainline scope approved or merge-safe. |
 | Lint and tests passed after refactor | The named checks passed. | The refactor is behavior-preserving, readable, or efficient without review evidence. |
+| Pre-PR gate passed | Ready to open a PR for review. | Queue-ready, merge-ready, deploy-ready, or product-ready. |
+| PR readiness gate passed | Eligible to enter the integration queue. | Merge result is safe. |
+| Merge queue or `merge_group` passed | The tested target-branch candidate passed that queue scope. | Production-ready or deploy-safe without deploy evidence. |
 
 ## Stop Signals
 
@@ -78,6 +84,7 @@ Stop or narrow when:
 - a report says pass but also says partial, interrupted, skipped, mocked, or not run
 - PR status is summarized as merge-ready without current-base evidence or merge simulation
 - clean, maintainable, optimized, or efficient is claimed from green checks without code-health or performance evidence
+- pre-PR, queue-ready, merge-ready, and deploy-ready are collapsed into one "ready" claim
 
 ## Verification
 

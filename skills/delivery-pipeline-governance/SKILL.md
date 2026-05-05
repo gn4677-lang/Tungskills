@@ -1,6 +1,6 @@
 ---
 name: delivery-pipeline-governance
-description: Use when designing, reviewing, or diagnosing CI/CD, GitHub Actions, merge gates, release gates, deployment workflows, required checks, branch protection/ruleset availability, merge queue, PR debt, stale base, base drift, draft PR, parallel PRs, multi-agent development, private/free GitHub limitations, workflow permissions, artifacts, logs, smoke tests, rollback, contract-hardening debt, semantic audit missing, or whether CI green means merge/deploy ready. Trigger on CI/CD, GitHub Actions, deploy, release, branch protection, required checks, ruleset, private repo 403, rebase_required, merge-ready, 多 agent 開發, 平行 PR, base 過期, PR 債, 可以 merge 嗎, 可以 deploy 嗎, CI 綠可以上線嗎. Do not use as primary for fixing failing PR logs; route that to gh-fix-ci.
+description: Use when designing, reviewing, or diagnosing CI/CD, GitHub Actions, pre-PR gates, PR readiness gates, merge queue gates, merge_group checks, queue eligibility, integration-owner workflows, release gates, deployment workflows, required checks, branch protection/ruleset availability, PR debt, stale base, base drift, draft PR, stacked PRs, parent dependencies, parallel PRs, multi-agent development, workflow permissions, artifacts, logs, smoke tests, rollback, contract-hardening debt, semantic audit missing, or whether CI green means open-PR/queue/merge/deploy ready. Trigger on CI/CD, GitHub Actions, pre-PR, PR readiness, merge queue, merge_group, queue-ready, required report, required checks, rebase_required, merge-ready, 開 PR 前檢查, 進 queue 前, base 過期, PR 債. Do not use as primary for fixing failing PR logs; route that to gh-fix-ci.
 ---
 
 # Delivery Pipeline Governance
@@ -15,7 +15,7 @@ Core principle: CI output is evidence, but branch protection, deployment gates, 
 
 Read `references/private-free-github-delivery-patterns.md` when the repo is private/free, branch protection or environments may be plan-limited, a workflow is only a placeholder, or a merge/deploy/readiness claim depends on GitHub Actions settings.
 
-Read `references/parallel-agent-merge-governance.md` when multiple agents, capabilities, domains, draft PRs, stacked PRs, stale branches, future-wave work, or merge queue/manual queue decisions affect merge readiness.
+Read `references/parallel-agent-merge-governance.md` when multiple agents, capabilities, domains, draft PRs, stacked PRs, stale branches, future-wave work, pre-PR gates, PR readiness gates, merge queue gates, or manual queue decisions affect merge readiness.
 
 ## Default Output
 
@@ -26,6 +26,13 @@ platform_controls_unavailable: ...
 fallback_controls: ...
 workflow_permission_posture: ...
 required_checks_or_manual_equivalent: ...
+pre_pr_gate: ...
+pr_readiness_gate: ...
+merge_queue_gate: ...
+queue_eligibility: ...
+missing_builder_artifacts: ...
+required_report_status: ...
+merge_group_check_status: ...
 artifact_log_retention: ...
 deploy_or_release_gate: ...
 smoke_or_rollback_plan: ...
@@ -50,6 +57,9 @@ decision: proceed | narrow | stop
 12. Future-wave or non-mainline capability PRs default to draft, hold-as-shadow, or extract-only unless the change is a small guard, contract, schema, or no-runtime-effect integration slice.
 13. In multi-agent development, do not let task completion, subagent approval, or branch-local CI imply merge authorization; require base freshness, required checks, boundary review, and explicit human merge choice.
 14. If platform merge queue is unavailable, use a scripted merge-debt matrix or manual queue artifact as the fallback governance surface.
+15. Shift repeated integration-owner fixes left: recurring missing artifacts, missing reports, wrong parent dependencies, stale-base issues, or boundary misses should become pre-PR or PR-readiness gates.
+16. Keep gate layers distinct: pre-PR gate means ready to open a PR; PR readiness gate means eligible to enter an integration queue; merge queue gate means the combined target-branch candidate can land.
+17. GitHub Actions workflows used as required merge queue checks need a `merge_group` trigger; otherwise queue checks may never report on the merge group.
 
 ## Heuristics
 
@@ -64,7 +74,10 @@ decision: proceed | narrow | stop
 | Multiple draft PRs from parallel agents | Build a PR debt matrix before merging by convenience or age. |
 | Stale PR base with green branch CI | Require rebase/update or merge simulation against current target branch. |
 | Future-wave implementation wants to enter main | Extract guard/contract/no-runtime-effect slice; keep implementation draft or shadow. |
+| Integration owner repeatedly fixes the same missing PR artifact | Add a pre-PR or PR-readiness check instead of relying on human memory. |
+| Builder asks what to run before opening PR | Provide a track-specific pre-PR gate, not the full merge queue suite. |
+| PR is green but queue entry is blocked | Separate PR readiness from merge-group readiness and name the missing queue condition. |
 
 ## Verification
 
-Before finalizing, name the evidence: workflow files, `gh` output, GitHub settings screenshots, branch protection/ruleset status, environment list, workflow permissions, artifact/log retention, CI run status, merge queue or manual queue artifact, base freshness, merge simulation result, deploy smoke result, rollback evidence, or explicit not-run status.
+Before finalizing, name the evidence: workflow files, `gh` output, GitHub settings screenshots, branch protection/ruleset status, environment list, workflow permissions, artifact/log retention, pre-PR gate result, PR readiness result, CI run status, merge queue or manual queue artifact, `merge_group` trigger, base freshness, merge simulation result, deploy smoke result, rollback evidence, or explicit not-run status.
