@@ -18,6 +18,21 @@ Before reading references, write down:
 - the actor identity and workspace/project scope
 - the state that must survive, expire, or stay private
 
+## Default Output
+
+```text
+Session boundary: ...
+Identity boundary: ...
+Durable memory: ...
+Session state: ...
+Assembled context pack: ...
+Compaction rule: ...
+Leakage risk: ...
+Verification case: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
 
 1. Classify the problem as one of:
@@ -38,16 +53,7 @@ Before reading references, write down:
 5. Read [references/wave1-patterns.md](references/wave1-patterns.md) when memory productization or long-lived stateful memory is part of the problem.
 6. Read [references/wave3-patterns.md](references/wave3-patterns.md) when multi-tenant scope, state taxonomy, checkpoint-vs-memory boundaries, or temporal memory are part of the problem.
 7. Read [references/translation.md](references/translation.md) only after choosing the capability shape.
-8. Return:
-   - session boundary
-   - identity boundary
-   - durable memory
-   - session state
-   - assembled context pack
-   - compaction rule
-   - leakage risk
-   - verification case
-   - optional handoff block using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md)
+8. Return the Default Output, using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -61,3 +67,16 @@ Before reading references, write down:
 - Never let LLM-inferred memory scope override tenant, user, workspace, privacy, or retention keys.
 - Name at least one regression scenario, such as "same user in two projects", "two users in one shared channel", or "resume after compaction".
 - If the core complaint is search quality or RAG scope, route to `agent-retrieval-architecture`.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- checkpoint, transcript, retrieved document text, or search result is treated as reusable memory
+- tenant, user, workspace, project, privacy, or retention scope is missing
+- the fix depends on replaying full history by default
+- the primary complaint is source lookup or RAG quality rather than active context or memory continuity
+
+## Verification
+
+Before claiming the context design is safe, name the evidence: scope keys, memory-state taxonomy, context-pack rule, compaction preservation case, leakage regression, and any retrieval handoff.

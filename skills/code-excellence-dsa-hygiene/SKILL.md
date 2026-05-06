@@ -62,6 +62,10 @@ Stop or narrow when:
 - a large PR mixes formatting, refactor, feature work, and performance changes
 - the change makes the call graph harder to explain than the original
 
+## Verification
+
+Before claiming code is clean, maintainable, readable, or efficient, name the evidence: behavior boundary, targeted tests, lint/type result, complexity or size signal, profiling/benchmark/query-count result, before/after operation count, or explicit not-run status.
+
 ## Handoffs
 
 - Use `architecture-boundary-governance` when module ownership, public API, data model, runtime boundary, or deep-module placement is the primary risk.

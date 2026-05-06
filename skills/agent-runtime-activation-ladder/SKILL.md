@@ -11,6 +11,8 @@ Use this to decide how far an agentic capability may be turned on.
 
 Core principle: capability dependency decides what to build next; activation ladder decides how safely a built capability may run.
 
+Hard stop: built, tested, green, shadowed, or merged does not by itself permit user-facing or mutation-bearing activation.
+
 ## Default Output
 
 Keep the answer compact:
@@ -46,11 +48,12 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 8. Use `evidence-claim-integrity` before claiming rollout readiness.
 9. Use `agentic-eval-development` when the primary task is designing the eval suite, grader, trace replay, or regression seed rather than deciding activation stage.
 10. Use `llm-deterministic-boundary` when activation would change whether LLM output, deterministic code, or a human owns runtime truth.
-11. Passing a strict harness, diagnostic suite, or repeated stability runs is activation evidence only; it does not freeze guard/repair architecture, prove model portability, or skip shadow/canary checks across model tiers.
-12. Single-profile live evidence or full-suite diagnostic pass remains `live-diagnostic` evidence until model/profile diversity, holdout coverage, claim boundaries, and rollback/no-commit fallback are present.
-13. A pass that appears only after prompt, schema, guard, or contract hardening must not advance activation until overfit risk and legal-flow representability are reviewed.
-14. A future-wave PR being implemented, reviewed, or green is not activation permission; merging active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority requires an activation-stage decision.
-15. Guard, contract, schema, and no-runtime-effect slices may enter main as activation controls; hidden or shadow implementation must remain non-authoritative until the next ladder step has evidence.
+11. Use `delivery-pipeline-governance` when the question is whether a PR, queue candidate, CI result, or deployment pipeline may merge or release the capability.
+12. Passing a strict harness, diagnostic suite, or repeated stability runs is activation evidence only; it does not freeze guard/repair architecture, prove model portability, or skip shadow/canary checks across model tiers.
+13. Single-profile live evidence or full-suite diagnostic pass remains `live-diagnostic` evidence until model/profile diversity, holdout coverage, claim boundaries, and rollback/no-commit fallback are present.
+14. A pass that appears only after prompt, schema, guard, or contract hardening must not advance activation until overfit risk and legal-flow representability are reviewed.
+15. A future-wave PR being implemented, reviewed, or green is not activation permission; merging active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority requires an activation-stage decision.
+16. Guard, contract, schema, and no-runtime-effect slices may enter main as activation controls; hidden or shadow implementation must remain non-authoritative until the next ladder step has evidence.
 
 ## Heuristics
 
@@ -74,3 +77,9 @@ Stop or narrow when live LLM output would own product truth, user-visible behavi
 ## Verification
 
 Before advancing, name the evidence: contract, deterministic gate, live trace, shadow comparison, canary metric, guard result, rollback/no-commit fallback, audit trail, or approval.
+
+## Handoffs
+
+- Use `delivery-pipeline-governance` for PR, CI, merge queue, release gate, or deploy readiness.
+- Use `evidence-claim-integrity` before saying the capability is ready, safe, stable, or production-grade.
+- Use `agentic-eval-development` when the missing evidence is an eval suite, grader, trace replay, or holdout design.

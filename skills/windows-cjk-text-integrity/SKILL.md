@@ -11,6 +11,8 @@ Use this before editing or diagnosing text that may be misread by Windows tools,
 
 Core principle: terminal rendering is not encoding evidence; bytes and consumers decide.
 
+Hard gate: do not edit or "fix" suspected corruption until byte-level evidence or the real consumer failure is known.
+
 ## Default Output
 
 Keep the answer compact:
@@ -48,6 +50,21 @@ Decision: proceed | inspect bytes | stop
 | `print(..., ensure_ascii=False)` fails under CP950 stdout | Print an ASCII-safe summary with `ensure_ascii=True`, or write UTF-8 output to a file and print only the artifact path. |
 | `UnicodeEncodeError` or `charmap` appears while printing | Treat as console/stdout encoding failure until byte evidence proves file corruption. |
 
+## Stop Signals
+
+Stop or narrow when:
+
+- terminal output, copied chat text, or `Get-Content` rendering is the only corruption evidence
+- a BOM/no-BOM change would touch YAML frontmatter, JSON, shebangs, or strict parser inputs without parser verification
+- stdout cannot print Unicode and the agent starts changing files instead of switching to ASCII-safe summaries or UTF-8 artifacts
+- the proposed encoding fix does not name the target consumer
+
 ## Verification
 
 Before claiming text is fixed, name the evidence: byte prefix, decoder result, parser result, repo encoding check, editor encoding, or consumer roundtrip.
+
+## Handoffs
+
+- Use `development-environment-parity` when encoding symptoms are part of moving setup across Windows, macOS, Linux, Docker, or CI.
+- Use `evidence-claim-integrity` before claiming corrupted text, fixed text, clean output, or readiness from partial encoding evidence.
+- Use `delivery-pipeline-governance` when CI logs, workflow output, or release evidence depends on encoded terminal or artifact output.

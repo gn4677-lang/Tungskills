@@ -41,7 +41,21 @@ This skill does not own:
 - retry tables or failover policy
 - onboarding or interaction rewrites
 
+## Default Router Output
+
+```text
+Runtime bottleneck: ...
+Chosen capability skill: ...
+Primary layer rationale: ...
+Deterministic boundary: ...
+Next artifact: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
+
+First classify one primary capability, then read only the smallest reference needed to resolve the current routing gap.
 
 1. Read [references/skill-map.md](references/skill-map.md).
 2. Read [references/source-strength.md](references/source-strength.md) if source confidence matters.
@@ -55,13 +69,7 @@ This skill does not own:
 10. Read [references/wave1-patterns.md](references/wave1-patterns.md) when the question involves the current repo-intake expansion.
 11. Read [references/wave2-patterns.md](references/wave2-patterns.md) when contract discipline or retrieval taxonomy refinement is part of the question.
 12. Read the matching capability references only as needed.
-13. Return:
-   - runtime bottleneck
-   - chosen capability skill
-   - why this is the primary layer
-   - what should remain deterministic
-   - next artifact to design or implement
-   - optional handoff block using [references/handoff-schema.md](references/handoff-schema.md)
+13. Return the Default Router Output, using [references/handoff-schema.md](references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -71,3 +79,16 @@ This skill does not own:
 - Do not use second-hand videos as source-of-truth.
 - Keep capability skills procedural: intake, decision, action, output contract, and verification.
 - Do not treat a future research queue as a promotion trigger; start another promotion pass only after a real usage failure, new source, or explicit user request.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- the answer starts redesigning memory, retrieval, durability, proactive behavior, fallback, and UX all at once
+- no single primary runtime capability is named
+- a handoff skill is needed but omitted
+- implementation advice appears before the runtime bottleneck and deterministic boundary are named
+
+## Verification
+
+Before claiming routing quality, name the evidence: user symptom, chosen primary skill, rejected neighboring skills, deterministic boundary, required output fields, and any handoff block.

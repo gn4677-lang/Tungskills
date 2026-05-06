@@ -57,6 +57,15 @@ decision: proceed | narrow | stop
 | Local pass but CI fail | Narrow the claim; compare runtime, OS, dependency source, and command scope. |
 | Terminal shows broken CJK | Verify bytes or route to `windows-cjk-text-integrity`. |
 
+## Stop Signals
+
+Stop or narrow when:
+
+- a local setup workaround changes product behavior, prompts, schemas, runtime contracts, or CI authority
+- local pass is used to claim CI, merge, deploy, or cross-machine readiness
+- secret values are requested in chat instead of checking names, examples, or readiness diagnostics
+- terminal mojibake or line-ending display is treated as file corruption without byte evidence
+
 ## Verification
 
 Before finalizing, name the evidence: setup docs, devcontainer config, Compose file, Dockerfile, dependency file, Python version, `gh`/CI output, verify script result, `.env.example`, byte/line-ending check, or explicit not-run status.

@@ -107,9 +107,9 @@ blockers:
 | Dev Container opens | Development environment boots. | Production deploy is ready. |
 | Terminal CJK is garbled | Rendering may be broken. | File bytes are corrupted. |
 
-## Agentic-Calorie-Assistant Pattern To Reuse
+## Cross-Platform App Pattern To Reuse
 
-This project is a useful generalized pattern:
+This is a reusable generalized pattern:
 
 - README names Docker/Mac as the preferred cross-platform path.
 - Dev Container points to the same Compose app service.

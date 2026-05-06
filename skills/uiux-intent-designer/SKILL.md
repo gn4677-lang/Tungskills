@@ -42,6 +42,19 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 8. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
 9. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
 
+## Default Output
+
+```text
+Intent brief: ...
+Assumptions or questions: ...
+Recommended direction: ...
+Purpose trace: ...
+Interaction feedback map: needed | not needed | ...
+Human judgment still needed: ...
+Handoff skills: ...
+Decision: proceed | align first | stop
+```
+
 ## Ryo Lu-Informed Principles
 
 - Design systems, not feature piles. If several features overlap, look for fewer primitives or modes that make the product easier to understand.
@@ -69,3 +82,16 @@ For design generation, produce:
 - Adding features instead of unifying concepts.
 - Describing a UI as good without explaining what user outcome it supports.
 - Using Ryo Lu references as style imitation instead of system-thinking guidance.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- the audience, primary task, system concept, or trust posture would materially change the design but remains unknown
+- "interface" means module/API/type/method shape rather than user-facing UI or interaction
+- implementation starts before the design intent can explain each major region's user purpose
+- animation, AI autonomy, destructive action, or async work has no feedback or correction map
+
+## Verification
+
+Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, purpose trace, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.

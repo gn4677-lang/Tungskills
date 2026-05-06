@@ -18,6 +18,21 @@ Before reading references, write down:
 - the highest-risk action the agent might take
 - the available approval, snooze, dismiss, and undo surfaces
 
+## Default Output
+
+```text
+Wake trigger: ...
+Autonomy tier: ...
+Approval boundary: ...
+Runtime surface: ...
+Fallback path: ...
+Observability requirement: ...
+Dismissal and undo path: ...
+Proactivity metric: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
 
 1. Classify the proactive behavior as one of:
@@ -39,16 +54,7 @@ Before reading references, write down:
 6. Read [references/wave1-patterns.md](references/wave1-patterns.md) when human approval, interruption, or delegation boundaries need sharper runtime framing.
 7. Read [references/wave4-patterns.md](references/wave4-patterns.md) when wake-trigger control planes, autonomy-tier decisions, approval/dismiss/undo surfaces, or false-positive silence cases matter.
 8. Read [references/translation.md](references/translation.md) only after choosing the autonomy tier.
-9. Return:
-   - wake trigger
-   - autonomy tier
-   - approval boundary
-   - runtime surface
-   - fallback path
-   - observability requirement
-   - dismissal and undo path
-   - proactivity metric
-   - optional handoff block using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md)
+9. Return the Default Output, using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -63,3 +69,16 @@ Before reading references, write down:
 - Include at least one false-positive case where the agent should stay silent.
 - When the agent stays silent for a false-positive risk, specify the next signal, threshold, or time window that would justify surfacing later.
 - If the core complaint is outage handling or degraded response behavior, route to `agent-fallback-eval`.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- a schedule, cron, or threshold is treated as sufficient reason to interrupt the user
+- autonomy tier, approval boundary, or dismiss/snooze/undo path is missing
+- auto-action is proposed without rollback, observability, or human approval where needed
+- false-positive silence and later surfacing condition are not specified
+
+## Verification
+
+Before claiming proactive behavior is safe, name the evidence: wake source, user-relevant timing reason, autonomy tier, approval or rollback surface, false-positive case, next-signal condition, and proactivity metric.

@@ -35,6 +35,18 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 7. If reviewing a live or local implementation, follow `references/rendered-ui-review-protocol.md`.
 8. Report issues by severity and tie each issue to a user impact.
 
+## Default Output
+
+```text
+Rendered artifact: screenshot | browser | local app | prototype | missing
+Objective checks passed: ...
+Must-fix failures: ...
+Should-fix risks: ...
+Human judgment needed: ...
+Evidence not run: ...
+Decision: ready | narrow | stop
+```
+
 ## Review Categories
 
 Use these categories unless the user requests a different format:
@@ -55,6 +67,15 @@ Reject the design as not ready when any of these are true:
 - The interface looks like a generic AI template with no intentional brand or product fit.
 - Major interactive elements cannot be reached or understood by keyboard and visible focus.
 
+## Stop Signals
+
+Stop or narrow when:
+
+- no rendered artifact is available for a rendered-UI readiness claim
+- code inspection is used as the only evidence for polished, ready, or well-designed UI
+- major viewports, interaction states, keyboard access, or loading/error/empty states are untested
+- objective failures are being reframed as taste preferences instead of must-fix issues
+
 ## Common Mistakes
 
 - Treating accessibility scores as complete UX review.
@@ -62,3 +83,13 @@ Reject the design as not ready when any of these are true:
 - Calling something "clean" when it is merely empty.
 - Accepting purple gradients, dramatic shadows, or template SaaS cards as a substitute for design intent.
 - Using pixel-diff visual regression as taste evaluation; it only detects changes.
+
+## Verification
+
+Before claiming a UI is polished, ready, or improved, name the evidence: rendered artifact, desktop/mobile viewport checks, interaction states exercised, accessibility or keyboard result, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
+
+## Handoffs
+
+- Use `uiux-intent-designer` when the product purpose, audience, system concept, or interaction intent is unclear.
+- Use `architecture-boundary-governance` when "interface" means module/API/type/method shape rather than rendered user-facing UI.
+- Use `evidence-claim-integrity` before claiming visual polish, readiness, or accessibility from partial checks.

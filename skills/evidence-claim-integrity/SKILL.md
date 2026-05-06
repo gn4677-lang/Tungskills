@@ -11,6 +11,8 @@ Use this before making success, readiness, pass, or completion claims.
 
 Core principle: match claim scope to evidence scope. Partial evidence supports only a partial claim.
 
+Hard gate: if the evidence boundary cannot be named, the claim must be narrowed or withheld.
+
 ## Default Output
 
 Keep the answer compact:
@@ -43,6 +45,7 @@ Decision: proceed | narrow | stop
 14. A pre-PR gate pass supports only "ready to open PR"; it does not prove queue-ready, merge-ready, deploy-ready, or product-ready.
 15. A PR readiness pass supports only queue eligibility; it does not prove the merge queue candidate will pass.
 16. A merge queue pass supports the tested target-branch candidate; it does not prove deployment or production readiness unless deploy gates also passed.
+17. Use `delivery-pipeline-governance` when the primary work is diagnosing CI/CD, required checks, merge queue eligibility, branch protection, base drift, deployment gates, or release readiness; this skill narrows the claim after that evidence is named.
 
 ## Heuristics
 

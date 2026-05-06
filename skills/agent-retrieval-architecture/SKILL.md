@@ -18,6 +18,22 @@ Before reading references, write down:
 - the freshness and citation requirement
 - the cost of a wrong or stale retrieval
 
+## Default Output
+
+```text
+Deterministic state: ...
+Durable memory: ...
+Session state: ...
+Retrieval sources: ...
+Routing and ranking rule: ...
+Doc-read fallback: ...
+Search failure modes: ...
+RAG recommendation: ...
+Retrieval eval case: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
 
 1. Classify the retrieval task as one of:
@@ -38,17 +54,7 @@ Before reading references, write down:
 6. Read [references/wave2-patterns.md](references/wave2-patterns.md) when retrieval taxonomy, routers, or query-engine layering need more precision.
 7. Read [references/wave4-patterns.md](references/wave4-patterns.md) when query-mode selection, source-class routing, deterministic pipeline boundaries, retrieval evaluation, or full-document fallback matter.
 8. Read [references/translation.md](references/translation.md) only after choosing the retrieval path.
-9. Return:
-   - deterministic state
-   - durable memory
-   - session state
-   - retrieval sources
-   - routing and ranking rule
-   - doc-read fallback
-   - search failure modes
-   - RAG recommendation
-   - retrieval eval case
-   - optional handoff block using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md)
+9. Return the Default Output, using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -62,3 +68,16 @@ Before reading references, write down:
 - Split retrieval evaluation into source selection, ranking, answer grounding, citation/freshness, and fallback behavior.
 - Include at least one negative case where retrieval should refuse, ask for source scope, or fall back to document read.
 - If the core complaint is forgetting or cross-session leakage, route to `agent-context-architecture`.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- RAG is proposed before deterministic state, permissions, freshness, and source classes are named
+- a vector result is allowed to override current operational state
+- retrieval and answer quality are evaluated as one combined pass/fail result
+- full-document read is skipped when index results are ambiguous or stale
+
+## Verification
+
+Before claiming retrieval architecture is safe, name the evidence: source classes, deterministic-state boundary, routing/ranking rule, citation or freshness check, doc-read fallback, and retrieval-vs-answer eval case.

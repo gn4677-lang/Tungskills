@@ -18,6 +18,21 @@ Before reading references, write down:
 - the minimum input needed for first value
 - the surface where the user already is
 
+## Default Output
+
+```text
+Current friction: ...
+Why users feel it: ...
+What stays deterministic: ...
+What becomes more agentic: ...
+Surface and interaction change: ...
+Instrumentation after launch: ...
+First-value path: ...
+Correction path: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
 
 1. Classify the friction as one of:
@@ -41,16 +56,7 @@ Before reading references, write down:
 6. Read [references/wave2-patterns.md](references/wave2-patterns.md) when post-launch instrumentation or operator cues are part of the problem.
 7. Read [references/wave4-patterns.md](references/wave4-patterns.md) when streaming, progress cues, blocked-state design, correction paths, first-value time, or post-launch measurement matter.
 8. Read [references/translation.md](references/translation.md) only after choosing the interaction fix.
-9. Return:
-   - current friction
-   - why users feel it
-   - what stays deterministic
-   - what should become more agentic
-   - surface and interaction change
-   - instrumentation after launch
-   - first-value path
-   - correction path
-   - optional handoff block using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md)
+9. Return the Default Output, using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -63,3 +69,16 @@ Before reading references, write down:
 - Slow or uncertain flows must expose a progress cue, blocked state, correction path, and measurement.
 - Measure time to first value, clarification turns, abandonment, correction success, and user takeover before claiming the design is improved.
 - If the core complaint is forgetting, search, or outages, route to the specialized runtime skill instead.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- the flow asks setup questions before checking what the system already knows
+- a slow or uncertain flow has no progress cue, blocked state, correction path, or measurement
+- the redesign hides a runtime failure, memory issue, or retrieval issue that belongs to another skill
+- "frictionless" is used to justify irreversible automation without approval or undo
+
+## Verification
+
+Before claiming the interaction is smoother, name the evidence: first-value path, delayed-clarification decision, progress or blocked state, correction path, measurement plan, and any runtime handoff.

@@ -11,6 +11,8 @@ Use this to judge delivery safety when pipeline evidence, platform enforcement, 
 
 Core principle: CI output is evidence, but branch protection, deployment gates, and human approval decide whether that evidence is enforceable.
 
+Hard stop: CI green, pre-PR pass, queue-ready, merge-ready, deploy-ready, and production-ready are separate claims.
+
 ## Read First
 
 Read `references/private-free-github-delivery-patterns.md` when the repo is private/free, branch protection or environments may be plan-limited, a workflow is only a placeholder, or a merge/deploy/readiness claim depends on GitHub Actions settings.
@@ -77,6 +79,15 @@ decision: proceed | narrow | stop
 | Integration owner repeatedly fixes the same missing PR artifact | Add a pre-PR or PR-readiness check instead of relying on human memory. |
 | Builder asks what to run before opening PR | Provide a track-specific pre-PR gate, not the full merge queue suite. |
 | PR is green but queue entry is blocked | Separate PR readiness from merge-group readiness and name the missing queue condition. |
+
+## Stop Signals
+
+Stop or narrow when:
+
+- CI green, pre-PR pass, queue-ready, merge-ready, deploy-ready, and production-ready are treated as one status
+- required checks, branch protection/ruleset, merge queue, or manual fallback governance is unknown
+- a stale branch result is used as current target-branch evidence
+- a deployment workflow is a placeholder but described as CD
 
 ## Verification
 

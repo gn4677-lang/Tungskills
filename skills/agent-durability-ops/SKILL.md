@@ -18,6 +18,20 @@ Before reading references, write down:
 - the actor that owns each state transition
 - the budget, quota, and rollback limit
 
+## Default Output
+
+```text
+Durability risk: ...
+Background maintenance loop: ...
+State ownership and sync rule: ...
+Budget and quota guard: ...
+Recovery and bootstrap path: ...
+Observability and rollback rule: ...
+Operator runbook check: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
 
 1. Classify the durability problem as one of:
@@ -38,15 +52,7 @@ Before reading references, write down:
 5. Read [references/wave1-patterns.md](references/wave1-patterns.md) when long-lived memory products, session persistence, or inspectable durable state are part of the design.
 6. Read [references/wave3-patterns.md](references/wave3-patterns.md) when durable execution backends, disaster recovery, worker lifecycle, operator runbooks, or human-in-the-loop resume are part of the design.
 7. Read [references/translation.md](references/translation.md) only after choosing the durable mechanism.
-8. Return:
-   - durability risk
-   - background maintenance loop
-   - state ownership and sync rule
-   - budget and quota guard
-   - recovery and bootstrap path
-   - observability and rollback rule
-   - operator runbook check
-   - optional handoff block using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md)
+8. Return the Default Output, using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -68,3 +74,16 @@ Before reading references, write down:
 - If the core complaint is search, retrieval, or document scope, route to `agent-retrieval-architecture`.
 - If the core complaint is reminders, wake triggers, or autonomy policy, route to `agent-proactive-architecture`.
 - If the core complaint is provider failure, retry, or degraded response behavior, route to `agent-fallback-eval`.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- a background worker has no owner, lease, idempotency key, trace ID, retry limit, or terminal state
+- checkpointing is used as a memory product instead of execution recovery
+- a crash, duplicate wake, stale lock, or quota exhaustion case is not described
+- user-visible degradation is being designed without a handoff to `agent-fallback-eval`
+
+## Verification
+
+Before claiming durability is safe, name the evidence: durable mechanism, state owner, lease/lock rule, idempotency boundary, recovery path, budget gate, operator runbook check, and chaos case.

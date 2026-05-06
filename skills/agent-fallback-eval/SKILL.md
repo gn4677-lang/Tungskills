@@ -18,6 +18,21 @@ Before reading references, write down:
 - the user-visible impact
 - the safe degraded result
 
+## Default Output
+
+```text
+Failure surface: ...
+Retry rule: ...
+Failover rule: ...
+Degraded mode: ...
+Trace additions: ...
+Eval additions: ...
+Stop condition: ...
+Regression dataset seed: ...
+Handoff block: optional
+Decision: proceed | narrow | stop
+```
+
 ## Workflow
 
 1. Classify the failure as one of:
@@ -41,16 +56,7 @@ Before reading references, write down:
 6. Read [references/wave2-patterns.md](references/wave2-patterns.md) when stable runtime contracts or operator-facing compatibility matter.
 7. Read [references/wave3-patterns.md](references/wave3-patterns.md) when a failure-class matrix, guardrail placement, trace-to-eval loop, stop condition, or durable retry boundary is needed.
 8. Read [references/translation.md](references/translation.md) only after choosing the response policy.
-9. Return:
-   - failure surface
-   - retry rule
-   - failover rule
-   - degraded mode
-   - trace additions
-   - eval additions
-   - stop condition
-   - regression dataset seed
-   - optional handoff block using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md)
+9. Return the Default Output, using [../agent-runtime-architecture/references/handoff-schema.md](../agent-runtime-architecture/references/handoff-schema.md) when a handoff is needed.
 
 ## Rules
 
@@ -80,3 +86,16 @@ Use this when live provider tests, manager evals, tool-loop evals, or model comp
 - Trace provider, model, profile, attempt count, latency, timeout, rate-limit signal, failure class, and final outcome.
 - Use batch, queue, or background mode only when synchronous user latency is not under test.
 - Stop parallel expansion when errors increase faster than completed cases.
+
+## Stop Signals
+
+Stop or narrow when:
+
+- retry, failover, degraded mode, and stop/approval are collapsed into one fallback bucket
+- the whole workflow is replayed after one operation fails without idempotency justification
+- traces are missing for failure class, attempt count, provider/model/tool, latency, cost, and user-visible outcome
+- guardrails are assumed to cover tools, hosted capabilities, or handoffs without naming uncovered paths
+
+## Verification
+
+Before claiming fallback behavior is safe, name the evidence: failure class, retry boundary, failover rule, degraded result, trace fields, stop condition, regression seed, and any durability or eval handoff.

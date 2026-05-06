@@ -45,6 +45,8 @@ Use `llm-deterministic-boundary` when the next slice depends on whether an LLM, 
 
 Use `code-excellence-dsa-hygiene` when the build order question is whether to pay down readability, unnecessary abstraction, hot-path, algorithm, or data-structure debt before adding more product behavior.
 
+Use `delivery-pipeline-governance` when the primary question is PR readiness, merge queue eligibility, CI/check status, stale base, base drift, deploy readiness, or merge readiness rather than capability sequencing.
+
 Read `references/domain-language-and-product-slicing.md` when capability order depends on domain glossary terms, `CONTEXT.md`, ADRs, PRD shape, vertical issue slicing, HITL/AFK labels, or issue-publishing approval boundaries.
 
 ## Build-Order Heuristics
@@ -77,4 +79,10 @@ Do not proceed with the proposed order when:
 
 ## Verification
 
-Before claiming the order is correct, name the evidence: dependency map, test slice, use-case trace, bounded-context note, interface contract, architecture rule, or explicit manual ordering rationale.
+Before claiming the order is correct, name the evidence: capability dependency map, user-flow trace, test slice, bounded-context note, parent dependency, required report, interface contract, architecture rule, or explicit manual ordering rationale.
+
+## Handoffs
+
+- Use `delivery-pipeline-governance` when the primary question is PR readiness, merge queue eligibility, CI/check status, base drift, deploy readiness, or merge readiness.
+- Use `architecture-boundary-governance` when sequencing crosses ownership, public APIs, data models, runtime boundaries, or subagent responsibilities.
+- Use `evidence-claim-integrity` before claiming a slice is ready, unblocked, safe, or complete.

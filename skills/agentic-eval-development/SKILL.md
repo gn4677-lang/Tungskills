@@ -1,6 +1,6 @@
 ---
 name: agentic-eval-development
-description: Use when designing or revising evals for agentic products, Eval Driven Development, 評測驅動開發, manager agents, multi-agent systems, tool orchestration, guardrails, handoffs, traces, graders/rubrics, product-truth validation, capability evals, regression seeds, benchmark replay governance, fixture-shape drift, eval/test-set overfitting, path-specific grading, harness/scaffold confounders, raw prompt to route, fixture-shaped eval, oracle leakage, dataset leakage, runner inferred semantics, self-fulfilling harness, live failure shaping contract, contract hardening from eval failure, full-suite false green, holdout anti-overfit, legal-flow matrix, provider-specific hardening, or product truth vs fixture truth.
+description: Use when designing or revising agentic evals, Eval Driven Development, 評測驅動開發, manager/multi-agent behavior, tool orchestration, guardrails, handoffs, traces, graders/rubrics, product-truth validation, capability evals, regression seeds, benchmark replay, fixture-shape drift, eval overfitting, harness/scaffold confounders, raw prompt to route, oracle leakage, dataset leakage, runner-inferred semantics, live failure shaping contract, contract hardening from eval failure, full-suite false green, holdout anti-overfit, legal-flow matrix, or product truth vs fixture truth.
 ---
 
 # Agentic Eval Development
@@ -11,9 +11,19 @@ Use this to design evals that validate agentic product behavior without letting 
 
 Core principle: eval assets validate product truth; they do not define architecture, manager contracts, tool semantics, or user-visible behavior.
 
+Hard stop: do not use eval, fixture, runner, or live-failure evidence as the only source for product semantics or contract hardening.
+
 ## Read First
 
 - Read `references/semantic-ownership-and-harness-leakage.md` when evals, runners, fixtures, guards, or verifiers may infer semantic decisions from raw input, dataset wording, or test convenience.
+
+## Workflow
+
+1. Name the product truth and the agent behavior under eval.
+2. Separate agent/model decision, deterministic validation, and state/output correctness.
+3. Choose trace fields before grader type.
+4. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
+5. Add negative or holdout coverage before using eval results to change prompts, schemas, or contracts.
 
 ## Default Output
 

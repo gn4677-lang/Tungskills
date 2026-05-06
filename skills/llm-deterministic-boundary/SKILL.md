@@ -1,6 +1,6 @@
 ---
 name: llm-deterministic-boundary
-description: Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, semantic routing, post-pass overrides, or agent decision authority should own a product/workflow decision. Use when Codex encounters 該寫 prompt 還是 code, model-tier portability, weak-model compensation, scaffold dependency, scaffold/eval overfitting, guardrail overconstraint, repair-loop dependency, raw-input oracle, runner-inferred semantics, semantic ownership, semantic verifier became router, guardrail became semantic owner, deterministic verifier infers intent/action, live failure shaping contract, provider-specific semantic hardening, full-suite false green, 模型泛化, 測試集過擬合, guard 太重, or code overwriting an LLM semantic decision.
+description: Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, semantic routing, post-pass overrides, or agent decision authority should own a product/workflow decision. Trigger on 該寫 prompt 還是 code, model portability, weak-model compensation, scaffold/eval overfitting, guardrail overconstraint, raw-input oracle, runner-inferred semantics, semantic ownership, semantic verifier/router confusion, deterministic verifier infers intent/action, live failure shaping contract, provider-specific hardening, full-suite false green, 模型泛化, 測試集過擬合, guard 太重, or code overwriting LLM semantic decisions.
 ---
 
 # LLM Deterministic Boundary
@@ -10,6 +10,8 @@ description: Use when deciding whether LLMs, deterministic code, validators, gua
 Use this to assign decision ownership before changing agent runtime behavior.
 
 Core principle: deterministic code may constrain or verify LLM decisions, but it must not silently rewrite completed semantic decisions.
+
+Hard stop: deterministic code cannot own semantic intent, route, action, or disposition unless a product-approved oracle is named.
 
 ## Default Output
 
@@ -58,6 +60,21 @@ Decision: proceed | narrow | stop
 | Live failure suggests tightening the contract | Treat the failure as diagnostic evidence; require product semantic ownership before hardening. |
 | Provider-specific pass/fail drives shared schema | Narrow; separate shared invariants from provider/profile adaptation. |
 
+## Stop Signals
+
+Stop or narrow when:
+
+- deterministic code fabricates, infers, or overwrites intent, route, action, or disposition without a product-approved oracle
+- a guard, repair loop, runner, or verifier becomes the semantic owner by convenience
+- a weak-model failure causes a shared contract or schema to harden without model-tier and holdout checks
+- a prompt patch is proposed before the decision surface and truth owner are named
+
 ## Verification
 
 Before claiming the boundary is safe, name the evidence: invariant test, schema check, trace field, comparison run, failure-family eval, human approval, or product-truth note.
+
+## Handoffs
+
+- Use `agentic-eval-development` when the boundary must be validated through evals, graders, traces, regression seeds, or holdout cases.
+- Use `architecture-boundary-governance` when the ownership decision changes module placement, public API, data model, runtime boundary, or dependency direction.
+- Use `evidence-claim-integrity` before claiming the boundary is safe, general, portable, or production-ready.

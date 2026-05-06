@@ -17,7 +17,7 @@ For module/API interface shape, deep-module review, deletion tests, or explorato
 
 ## Default Check
 
-For ordinary work, emit at most this five-line note, then continue:
+For ordinary work, emit at most this five-line note as the output contract, then continue:
 
 ```text
 Boundary touched: <none | domain | data | API | runtime | ownership | dependency | capability | active-code | freeze-growth>
@@ -72,6 +72,15 @@ Do not require diagrams, full inventories, or ADRs for low-risk work.
 | ADRs for every small edit | Reserve ADRs for high-risk decisions. |
 | Quick fix creates reverse dependency | Check dependency direction first. |
 | Helper added to a protected/fat file because it is faster | Find the owner module or extract the smallest responsibility boundary. |
+
+## Stop Signals
+
+Stop or narrow when:
+
+- the change touches public API, persistence, auth, runtime behavior, or truth ownership without naming the owner boundary
+- a shared helper, adapter, or abstraction appears before a real consumer or stable boundary exists
+- subagent or PR split follows file count rather than responsibility ownership
+- a local cleanup changes dependency direction, module responsibility, or active-code ownership
 
 ## Verification
 
