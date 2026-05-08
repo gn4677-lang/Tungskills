@@ -1,6 +1,6 @@
 ---
 name: delivery-pipeline-governance
-description: Use when designing, reviewing, or diagnosing CI/CD, GitHub Actions, pre-PR gates, PR readiness gates, merge queue gates, merge_group checks, queue eligibility, integration-owner workflows, release gates, deployment workflows, required checks, branch protection/ruleset availability, PR debt, stale base, base drift, draft PR, stacked PRs, parent dependencies, parallel PRs, multi-agent development, workflow permissions, artifacts, logs, smoke tests, rollback, contract-hardening debt, semantic audit missing, or whether CI green means open-PR/queue/merge/deploy ready. Trigger on CI/CD, GitHub Actions, pre-PR, PR readiness, merge queue, merge_group, queue-ready, required report, required checks, rebase_required, merge-ready, 開 PR 前檢查, 進 queue 前, base 過期, PR 債. Do not use as primary for fixing failing PR logs; route that to gh-fix-ci.
+description: Use when designing, reviewing, or diagnosing CI/CD, GitHub Actions, pre-PR gates, PR readiness gates, merge queue gates, merge_group checks, queue eligibility, integration-owner workflows, release gates, deployment workflows, required checks, branch protection or ruleset availability, PR debt, stale base, base drift, draft PR, stacked PRs, parent dependencies, parallel PRs, multi-agent development, workflow permissions, artifacts, logs, smoke tests, rollback, red-team gates, AppSec gates, adversarial security gates, contract-hardening debt, semantic audit missing, or whether CI green means open-PR, queue, merge, deploy, or release ready. Do not use as primary for fixing failing PR logs; route that to gh-fix-ci.
 ---
 
 # Delivery Pipeline Governance
@@ -62,6 +62,7 @@ decision: proceed | narrow | stop
 15. Shift repeated integration-owner fixes left: recurring missing artifacts, missing reports, wrong parent dependencies, stale-base issues, or boundary misses should become pre-PR or PR-readiness gates.
 16. Keep gate layers distinct: pre-PR gate means ready to open a PR; PR readiness gate means eligible to enter an integration queue; merge queue gate means the combined target-branch candidate can land.
 17. GitHub Actions workflows used as required merge queue checks need a `merge_group` trigger; otherwise queue checks may never report on the merge group.
+18. Adversarial security evidence is a separate gate from CI, PR readiness, merge readiness, deploy readiness, and rollout permission; name where that gate is enforced and what it covers.
 
 ## Heuristics
 
@@ -79,6 +80,7 @@ decision: proceed | narrow | stop
 | Integration owner repeatedly fixes the same missing PR artifact | Add a pre-PR or PR-readiness check instead of relying on human memory. |
 | Builder asks what to run before opening PR | Provide a track-specific pre-PR gate, not the full merge queue suite. |
 | PR is green but queue entry is blocked | Separate PR readiness from merge-group readiness and name the missing queue condition. |
+| CI green but adversarial security evidence missing | Narrow; CI and red-team results are separate gates. |
 
 ## Stop Signals
 
@@ -91,4 +93,4 @@ Stop or narrow when:
 
 ## Verification
 
-Before finalizing, name the evidence: workflow files, `gh` output, GitHub settings screenshots, branch protection/ruleset status, environment list, workflow permissions, artifact/log retention, pre-PR gate result, PR readiness result, CI run status, merge queue or manual queue artifact, `merge_group` trigger, base freshness, merge simulation result, deploy smoke result, rollback evidence, or explicit not-run status.
+Before finalizing, name the evidence: workflow files, `gh` output, GitHub settings screenshots, branch protection/ruleset status, environment list, workflow permissions, artifact/log retention, pre-PR gate result, PR readiness result, CI run status, red-team gate status, merge queue or manual queue artifact, `merge_group` trigger, base freshness, merge simulation result, deploy smoke result, rollback evidence, or explicit not-run status.

@@ -1,6 +1,6 @@
 ---
 name: evidence-claim-integrity
-description: Use when claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, all passed, green, no issues, test/eval/CI/benchmark/PR status, pre-PR pass, queue-ready, merge queue, merge_group, required report, merge-ready, deploy-ready, production-ready, stale base, base drift, PR debt, AI-generated or self-confirming tests, full-suite false green, pass after hardening, single-profile evidence, model portability, truncated output, partial scan, skipped tests, timeouts, mocks, partial failures, or incomplete reports. Trigger on 可以說完成嗎, ready 嗎, 有證據嗎, PR 可以 merge 嗎, 進 queue 嗎, code 乾淨嗎, unrun tests, or overbroad success claims.
+description: Use when claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, all passed, green, no issues, prompt-injection safe, XSS-safe, SQLi-safe, authz-safe, RLS-safe, security reviewed, pentested, red-teamed, hardened, safe against exfiltration, test or eval or CI or benchmark or PR status, pre-PR pass, queue-ready, merge-ready, deploy-ready, production-ready, stale base, base drift, PR debt, AI-generated or self-confirming tests, full-suite false green, pass after hardening, single-profile evidence, model portability, truncated output, partial scan, skipped tests, timeouts, mocks, partial failures, or incomplete reports.
 ---
 
 # Evidence Claim Integrity
@@ -20,6 +20,7 @@ Keep the answer compact:
 ```text
 Claim: ...
 Claim type: implementation | test | eval | readiness | production | architecture
+Tested attack surface: ...
 Evidence present: ...
 Evidence missing: ...
 Allowed claim: ...
@@ -46,6 +47,7 @@ Decision: proceed | narrow | stop
 15. A PR readiness pass supports only queue eligibility; it does not prove the merge queue candidate will pass.
 16. A merge queue pass supports the tested target-branch candidate; it does not prove deployment or production readiness unless deploy gates also passed.
 17. Use `delivery-pipeline-governance` when the primary work is diagnosing CI/CD, required checks, merge queue eligibility, branch protection, base drift, deployment gates, or release readiness; this skill narrows the claim after that evidence is named.
+18. A red-team pass, pentest, or security review supports only the tested attack surface and evidence boundary; it does not prove general safety against XSS, SQLi, SSRF, auth bypass, IDOR/BOLA, exfiltration, prompt injection, or other untested families.
 
 ## Heuristics
 
@@ -61,6 +63,7 @@ Decision: proceed | narrow | stop
 | Repeated strict harness runs passed | That harness passed under those model/scaffold/environment settings. | Generally stable, model-portable, production ready, or architecture optimal. |
 | Full suite passed after prompt/schema/contract hardening | That suite passed under the new scaffold and evidence scope. | Product semantics are correct, model-portable, or readiness is unlocked. |
 | Single-profile live evidence passed | That profile produced diagnostic evidence. | Provider portability, production readiness, or private-use readiness. |
+| Red-team run found no issue | The tested attack set produced no confirmed issue. | Safe against prompt injection, exfiltration, or agent attacks in general. |
 | Large `rg` or shell output was truncated | The visible subset was inspected. | Full scan completed, no references exist, or the whole folder was checked. |
 | Bounded scan artifact says `truncated=true` | Results are partial up to the stated limit. | Complete absence, complete coverage, or no remaining matches. |
 | Branch CI passed before main advanced | That branch ref passed those checks. | Current-base merge-ready. |
@@ -91,4 +94,4 @@ Stop or narrow when:
 
 ## Verification
 
-Before finalizing, name the evidence and its boundary: command output, report path, trace artifact, coverage result, parity audit, human/founder status, CI job, or explicit not-run status.
+Before finalizing, name the evidence and its boundary: command output, report path, trace artifact, coverage result, parity audit, human or founder status, CI job, tested attack surface, or explicit not-run status.

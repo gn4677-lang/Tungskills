@@ -26,6 +26,8 @@ User-facing changed: true | false
 Runtime truth changed: true | false
 Mutation changed: true | false
 Required evidence: ...
+Tested adversarial surfaces: ...
+Residual risk / untested surfaces: ...
 Safe fallback: ...
 Decision: proceed | narrow | stop
 ```
@@ -54,6 +56,8 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 14. A pass that appears only after prompt, schema, guard, or contract hardening must not advance activation until overfit risk and legal-flow representability are reviewed.
 15. A future-wave PR being implemented, reviewed, or green is not activation permission; merging active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority requires an activation-stage decision.
 16. Guard, contract, schema, and no-runtime-effect slices may enter main as activation controls; hidden or shadow implementation must remain non-authoritative until the next ladder step has evidence.
+17. A red-team pass, no-findings report, pentest, or prompt-injection review is not rollout permission; it proves only the tested adversarial scope.
+18. Before canary, user-facing, or mutation-bearing promotion, name which adversarial surfaces were tested, which were not tested, and which safeguards still bound the residual risk.
 
 ## Heuristics
 
@@ -65,6 +69,7 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 | Strict harness passes repeatedly -> freeze scaffold | Narrow; compare shadow behavior across model tiers before treating guard/repair weight as product architecture. |
 | Single-profile live pass -> private use or canary | Stop; require portability evidence and explicit activation review. |
 | Full-suite pass after hardening -> readiness | Narrow; check overfit risk, representability, and holdout coverage first. |
+| Red-team pass or pentest report -> canary now | Narrow; adversarial evidence is one input, not activation permission by itself. |
 | All providers live in parallel | Narrow; isolate one provider/model first or route fallback concerns. |
 | Capability built -> activate for users | Stop; build completion is not activation permission. |
 | Future-wave PR wants merge because implementation is complete | Narrow; merge only activation controls unless the capability is promoted. |
@@ -80,6 +85,7 @@ Before advancing, name the evidence: contract, deterministic gate, live trace, s
 
 ## Handoffs
 
+- Use `application-security-red-teaming` when the missing evidence is adversarial testing of auth/session, API abuse, file upload/storage, data exposure, prompt/tool misuse, memory, RAG, or other application attack surfaces.
 - Use `delivery-pipeline-governance` for PR, CI, merge queue, release gate, or deploy readiness.
 - Use `evidence-claim-integrity` before saying the capability is ready, safe, stable, or production-grade.
 - Use `agentic-eval-development` when the missing evidence is an eval suite, grader, trace replay, or holdout design.

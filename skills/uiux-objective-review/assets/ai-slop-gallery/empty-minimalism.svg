@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Empty minimalism: bad versus better</title>
+  <desc id="desc">Left side shows sparse empty space, vague copy, and no clear next action. Right side keeps a restrained layout but adds enough literal guidance, proof, and next-step clarity to support the task.</desc>
+  <rect width="1200" height="680" fill="#f5f7fb"/>
+  <text x="600" y="44" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#111827">Empty Minimalism</text>
+  <rect x="40" y="80" width="520" height="560" rx="20" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="80" y="120" font-family="Arial, sans-serif" font-size="24" fill="#b91c1c">Bad</text>
+  <text x="80" y="200" font-family="Arial, sans-serif" font-size="30" fill="#111827">Designed for clarity</text>
+  <text x="80" y="242" font-family="Arial, sans-serif" font-size="16" fill="#9ca3af">A new way to manage your day.</text>
+  <rect x="80" y="320" width="120" height="38" rx="19" fill="#111827"/>
+  <text x="140" y="345" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#ffffff">Try now</text>
+  <text x="80" y="622" font-family="Arial, sans-serif" font-size="18" fill="#374151">Problem: reduction removed meaning, proof, and next steps</text>
+  <rect x="640" y="80" width="520" height="560" rx="20" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="680" y="120" font-family="Arial, sans-serif" font-size="24" fill="#065f46">Better</text>
+  <text x="680" y="184" font-family="Arial, sans-serif" font-size="28" fill="#111827">Review each meal before it changes your daily calorie budget</text>
+  <text x="680" y="224" font-family="Arial, sans-serif" font-size="17" fill="#374151">A calm interface can still be explicit about who it serves, what it helps you do, and what happens next.</text>
+  <rect x="680" y="280" width="210" height="42" rx="21" fill="#0f766e"/>
+  <text x="785" y="307" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">View example review flow</text>
+  <rect x="680" y="360" width="360" height="120" rx="18" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="708" y="398" font-family="Arial, sans-serif" font-size="18" fill="#111827">Proof</text>
+  <text x="708" y="430" font-family="Arial, sans-serif" font-size="16" fill="#374151">Sample day, correction history, and budget deltas appear before the commitment point.</text>
+  <text x="680" y="622" font-family="Arial, sans-serif" font-size="18" fill="#374151">Better: restrained layout with explicit task and trust cues</text>
+</svg>

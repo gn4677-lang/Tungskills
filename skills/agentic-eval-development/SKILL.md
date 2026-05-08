@@ -1,6 +1,6 @@
 ---
 name: agentic-eval-development
-description: Use when designing or revising agentic evals, Eval Driven Development, 評測驅動開發, manager/multi-agent behavior, tool orchestration, guardrails, handoffs, traces, graders/rubrics, product-truth validation, capability evals, regression seeds, benchmark replay, fixture-shape drift, eval overfitting, harness/scaffold confounders, raw prompt to route, oracle leakage, dataset leakage, runner-inferred semantics, live failure shaping contract, contract hardening from eval failure, full-suite false green, holdout anti-overfit, legal-flow matrix, or product truth vs fixture truth.
+description: Use when designing or revising agentic evals, Eval Driven Development, manager or multi-agent behavior, tool orchestration, guardrails, handoffs, traces, graders or rubrics, product-truth validation, capability evals, regression seeds, benchmark replay, fixture-shape drift, eval overfitting, harness or scaffold confounders, raw prompt to route, oracle leakage, dataset leakage, runner-inferred semantics, adversarial holdouts, attack replay, poisoned-context replay, red-team regressions, fix-verification suites, live failure shaping contract, legal-flow matrix, or product truth vs fixture truth.
 ---
 
 # Agentic Eval Development
@@ -65,6 +65,7 @@ Decision: proceed | narrow | stop
 14. Do not let fixed strict cases, path-specific pass criteria, repair success, or repeated stability runs define product architecture; include outcome-based grading, negative/holdout cases, and model-tier comparison when eval or scaffold overfitting is a risk.
 15. Treat live, provider, or full-suite failures as evidence for attribution, semantic audit, representability review, and holdout design; do not let them directly justify prompt, schema, or contract hardening.
 16. Before tightening a contract from eval evidence, require a product-approved semantic source plus legal-flow or representability coverage and holdout cases that catch both over-triggering and over-blocking.
+17. Use `application-security-red-teaming` when the primary task is adversarial discovery, app/API attack-family selection, prompt/tool attack design, memory or RAG poisoning exploration, or authorized white-hat probing rather than replay and regression design.
 
 ## Heuristics
 
@@ -76,6 +77,7 @@ Decision: proceed | narrow | stop
 | One SKU or one case fixed by a prompt | Check the broader failure family before patching. |
 | Live failure triggers schema or prompt hardening | Stop; require attribution, product semantic source, representability coverage, and holdout cases first. |
 | Full-suite pass after hardening | Narrow; check whether the pass is scaffold/provider-specific before upgrading claims. |
+| A prompt-injection or poisoning bug is already known | Design attack replay, poisoned-context replay, and adversarial holdouts before claiming it is closed. |
 | Provider timeout, rate limit, or failover issue | Route to `agent-fallback-eval`. |
 | Subjective quality claim | Add rubric plus human calibration or sampling. |
 | Eval checks exact steps or tool order instead of useful outcomes | Prefer outcome grading, partial credit, and negative cases that catch overtriggering. |
@@ -98,3 +100,8 @@ Do not proceed when:
 ## Verification
 
 Before claiming an agentic eval is useful, name the evidence: trace sample, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, or explicit product-truth rationale.
+
+## Handoffs
+
+- Use `application-security-red-teaming` for adversarial discovery and white-hat attack-family selection.
+- Use `llm-deterministic-boundary` when a discovered issue is really about semantic ownership rather than replay design.

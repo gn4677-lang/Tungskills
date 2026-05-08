@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Mobile form breakdown: bad versus better</title>
+  <desc id="desc">Left side shows a dense desktop-style form squeezed into a narrow mobile viewport with clipped labels and weak hierarchy. Right side shows a mobile-friendly form with stable field spacing, clear labels, and a recoverable bottom action area.</desc>
+  <rect width="1200" height="680" fill="#f5f7fb"/>
+  <text x="600" y="44" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#111827">Mobile Form Breakdown</text>
+  <rect x="80" y="80" width="420" height="560" rx="36" fill="#111827"/>
+  <rect x="100" y="104" width="380" height="512" rx="28" fill="#ffffff"/>
+  <text x="130" y="144" font-family="Arial, sans-serif" font-size="24" fill="#b91c1c">Bad</text>
+  <rect x="130" y="180" width="320" height="42" rx="10" fill="#eef2ff"/>
+  <rect x="130" y="240" width="320" height="42" rx="10" fill="#eef2ff"/>
+  <rect x="130" y="300" width="320" height="42" rx="10" fill="#eef2ff"/>
+  <rect x="130" y="360" width="320" height="42" rx="10" fill="#eef2ff"/>
+  <rect x="130" y="420" width="140" height="38" rx="19" fill="#d1d5db"/>
+  <rect x="286" y="420" width="164" height="38" rx="19" fill="#111827"/>
+  <text x="130" y="520" font-family="Arial, sans-serif" font-size="16" fill="#374151">Problem: squeezed controls, weak labels, fragile action area</text>
+  <rect x="700" y="80" width="420" height="560" rx="36" fill="#111827"/>
+  <rect x="720" y="104" width="380" height="512" rx="28" fill="#ffffff"/>
+  <text x="750" y="144" font-family="Arial, sans-serif" font-size="24" fill="#065f46">Better</text>
+  <text x="750" y="188" font-family="Arial, sans-serif" font-size="17" fill="#111827">Meal name</text>
+  <rect x="750" y="200" width="320" height="48" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="750" y="274" font-family="Arial, sans-serif" font-size="17" fill="#111827">Estimated calories</text>
+  <rect x="750" y="286" width="320" height="48" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="750" y="360" font-family="Arial, sans-serif" font-size="17" fill="#111827">Notes</text>
+  <rect x="750" y="372" width="320" height="88" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <rect x="750" y="500" width="320" height="66" rx="20" fill="#f9fafb" stroke="#e5e7eb"/>
+  <rect x="770" y="514" width="120" height="38" rx="19" fill="#d1d5db"/>
+  <rect x="910" y="514" width="140" height="38" rx="19" fill="#0f766e"/>
+  <text x="750" y="592" font-family="Arial, sans-serif" font-size="16" fill="#374151">Better: readable labels, stable controls, and a recoverable action area</text>
+</svg>

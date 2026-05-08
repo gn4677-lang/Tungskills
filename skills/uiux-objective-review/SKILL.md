@@ -1,6 +1,6 @@
 ---
 name: uiux-objective-review
-description: Use when Codex needs to review, verify, QA, or improve rendered UI/UX with screenshots, accessibility, responsive checks, interaction states, visual hierarchy, heuristic review, objective rejection criteria, or design readiness before claiming a UI is polished/ready. Trigger on rendered-UI defects such as layout overlap, mobile/responsive breakage, screenshot QA findings, accessibility issues, or readiness claims about visual quality.
+description: Use when Codex needs to review, verify, QA, or improve rendered UI/UX with screenshots, accessibility, responsive checks, interaction states, visual hierarchy, heuristic review, AI slop detection, objective rejection criteria, or design readiness before claiming a UI is polished/ready. Trigger on rendered-UI defects such as layout overlap, mobile/responsive breakage, screenshot QA findings, accessibility issues, generic AI styling, fake-looking demos, or readiness claims about visual quality.
 ---
 
 # UI/UX Objective Review
@@ -30,6 +30,9 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 6. Apply objective rubrics:
    - `references/objective-quality-checklist.md`
    - `references/ai-slop-rejection-checklist.md`
+   - `references/ai-slop-example-gallery.md`
+   - `references/visual-example-index.md`
+   - `references/code-smell-to-ui-failure-map.md`
    - `references/interaction-truthfulness-check.md`
    - `references/heuristic-review-rubric.md`
 7. If reviewing a live or local implementation, follow `references/rendered-ui-review-protocol.md`.
@@ -40,6 +43,7 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 ```text
 Rendered artifact: screenshot | browser | local app | prototype | missing
 Objective checks passed: ...
+AI slop signals: ...
 Must-fix failures: ...
 Should-fix risks: ...
 Human judgment needed: ...
@@ -51,8 +55,8 @@ Decision: ready | narrow | stop
 
 Use these categories unless the user requests a different format:
 
-- `must fix`: broken task completion, unreadable content, misleading state, accessibility blocker, layout overlap, clipped controls, or motion that prevents use.
-- `should fix`: weak hierarchy, avoidable cognitive load, generic AI styling, unclear copy, inconsistent spacing, incomplete states, or questionable interaction timing.
+- `must fix`: broken task completion, unreadable content, misleading state, accessibility blocker, layout overlap, clipped controls, fake product proof, or motion that prevents use.
+- `should fix`: weak hierarchy, avoidable cognitive load, generic AI styling, domain mismatch, unclear copy, inconsistent spacing, incomplete states, or questionable interaction timing.
 - `human judgment needed`: brand tone, taste, novelty, emotional feel, market positioning, and whether the design is distinctive enough.
 
 ## Objective Rejection Rules
@@ -66,6 +70,7 @@ Reject the design as not ready when any of these are true:
 - Motion steals attention without clarifying what changed.
 - The interface looks like a generic AI template with no intentional brand or product fit.
 - Major interactive elements cannot be reached or understood by keyboard and visible focus.
+- Screenshots, charts, demos, or operational data look fake, low-fidelity, or unrelated to the core task.
 
 ## Stop Signals
 
@@ -75,6 +80,7 @@ Stop or narrow when:
 - code inspection is used as the only evidence for polished, ready, or well-designed UI
 - major viewports, interaction states, keyboard access, or loading/error/empty states are untested
 - objective failures are being reframed as taste preferences instead of must-fix issues
+- the review ignores obvious AI-slop signals because the pixels look "modern"
 
 ## Common Mistakes
 
@@ -82,11 +88,12 @@ Stop or narrow when:
 - Reviewing screenshots without checking interaction states.
 - Calling something "clean" when it is merely empty.
 - Accepting purple gradients, dramatic shadows, or template SaaS cards as a substitute for design intent.
+- Treating code smell as final proof instead of an early warning that still needs rendered verification.
 - Using pixel-diff visual regression as taste evaluation; it only detects changes.
 
 ## Verification
 
-Before claiming a UI is polished, ready, or improved, name the evidence: rendered artifact, desktop/mobile viewport checks, interaction states exercised, accessibility or keyboard result, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
+Before claiming a UI is polished, ready, or improved, name the evidence: rendered artifact, desktop/mobile viewport checks, interaction states exercised, accessibility or keyboard result, AI slop signals reviewed, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
 
 ## Handoffs
 

@@ -1,6 +1,6 @@
 ---
 name: llm-deterministic-boundary
-description: Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, semantic routing, post-pass overrides, or agent decision authority should own a product/workflow decision. Trigger on 該寫 prompt 還是 code, model portability, weak-model compensation, scaffold/eval overfitting, guardrail overconstraint, raw-input oracle, runner-inferred semantics, semantic ownership, semantic verifier/router confusion, deterministic verifier infers intent/action, live failure shaping contract, provider-specific hardening, full-suite false green, 模型泛化, 測試集過擬合, guard 太重, or code overwriting LLM semantic decisions.
+description: Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, semantic routing, post-pass overrides, or agent decision authority should own a product or workflow decision. Trigger on prompt vs code, prompt injection defenses, indirect prompt injection, tool poisoning, external content overriding agent decisions, model portability, weak-model compensation, scaffold or eval overfitting, raw-input oracle, runner-inferred semantics, semantic ownership, semantic verifier or router confusion, guard became semantic owner, or code overwriting LLM semantic decisions.
 ---
 
 # LLM Deterministic Boundary
@@ -54,6 +54,7 @@ Decision: proceed | narrow | stop
 | LLM asked to enforce exact schema or threshold | Move that role to deterministic validation. |
 | Deterministic keyword router for semantic intent | Use it only as guard, prior, or reject rule unless product truth approves it. |
 | Raw-input oracle maps text directly to intent, route, or action | Stop; evaluate the agent/model decision or cite the product-approved oracle first. |
+| External content or tool output tells the agent to ignore prior priorities | Stop; handle untrusted content and ownership separately before patching prompts or guards. |
 | Verifier or guard becomes the semantic router | Stop; separate semantic decision ownership from validation boundaries. |
 | Repair loop with no attempt limit | Add bounded repair and stop condition. |
 | A model passes only with heavy guard/repair scaffold | Treat as a model-capability/scaffold tradeoff; do not freeze the scaffold until cross-model behavior and product truth are checked. |
@@ -75,6 +76,7 @@ Before claiming the boundary is safe, name the evidence: invariant test, schema 
 
 ## Handoffs
 
+- Use `application-security-red-teaming` when the primary task is authorized adversarial testing of a web app, API, auth/session flow, storage boundary, deployment surface, or AI-enabled attack surface rather than ownership assignment.
 - Use `agentic-eval-development` when the boundary must be validated through evals, graders, traces, regression seeds, or holdout cases.
 - Use `architecture-boundary-governance` when the ownership decision changes module placement, public API, data model, runtime boundary, or dependency direction.
 - Use `evidence-claim-integrity` before claiming the boundary is safe, general, portable, or production-ready.

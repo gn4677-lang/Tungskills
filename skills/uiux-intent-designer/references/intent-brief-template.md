@@ -12,6 +12,9 @@ Use this when UI/UX intent is incomplete or when the task affects a major surfac
 - Constraints:
 - Tone and trust posture:
 - Density target:
+- Unique product signal:
+- Visual anti-goals / tropes to avoid:
+- Literal proof to show early:
 - Primary action:
 - Secondary actions:
 - Non-goals:
@@ -27,6 +30,7 @@ Ask only questions that would change the design. Prefer concrete choices.
 - Density: Should this feel fast and operational, guided and calm, or expressive and exploratory?
 - Risk: What mistake would be most expensive or frustrating?
 - Brand: Should the UI feel restrained, technical, warm, playful, editorial, premium, or utilitarian?
+- Slop risk: What would make this feel like a generic AI template, and what must be avoided?
 
 ## Defaults When Speed Matters
 
@@ -36,6 +40,7 @@ If the user asks to move fast and context is thin:
 - State assumptions before implementation.
 - Avoid decorative hero layouts for tools and operational products.
 - Prefer clear literal copy over abstract marketing language.
+- Name one or two visual anti-goals so the model does not fill the gaps with generic SaaS tropes.
 - Leave brand taste as a human review item.
 
 ## Landing Page Defaults

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Decorative premium veneer: bad versus better</title>
+  <desc id="desc">Left side shows blur, glass, glow, and shadows dominating the page while hierarchy and proof remain weak. Right side uses restrained surfaces, clear reading order, and trust cues without losing personality.</desc>
+  <rect width="1200" height="680" fill="#f5f7fb"/>
+  <text x="600" y="44" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#111827">Decorative Premium Veneer</text>
+  <rect x="40" y="80" width="520" height="560" rx="20" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="80" y="120" font-family="Arial, sans-serif" font-size="24" fill="#b91c1c">Bad</text>
+  <rect x="90" y="150" width="420" height="200" rx="28" fill="#1d4ed8" opacity="0.85"/>
+  <circle cx="180" cy="240" r="80" fill="#c084fc" opacity="0.45"/>
+  <circle cx="410" cy="220" r="70" fill="#67e8f9" opacity="0.35"/>
+  <rect x="130" y="220" width="220" height="110" rx="22" fill="#ffffff" opacity="0.32" stroke="#ffffff"/>
+  <rect x="80" y="390" width="430" height="170" rx="20" fill="#ffffff" opacity="0.8" stroke="#e5e7eb"/>
+  <text x="80" y="622" font-family="Arial, sans-serif" font-size="18" fill="#374151">Problem: mood overwhelms hierarchy and trust</text>
+  <rect x="640" y="80" width="520" height="560" rx="20" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="680" y="120" font-family="Arial, sans-serif" font-size="24" fill="#065f46">Better</text>
+  <rect x="680" y="150" width="420" height="160" rx="22" fill="#f8fafc" stroke="#e5e7eb"/>
+  <text x="708" y="196" font-family="Arial, sans-serif" font-size="28" fill="#111827">Daily meal review with verifiable changes</text>
+  <text x="708" y="236" font-family="Arial, sans-serif" font-size="17" fill="#374151">See evidence, correct entries, and understand how each change affects the daily budget.</text>
+  <rect x="708" y="340" width="150" height="40" rx="20" fill="#0f766e"/>
+  <text x="783" y="366" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#ffffff">Open sample</text>
+  <rect x="680" y="410" width="420" height="140" rx="18" fill="#ecfeff" stroke="#99f6e4"/>
+  <text x="708" y="446" font-family="Arial, sans-serif" font-size="18" fill="#111827">Trust cues</text>
+  <text x="708" y="478" font-family="Arial, sans-serif" font-size="16" fill="#374151">• Each correction keeps an audit trail</text>
+  <text x="708" y="506" font-family="Arial, sans-serif" font-size="16" fill="#374151">• Evidence stays attached to the meal</text>
+  <text x="680" y="622" font-family="Arial, sans-serif" font-size="18" fill="#374151">Better: restrained visuals support meaning instead of replacing it</text>
+</svg>

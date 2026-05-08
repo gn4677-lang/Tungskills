@@ -1,6 +1,6 @@
 ---
 name: uiux-intent-designer
-description: Use when Codex is asked to design, redesign, build, modify, or critique user-facing UI/UX and must clarify user intent, product purpose, system concept, interaction behavior, animation purpose, visual direction, or human alignment before implementation. Trigger on user-facing 介面設計, 使用者流程, 畫面互動, UX, visual direction, or interaction concept work. If interface means module/API/type/method shape, route to architecture-boundary-governance.
+description: Use when Codex is asked to design, redesign, build, modify, or critique user-facing UI/UX and must clarify user intent, product purpose, system concept, interaction behavior, animation purpose, visual direction, anti-goals, or human alignment before implementation. Trigger on user-facing UI/UX, visual direction, interaction concept work, or complaints that AI-generated UI looks generic, samey, template-like, fake, card-heavy, overly purple, unclear, or like AI slop. If interface means module/API/type/method shape, route to architecture-boundary-governance.
 ---
 
 # UI/UX Intent Designer
@@ -35,12 +35,13 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 1. Inspect existing product context first when available: screenshots, code, copy, design system, prior pages, or app behavior.
 2. Build a concise intent brief. Use `references/intent-brief-template.md` when the task is broad or ambiguous.
 3. Add a system-first pass. Use `references/system-first-brief.md` for products with many features, AI agents, editors, dashboards, or workflows.
-4. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
-5. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
-6. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
-7. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
-8. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
-9. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
+4. When generic AI output is a risk, add anti-slop constraints before visual exploration: unique product signal, literal proof, density target, and tropes to avoid. Use `references/anti-slop-design-brief.md` and `references/anti-slop-direction-examples.md` when you need concrete contrast, and use `../uiux-objective-review/references/visual-example-index.md` when a paired visual example would help.
+5. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
+6. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
+7. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
+8. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
+9. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
+10. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
 
 ## Default Output
 
@@ -48,6 +49,7 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 Intent brief: ...
 Assumptions or questions: ...
 Recommended direction: ...
+Anti-slop constraints: ...
 Purpose trace: ...
 Interaction feedback map: needed | not needed | ...
 Human judgment still needed: ...
@@ -70,6 +72,7 @@ For design generation, produce:
 - Intent brief.
 - Assumptions or questions.
 - 2-3 directions with tradeoffs and a recommendation.
+- Anti-slop constraints when the surface risks generic AI output.
 - Purpose trace for the selected direction.
 - Interaction feedback map when relevant.
 - Human judgment items that remain unresolved.
@@ -81,6 +84,7 @@ For design generation, produce:
 - Treating "minimal" as empty or "premium" as more animation.
 - Adding features instead of unifying concepts.
 - Describing a UI as good without explaining what user outcome it supports.
+- Letting the model fill missing intent with generic SaaS tropes, fake charts, unrelated hero sections, or decorative gradients.
 - Using Ryo Lu references as style imitation instead of system-thinking guidance.
 
 ## Stop Signals
@@ -91,7 +95,8 @@ Stop or narrow when:
 - "interface" means module/API/type/method shape rather than user-facing UI or interaction
 - implementation starts before the design intent can explain each major region's user purpose
 - animation, AI autonomy, destructive action, or async work has no feedback or correction map
+- anti-goals are missing while the surface is at high risk of generic AI output
 
 ## Verification
 
-Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, purpose trace, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.
+Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, anti-slop constraints when relevant, purpose trace, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.

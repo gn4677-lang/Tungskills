@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Feature-card filler: bad versus better</title>
+  <desc id="desc">Left side shows six generic feature cards with abstract copy and equal weight. Right side replaces generic cards with a task flow that explains how the product actually works from input to review to result.</desc>
+  <rect width="1200" height="680" fill="#f5f7fb"/>
+  <text x="600" y="44" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#111827">Feature-Card Filler</text>
+  <rect x="40" y="80" width="520" height="560" rx="20" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="80" y="120" font-family="Arial, sans-serif" font-size="24" fill="#b91c1c">Bad</text>
+  <text x="80" y="164" font-family="Arial, sans-serif" font-size="24" fill="#111827">Everything your team needs</text>
+  <g font-family="Arial, sans-serif" font-size="16" fill="#374151">
+    <rect x="80" y="200" width="200" height="130" rx="16" fill="#eef2ff"/><text x="110" y="240">Automation</text><text x="110" y="270">Streamline workflows</text>
+    <rect x="300" y="200" width="200" height="130" rx="16" fill="#eef2ff"/><text x="330" y="240">Analytics</text><text x="330" y="270">Unlock insights</text>
+    <rect x="80" y="350" width="200" height="130" rx="16" fill="#eef2ff"/><text x="110" y="390">Collaboration</text><text x="110" y="420">Work together</text>
+    <rect x="300" y="350" width="200" height="130" rx="16" fill="#eef2ff"/><text x="330" y="390">Security</text><text x="330" y="420">Enterprise ready</text>
+    <rect x="80" y="500" width="200" height="100" rx="16" fill="#eef2ff"/><text x="110" y="540">Integrations</text>
+    <rect x="300" y="500" width="200" height="100" rx="16" fill="#eef2ff"/><text x="330" y="540">AI Powered</text>
+  </g>
+  <text x="80" y="622" font-family="Arial, sans-serif" font-size="18" fill="#374151">Problem: cards replace product understanding</text>
+  <rect x="640" y="80" width="520" height="560" rx="20" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="680" y="120" font-family="Arial, sans-serif" font-size="24" fill="#065f46">Better</text>
+  <text x="680" y="164" font-family="Arial, sans-serif" font-size="24" fill="#111827">How a meal log becomes a trustworthy daily budget</text>
+  <rect x="680" y="220" width="120" height="120" rx="16" fill="#dbeafe"/>
+  <rect x="840" y="220" width="120" height="120" rx="16" fill="#dcfce7"/>
+  <rect x="1000" y="220" width="120" height="120" rx="16" fill="#fef3c7"/>
+  <text x="740" y="285" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#111827">Log meal</text>
+  <text x="900" y="285" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#111827">Review evidence</text>
+  <text x="1060" y="285" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#111827">Update budget</text>
+  <line x1="800" y1="280" x2="840" y2="280" stroke="#64748b" stroke-width="4"/>
+  <line x1="960" y1="280" x2="1000" y2="280" stroke="#64748b" stroke-width="4"/>
+  <rect x="680" y="390" width="440" height="170" rx="18" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="712" y="430" font-family="Arial, sans-serif" font-size="18" fill="#111827">Why users trust it</text>
+  <text x="712" y="466" font-family="Arial, sans-serif" font-size="16" fill="#374151">• Evidence stays attached to the meal</text>
+  <text x="712" y="496" font-family="Arial, sans-serif" font-size="16" fill="#374151">• Corrections do not erase history</text>
+  <text x="712" y="526" font-family="Arial, sans-serif" font-size="16" fill="#374151">• The daily budget shows what changed</text>
+  <text x="680" y="622" font-family="Arial, sans-serif" font-size="18" fill="#374151">Better: task flow and trust cues replace filler cards</text>
+</svg>
