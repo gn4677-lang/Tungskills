@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Code Excellence"
+  short_description: "Review readability, DSA fit, hot paths, and abstraction quality."
+  default_prompt: "Use $review-code-excellence to review whether code is readable, efficient, maintainable, and not over-abstracted."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "UI/UX Intent Designer"
-  short_description: "Clarify UI/UX intent before design work."
-  default_prompt: "Use this skill to clarify UI/UX intent, system concept, interaction feedback, and human alignment before designing or changing an interface."

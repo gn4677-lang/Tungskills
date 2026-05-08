@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Windows/CJK Text"
+  short_description: "Verify encoding, mojibake, BOM, and terminal byte evidence."
+  default_prompt: "Use $verify-windows-cjk-text to handle Windows, CJK, Markdown, BOM, mojibake, CP950, and byte-level text evidence safely."

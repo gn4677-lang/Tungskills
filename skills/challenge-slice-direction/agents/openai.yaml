@@ -1,0 +1,4 @@
+interface:
+  display_name: "Challenge Slice Direction"
+  short_description: "Challenge next-slice direction before planning or implementation."
+  default_prompt: "Use $challenge-slice-direction before planning a non-trivial new slice, mainline/detour decision, or why-now scope decision."

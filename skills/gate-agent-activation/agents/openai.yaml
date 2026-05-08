@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gate Agent Activation"
+  short_description: "Decide live, shadow, canary, user-facing, and mutation stages."
+  default_prompt: "Use $gate-agent-activation to decide whether an agent capability may move to live, shadow, canary, user-facing, or mutation-bearing runtime."

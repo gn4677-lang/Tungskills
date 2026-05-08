@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Runtime Architecture"
-  short_description: "Diagnose broad agent-runtime problems and route them to the right specialized runtime skill."
-  default_prompt: "Use $agent-runtime-architecture to diagnose this agent problem and choose which runtime skill should own it."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Runtime Activation Ladder"
-  short_description: "Stage live LLM rollout safely."
-  default_prompt: "Use $agent-runtime-activation-ladder to decide whether an agent capability may move to live diagnostic, shadow, canary, user-facing, or mutation-bearing runtime."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Red-Team Application Security"
+  short_description: "Run authorized AppSec and AI-enabled attack-surface review."
+  default_prompt: "Use $red-team-application-security to assess this authorized application security problem, choose one attack surface, and route remediation correctly."

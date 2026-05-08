@@ -1,4 +1,0 @@
-interface:
-  display_name: "Development Environment Parity"
-  short_description: "Diagnose cross-machine dev environment parity"
-  default_prompt: "Diagnose this project setup across machines and identify the authoritative runtime, local/CI parity, blockers, and verification command."

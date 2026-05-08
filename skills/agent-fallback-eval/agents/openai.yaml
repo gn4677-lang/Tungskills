@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Fallback Eval"
-  short_description: "Own retry, failover, degraded modes, traces, and eval loops for reliable agent runtimes."
-  default_prompt: "Use $agent-fallback-eval when this agent breaks under provider/model failure or lacks clear degraded behavior."

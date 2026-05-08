@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agent Retrieval"
+  short_description: "Design search, RAG, source routing, and retrieval boundaries."
+  default_prompt: "Use $design-agent-retrieval when this agent needs better search, RAG, source routing, or document lookup boundaries."

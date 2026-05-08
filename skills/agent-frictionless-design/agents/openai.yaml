@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Frictionless Design"
-  short_description: "Own onboarding, clarification burden, progress cues, and surface-flow friction for agents."
-  default_prompt: "Use $agent-frictionless-design when this agent feels heavy, slow, or too form-driven."

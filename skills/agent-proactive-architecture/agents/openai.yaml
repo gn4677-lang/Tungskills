@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Proactive Architecture"
-  short_description: "Own reminders, follow-ups, wake triggers, and autonomy tiers for proactive agents."
-  default_prompt: "Use $agent-proactive-architecture when this agent needs to act before the user asks."

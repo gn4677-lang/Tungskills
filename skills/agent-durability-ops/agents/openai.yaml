@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Durability Ops"
-  short_description: "Own background maintenance, shared-state sync, recovery, and budget guards for long-lived agents."
-  default_prompt: "Use $agent-durability-ops when this agent needs background maintenance, team sync, snapshot or recovery design, or budget-aware runtime guardrails."

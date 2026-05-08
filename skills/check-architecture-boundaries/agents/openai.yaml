@@ -1,0 +1,4 @@
+interface:
+  display_name: "Check Architecture Boundaries"
+  short_description: "Check ownership, API, dependency, runtime, and data boundaries."
+  default_prompt: "Use $check-architecture-boundaries before changing architecture, ownership, dependencies, public contracts, data models, or runtime boundaries."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "UI/UX Objective Review"
-  short_description: "Review rendered UI with objective checks."
-  default_prompt: "Use this skill to review UI/UX with rendered screenshots, accessibility checks, interaction truthfulness, and objective rejection criteria before calling a design ready."

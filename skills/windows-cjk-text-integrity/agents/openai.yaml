@@ -1,4 +1,0 @@
-interface:
-  display_name: "Windows CJK Text Integrity"
-  short_description: "Verify Windows CJK encoding and BOM safety."
-  default_prompt: "Use $windows-cjk-text-integrity to handle Windows, CJK, Markdown, BOM, mojibake, and byte-level text evidence safely."

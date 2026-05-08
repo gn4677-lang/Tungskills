@@ -1,4 +1,0 @@
-interface:
-  display_name: "LLM Deterministic Boundary"
-  short_description: "Assign LLM and deterministic decision ownership."
-  default_prompt: "Use $llm-deterministic-boundary to decide whether LLM, deterministic code, guards, validators, or repair loops should own a decision."

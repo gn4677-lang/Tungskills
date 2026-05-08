@@ -1,0 +1,4 @@
+interface:
+  display_name: "Narrow Evidence Claims"
+  short_description: "Match success, readiness, quality, and safety claims to evidence."
+  default_prompt: "Use $narrow-evidence-claims before claiming pass, complete, ready, done, safe, clean, optimized, merge-ready, or deploy-ready."

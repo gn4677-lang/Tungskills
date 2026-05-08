@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agent Context Architecture"
-  short_description: "Own memory continuity, session routing, context packs, and compaction for long-lived agents."
-  default_prompt: "Use $agent-context-architecture when this agent is forgetting, leaking context, or carrying too much raw history."

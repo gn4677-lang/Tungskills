@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agent Fallbacks"
+  short_description: "Design retries, failover, degradation, and failure evals."
+  default_prompt: "Use $design-agent-fallbacks when this agent breaks under provider, model, tool, timeout, or runtime failure."

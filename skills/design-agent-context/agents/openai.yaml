@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agent Context"
+  short_description: "Design memory, session, scope, and context continuity."
+  default_prompt: "Use $design-agent-context when this agent is forgetting, leaking context, or carrying too much raw history."

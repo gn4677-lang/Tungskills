@@ -4,43 +4,60 @@ Personal Codex skill collection for reusable engineering governance, agent runti
 
 The goal is to make Codex behave more like a careful senior engineer across projects: clear boundaries, narrow claims, explicit evidence, small mergeable slices, readable code, and safer agent-runtime decisions.
 
+## Design Model
+
+Tungskills uses an action-protocol model inspired by Superpowers:
+
+- skill names are actions, not domains
+- `description` is trigger-only and should not summarize the workflow
+- `SKILL.md` starts with the smallest executable protocol
+- each skill has `Default Output`, `Stop Signals`, and `Verification`
+- heavy framework notes, examples, and rubrics stay in `references/`
+
+The intended flow is: recognize the task action, load the matching skill, run the protocol, produce the output contract, and hand off instead of answering from a loose checklist.
+
 ## Contents
 
-This repository contains 19 custom skills under `skills/`.
+This repository contains 21 custom skills under `skills/`.
 
 ### Agent Runtime Architecture
 
-- `agent-runtime-architecture` - umbrella router for runtime skill selection.
-- `agent-context-architecture` - memory, context continuity, scope, checkpoint vs memory.
-- `agent-retrieval-architecture` - search, RAG, source routing, retrieval boundaries.
-- `agent-durability-ops` - background work, crash recovery, job lifecycle, durable execution.
-- `agent-proactive-architecture` - reminders, wake triggers, autonomy tiers, proactive behavior.
-- `agent-fallback-eval` - retry, failover, degraded mode, trace/eval loops for failures.
-- `agent-frictionless-design` - interaction friction, progress cues, correction paths.
-- `agent-runtime-activation-ladder` - fake/live/shadow/canary/user-facing/mutation rollout gates.
+- `route-agent-runtime-design` - umbrella router for runtime skill selection.
+- `design-agent-context` - memory, context continuity, scope, checkpoint vs memory.
+- `design-agent-retrieval` - search, RAG, source routing, retrieval boundaries.
+- `design-agent-durability` - background work, crash recovery, job lifecycle, durable execution.
+- `design-proactive-agents` - reminders, wake triggers, autonomy tiers, proactive behavior.
+- `design-agent-fallbacks` - retry, failover, degraded mode, trace/eval loops for failures.
+- `reduce-agent-friction` - interaction friction, progress cues, correction paths.
+- `gate-agent-activation` - fake/live/shadow/canary/user-facing/mutation rollout gates.
 
 ### Agentic Eval And LLM Boundaries
 
-- `agentic-eval-development` - eval-driven agent development, traces, graders, harness design.
-- `llm-deterministic-boundary` - deciding whether LLM, deterministic code, guard, or verifier owns a decision.
+- `design-agentic-evals` - eval-driven agent development, traces, graders, harness design.
+- `assign-decision-ownership` - deciding whether LLM, deterministic code, guard, or verifier owns a decision.
 
 ### Engineering Governance
 
-- `architecture-boundary-governance` - ownership, public API, dependency direction, runtime/data boundaries.
-- `capability-dependency-build-order` - capability order, domain slicing, PRD/issue slicing.
-- `code-excellence-dsa-hygiene` - readable code, DSA fit, hot-path efficiency, unnecessary abstraction, no-behavior refactor safety.
-- `delivery-pipeline-governance` - CI/CD, merge gates, private/free GitHub limits, PR debt, merge queue fallback.
-- `development-environment-parity` - Windows/macOS/Linux setup parity, devcontainers, Python/venv, local vs CI.
-- `evidence-claim-integrity` - prevents overbroad done/ready/all-green/merge-safe/code-clean claims.
+- `check-architecture-boundaries` - ownership, public API, dependency direction, runtime/data boundaries.
+- `sequence-capability-work` - capability order, domain slicing, PRD/issue slicing.
+- `review-code-excellence` - readable code, DSA fit, hot-path efficiency, unnecessary abstraction, no-behavior refactor safety.
+- `gate-delivery-readiness` - CI/CD, merge gates, private/free GitHub limits, PR debt, merge queue fallback.
+- `align-development-environments` - Windows/macOS/Linux setup parity, devcontainers, Python/venv, local vs CI.
+- `challenge-slice-direction` - contrarian preflight for next-slice direction, mainline/detour, why-now, and smallest-safe-scope decisions.
+- `narrow-evidence-claims` - prevents overbroad done/ready/all-green/merge-safe/code-clean claims.
+
+### Security
+
+- `red-team-application-security` - authorized AppSec and red-team workflow for web apps, APIs, auth, storage, agentic surfaces, and post-fix regression.
 
 ### Product And Interface Review
 
-- `uiux-intent-designer` - user-facing UI/UX intent, interaction behavior, visual direction.
-- `uiux-objective-review` - rendered UI/UX QA, screenshots, accessibility, responsive checks.
+- `define-uiux-intent` - user-facing UI/UX intent, interaction behavior, visual direction.
+- `review-rendered-uiux` - rendered UI/UX QA, screenshots, accessibility, responsive checks.
 
 ### Windows / Encoding
 
-- `windows-cjk-text-integrity` - CJK mojibake, UTF-8/BOM policy, PowerShell/CP950 output safety.
+- `verify-windows-cjk-text` - CJK mojibake, UTF-8/BOM policy, PowerShell/CP950 output safety.
 
 ## What This Repo Does Not Include
 
@@ -100,7 +117,7 @@ Restarting Codex is usually the cleanest way to ensure updated skill description
 Validate a skill with the Codex skill creator validator:
 
 ```powershell
-python -X utf8 C:\Users\User\.codex\skills\.system\skill-creator\scripts\quick_validate.py C:\Users\User\.codex\skills\windows-cjk-text-integrity
+python -X utf8 C:\Users\User\.codex\skills\.system\skill-creator\scripts\quick_validate.py C:\Users\User\.codex\skills\verify-windows-cjk-text
 ```
 
 For all skills in a local checkout, run:
@@ -116,6 +133,14 @@ Encoding policy:
 - `SKILL.md` should start with `---` and should not have a BOM.
 - Reference markdown may use UTF-8 with BOM for Windows-heavy markdown workflows.
 - Do not add a BOM to `SKILL.md` just to satisfy a locale-bound validator.
+
+Acceptance checks for this repo:
+
+- all `SKILL.md` files validate with `quick_validate.py`
+- all `SKILL.md` files start with `---` and have no BOM
+- every skill includes `Action Protocol`, `Default Output`, `Stop Signals`, and `Verification`
+- no legacy noun-style Tungskills names remain in references or handoffs
+- pressure tests cover positive triggers and near-miss routing for direction, delivery, evidence, runtime, UI, security, environment, and code-quality workflows
 
 ## Sync Boundary
 

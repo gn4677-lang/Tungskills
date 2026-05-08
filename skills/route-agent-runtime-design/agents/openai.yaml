@@ -1,0 +1,4 @@
+interface:
+  display_name: "Route Agent Runtime Design"
+  short_description: "Choose the right agent runtime design owner."
+  default_prompt: "Use $route-agent-runtime-design to route this agent runtime problem to the right action skill before designing details."

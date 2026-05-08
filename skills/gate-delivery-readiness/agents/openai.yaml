@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gate Delivery Readiness"
+  short_description: "Separate pre-PR, queue, merge, deploy, and release readiness."
+  default_prompt: "Use $gate-delivery-readiness to decide whether CI/CD, PR, merge queue, deploy, or release evidence supports the claimed readiness stage."

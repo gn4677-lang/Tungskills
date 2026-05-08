@@ -1,4 +1,0 @@
-interface:
-  display_name: "Architecture Boundary Governance"
-  short_description: "Keep AI changes inside architecture boundaries."
-  default_prompt: "Use $architecture-boundary-governance to check boundary risk before changing architecture, ownership, dependencies, or build order."

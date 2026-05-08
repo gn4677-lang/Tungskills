@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Proactive Agents"
+  short_description: "Design wake triggers, autonomy tiers, and approval surfaces."
+  default_prompt: "Use $design-proactive-agents when this agent may remind, wake, nudge, schedule, or act proactively."

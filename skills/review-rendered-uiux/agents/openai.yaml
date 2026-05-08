@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Rendered UI/UX"
+  short_description: "Review rendered UI with screenshots, states, viewports, and accessibility."
+  default_prompt: "Use $review-rendered-uiux to verify rendered UI/UX quality with concrete visual, interaction, responsive, and accessibility evidence."

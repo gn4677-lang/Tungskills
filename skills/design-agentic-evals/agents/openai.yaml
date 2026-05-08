@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agentic Evals"
+  short_description: "Design trace, grader, regression, and harness boundaries."
+  default_prompt: "Use $design-agentic-evals to design or repair agentic evals, trace replay, graders, holdouts, or anti-leakage tests."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Capability Dependency Build Order"
-  short_description: "Choose build order from capability dependencies."
-  default_prompt: "Use $capability-dependency-build-order to decide what capability to build next from domain, dependency, OOD responsibility, and dependency direction."

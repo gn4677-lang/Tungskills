@@ -1,4 +1,0 @@
-interface:
-  display_name: "Delivery Pipeline Governance"
-  short_description: "Review CI/CD gates for private/free repos"
-  default_prompt: "Review this repository delivery pipeline and tell me whether CI/CD gates support merge, deploy, or readiness claims."

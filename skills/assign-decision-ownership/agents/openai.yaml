@@ -1,0 +1,4 @@
+interface:
+  display_name: "Assign Decision Ownership"
+  short_description: "Assign LLM, deterministic, guard, tool, or human ownership."
+  default_prompt: "Use $assign-decision-ownership to decide whether LLM, deterministic code, guards, validators, or humans should own a decision."

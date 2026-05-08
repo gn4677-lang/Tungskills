@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reduce Agent Friction"
+  short_description: "Reduce onboarding, clarification, progress, and correction friction."
+  default_prompt: "Use $reduce-agent-friction when this agent feels slow, heavy, unclear, too form-driven, or hard to correct."

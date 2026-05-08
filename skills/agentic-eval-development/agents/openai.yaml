@@ -1,4 +1,0 @@
-interface:
-  display_name: "Agentic Eval Development"
-  short_description: "Design evals for agentic product behavior."
-  default_prompt: "Use $agentic-eval-development to design evals for manager agents, tools, guards, handoffs, and product-truth validation."

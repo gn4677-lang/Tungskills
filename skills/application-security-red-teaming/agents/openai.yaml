@@ -1,4 +1,0 @@
-interface:
-  display_name: "Application Security Red Teaming"
-  short_description: "Red-team web apps, APIs, data boundaries, and AI-enabled surfaces."
-  default_prompt: "Use $application-security-red-teaming to assess this application security problem, choose one primary boundary and attack family, and route remediation correctly."

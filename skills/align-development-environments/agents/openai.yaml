@@ -1,0 +1,4 @@
+interface:
+  display_name: "Align Development Environments"
+  short_description: "Reproduce setup across machines, OSes, Docker, and CI."
+  default_prompt: "Use $align-development-environments when a project or Codex setup must run consistently across Windows, macOS, Linux, Docker, or CI."

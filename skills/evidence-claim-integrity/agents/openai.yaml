@@ -1,4 +1,0 @@
-interface:
-  display_name: "Evidence Claim Integrity"
-  short_description: "Prevent fake pass and overbroad completion claims."
-  default_prompt: "Use $evidence-claim-integrity before claiming pass, complete, ready, done, all good, or safe to proceed."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agent Durability"
+  short_description: "Design durable background work and recovery behavior."
+  default_prompt: "Use $design-agent-durability when this agent needs background work, crash recovery, leases, idempotency, or operator runbooks."

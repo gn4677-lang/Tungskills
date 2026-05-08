@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sequence Capability Work"
+  short_description: "Choose build order from accepted capability dependencies."
+  default_prompt: "Use $sequence-capability-work after direction is accepted to sequence capability, domain, PRD, issue, or pre-PR work."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Define UI/UX Intent"
+  short_description: "Define user-facing UI purpose, behavior, and anti-slop direction."
+  default_prompt: "Use $define-uiux-intent before designing or changing user-facing UI/UX when purpose, audience, behavior, or visual direction is unclear."
