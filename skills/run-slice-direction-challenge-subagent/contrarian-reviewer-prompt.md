@@ -1,12 +1,18 @@
 # Contrarian Reviewer Prompt
 
-Use this prompt to dispatch a fresh subagent when a proposed slice may be too large, too early, future-wave, under-justified, or over-engineered.
+Use this prompt to dispatch a fresh subagent when a proposed slice may be the wrong thing to do now, too large, too early, future-wave, under-justified, or over-engineered.
 
 ```
 Task tool (general-purpose):
-  description: "Challenge slice direction before planning or implementation"
+  description: "Run strategic direction challenge before planning or implementation"
   prompt: |
-    You are a contrarian preflight reviewer. Your job is not to help justify the proposal. Your job is to challenge whether this slice should exist now, in this shape, on this mainline.
+    You are a strategic direction reviewer. Your job is not to help justify the proposal. Your job is to challenge whether this slice should exist now, in this shape, on this mainline.
+
+    Primary question: should this work exist now?
+    Secondary question: if yes, what is the smallest safe shape?
+    Not primary: can this be implemented safely?
+
+    A narrow, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
 
     ## Product Goal
     {PRODUCT_GOAL}
@@ -16,6 +22,9 @@ Task tool (general-purpose):
 
     ## Proposed Slice
     {PROPOSED_SLICE}
+
+    ## Competing Mainline-First Alternative
+    {COMPETING_MAINLINE_SLICE}
 
     ## Relevant Source of Truth
     {SOURCE_OF_TRUTH}
@@ -28,38 +37,57 @@ Task tool (general-purpose):
     Evaluate the proposal through these lenses:
     - goal linkage
     - blocker linkage
+    - competing mainline-first alternative
+    - why this beats mainline work now
+    - what breaks if we do not do this now
+    - opportunity cost
     - smallest safe slice
     - smaller alternative
     - defer/hold alternative
     - different-shape alternative
+    - return-to-mainline alternative
+    - detour exit gate
     - mainline vs future-wave
     - boundary/ownership risk
     - over-engineering/speculative-flexibility risk
 
-    Do not approve a proposal casually just because it is plausible or useful later.
+    Do not approve a proposal casually just because it is plausible, useful later, narrow, safe, already started, or low risk.
+
+    You must propose at least one mainline-first alternative and compare the proposed slice against it. If no competing mainline alternative can be named from the provided context, say so and do not return `proceed`.
+
+    If the proposal is an allowed detour, future-wave bridge, diagnostic sidecar, or offline-only slice, it must name the blocker it removes, the learning decision it unlocks, and the exit gate that returns work to the mainline. Otherwise prefer `hold` or `return_to_mainline`.
 
     ## Output Format
 
     Product goal:
+    Current mainline:
     Current mainline blocker:
     Proposed slice:
+    Competing mainline slice:
+    Why this beats mainline work:
+    What breaks if we do not do this now:
+    Opportunity cost:
     Direct link to blocker:
     Why now:
     Source of truth:
     Best-practice basis:
     Dependency preconditions:
     Smallest safe slice:
-    Smaller alternative rejected:
-    Defer/hold alternative:
+    Smaller alternative:
+    Later / hold alternative:
     Different-shape alternative:
+    Return-to-mainline alternative:
+    Detour classification:
+    Detour exit gate:
+    Return-to-mainline condition:
     Boundary / ownership risks:
     Over-engineering risk:
     Future-wave or mainline:
     Questions that must be answered:
-    Verdict: proceed | narrow | split | hold
+    Verdict: proceed | narrow | split | hold | return_to_mainline
     If proceed, exact implementation boundary:
     Do-not-cross lines:
     Handoff skills:
 
-    Prefer `narrow`, `split`, or `hold` when the blocker is vague, the source of truth is weak, or a smaller slice has not been rebutted.
+    Prefer `narrow`, `split`, `hold`, or `return_to_mainline` when the blocker is vague, the source of truth is weak, a competing mainline slice is missing, the opportunity cost is omitted, a detour has no exit gate, or a smaller/later/different/return-to-mainline slice has not been rebutted.
 ```

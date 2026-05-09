@@ -43,7 +43,7 @@ This repository contains 21 custom skills under `skills/`.
 - `review-code-excellence` - readable code, DSA fit, hot-path efficiency, unnecessary abstraction, no-behavior refactor safety.
 - `gate-delivery-readiness` - CI/CD, merge gates, private/free GitHub limits, PR debt, merge queue fallback.
 - `align-development-environments` - Windows/macOS/Linux setup parity, devcontainers, Python/venv, local vs CI.
-- `run-slice-direction-challenge-subagent` - dispatches a contrarian direction reviewer before next-slice, mainline/detour, why-now, and smallest-safe-scope decisions.
+- `run-slice-direction-challenge-subagent` - dispatches a strategic direction reviewer before next-slice, mainline/detour, opportunity-cost, why-now, and smallest-safe-scope decisions.
 - `narrow-evidence-claims` - prevents overbroad done/ready/all-green/merge-safe/code-clean claims.
 
 ### Security
