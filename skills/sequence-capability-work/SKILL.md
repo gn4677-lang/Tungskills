@@ -22,7 +22,7 @@ Keep the answer compact:
 ```text
 Business capability: ...
 Domain / bounded context: ...
-Direction accepted by: inline | challenge-slice-direction | user | not_applicable
+Direction accepted by: inline | run-slice-direction-challenge-subagent | user | not_applicable
 Capability dependency: ...
 OOD responsibility owner: ...
 Dependency direction: ...
@@ -48,9 +48,9 @@ Use `check-architecture-boundaries` when the sequence crosses ownership, public 
 
 Use `assign-decision-ownership` when the next slice depends on whether an LLM, prompt, validator, guard, or deterministic rule should own a product decision.
 
-Use `challenge-slice-direction` before this skill when the main question is not sequencing among accepted slices, but whether a proposed slice should exist now, why now, whether it is too large, or whether it belongs to the current mainline at all.
+Use `run-slice-direction-challenge-subagent` before this skill when the main question is not sequencing among accepted slices, but whether a proposed slice should exist now, why now, whether it is too large, or whether it belongs to the current mainline at all.
 
-If the work is non-trivial and direction has not been accepted by the user, a controller note, or `challenge-slice-direction`, stop and obtain that acceptance before sequencing capabilities.
+If the work is non-trivial and direction has not been accepted by the user, a controller note, or `run-slice-direction-challenge-subagent`, stop and obtain that acceptance before sequencing capabilities.
 
 Use `review-code-excellence` when the build order question is whether to pay down readability, unnecessary abstraction, hot-path, algorithm, or data-structure debt before adding more product behavior.
 

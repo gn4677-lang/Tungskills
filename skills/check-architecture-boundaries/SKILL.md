@@ -92,7 +92,7 @@ Before claiming boundary safety, name the evidence: test, build, lint, architect
 
 ## Handoffs
 
-- Use `challenge-slice-direction` when the question is whether the slice should exist now, not where the boundary sits.
+- Use `run-slice-direction-challenge-subagent` when the question is whether the slice should exist now, not where the boundary sits.
 - Use `sequence-capability-work` when the boundary depends on capability dependency order.
 - Use `assign-decision-ownership` when prompt, LLM output, guard, validator, or deterministic code may own product truth.
 - Use `review-code-excellence` when the issue is readability, DSA fit, hot-path efficiency, or unnecessary abstraction without ownership change.

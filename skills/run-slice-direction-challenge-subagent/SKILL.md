@@ -1,13 +1,13 @@
 ---
-name: challenge-slice-direction
-description: "Use when deciding what to build next, opening a new slice after merge/PR, approving a mainline vs detour decision, or challenging whether a proposed slice is tied to the product goal, current blocker, source of truth, best-practice basis, and smallest safe scope. Trigger on next slice, why now, strategic sequencing, over-engineering, overfit, future-wave, 做歪, 開新 slice, 方向挑戰."
+name: run-slice-direction-challenge-subagent
+description: "Use when the root/controller should run a contrarian direction-review subagent before choosing what to build next, opening a new slice after merge/PR, approving mainline vs detour, or checking product-goal fit, current blocker, source of truth, best-practice basis, over-engineering, overfit, future-wave risk, and smallest safe scope. Trigger on subagent direction challenge, contrarian reviewer, next slice, why now, strategic sequencing, 做歪, 新 slice, 最小安全範圍."
 ---
 
-# Challenge Slice Direction
+# Run Slice Direction Challenge Subagent
 
 ## Action Protocol
 
-Use this as a contrarian preflight protocol. Challenge direction before planning or implementation, and require a controller-owned subagent for risky slice decisions when available.
+Use this as a contrarian subagent protocol. Challenge direction before planning or implementation, and require a controller-owned subagent for risky slice decisions when available.
 
 Core principle: challenge direction before optimizing execution.
 

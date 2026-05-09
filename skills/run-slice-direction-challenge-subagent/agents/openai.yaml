@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run Slice Direction Challenge Subagent"
+  short_description: "Dispatch a contrarian reviewer before a risky new slice."
+  default_prompt: "Use $run-slice-direction-challenge-subagent before planning a non-trivial new slice, mainline/detour decision, or why-now scope decision."

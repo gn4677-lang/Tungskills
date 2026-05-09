@@ -52,7 +52,7 @@ Decision: proceed | narrow | stop
 16. A merge queue pass supports the tested target-branch candidate; it does not prove deployment or production readiness unless deploy gates also passed.
 17. Use `gate-delivery-readiness` when the primary work is diagnosing CI/CD, required checks, merge queue eligibility, branch protection, base drift, deployment gates, or release readiness; this skill narrows the claim after that evidence is named.
 18. A red-team pass, pentest, or security review supports only the tested attack surface and evidence boundary; it does not prove general safety against XSS, SQLi, SSRF, auth bypass, IDOR/BOLA, exfiltration, prompt injection, or other untested families.
-19. A mainline/detour checklist, CI pass, merged PR, or queue position does not prove that the next slice is directionally justified. Route direction claims through `challenge-slice-direction` or name the explicit user/controller acceptance evidence.
+19. A mainline/detour checklist, CI pass, merged PR, or queue position does not prove that the next slice is directionally justified. Route direction claims through `run-slice-direction-challenge-subagent` or name the explicit user/controller acceptance evidence.
 
 ## Heuristics
 

@@ -68,7 +68,7 @@ decision: proceed | narrow | stop
 16. Keep gate layers distinct: pre-PR gate means ready to open a PR; PR readiness gate means eligible to enter an integration queue; merge queue gate means the combined target-branch candidate can land.
 17. GitHub Actions workflows used as required merge queue checks need a `merge_group` trigger; otherwise queue checks may never report on the merge group.
 18. Adversarial security evidence is a separate gate from CI, PR readiness, merge readiness, deploy readiness, and rollout permission; name where that gate is enforced and what it covers.
-19. Delivery evidence does not approve product direction. For a non-trivial new slice, require a slice acceptance record from the user, controller note, or `challenge-slice-direction`; otherwise mark delivery readiness as blocked by direction acceptance, not by CI.
+19. Delivery evidence does not approve product direction. For a non-trivial new slice, require a slice acceptance record from the user, controller note, or `run-slice-direction-challenge-subagent`; otherwise mark delivery readiness as blocked by direction acceptance, not by CI.
 
 ## Heuristics
 
@@ -87,7 +87,7 @@ decision: proceed | narrow | stop
 | Builder asks what to run before opening PR | Provide a track-specific pre-PR gate, not the full merge queue suite. |
 | PR is green but queue entry is blocked | Separate PR readiness from merge-group readiness and name the missing queue condition. |
 | CI green but adversarial security evidence missing | Narrow; CI and red-team results are separate gates. |
-| PR is mechanically ready but the slice direction is unaccepted | Hold delivery readiness; use `challenge-slice-direction` instead of treating queue order as product strategy. |
+| PR is mechanically ready but the slice direction is unaccepted | Hold delivery readiness; use `run-slice-direction-challenge-subagent` instead of treating queue order as product strategy. |
 
 ## Stop Signals
 
