@@ -13,15 +13,15 @@ Core principle: challenge direction before optimizing execution.
 
 Primary question: should this slice exist now?
 
-Secondary question: if yes, what is the smallest safe shape?
+Secondary question: if yes, what is the right-sized shape?
 
-Right-sizing question: is this the smallest useful slice, or only the smallest possible PR?
+Right-sizing question: does this slice have coherent blocker value, or has it been split or expanded for the wrong reason?
 
 Not primary: can this be implemented safely?
 
 A narrow, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
 
-Small batches are good only when each batch independently removes a blocker, advances a capability, or unlocks a named decision.
+Small batches are good only when each batch independently removes a blocker, advances a capability, or unlocks a named decision. Do not force smaller slices when one coherent vertical slice is easier to review, validate, and land safely.
 
 ## Operating Mode
 
@@ -39,7 +39,7 @@ Use this when the main question is:
 - what current blocker this removes
 - what mainline work this displaces
 - what happens if we do not do this now
-- is this the smallest safe slice
+- is this the right-sized slice
 - is this mainline or future-wave
 - is this over-engineered, too broad, or too early
 - what source of truth or best-practice basis justifies this direction
@@ -82,7 +82,7 @@ If a required contrarian subagent is not run, the controller must say so explici
 2. Restate the proposed slice as a falsifiable hypothesis, not a commitment.
 3. Name the competing mainline-first alternative before evaluating the proposed slice.
 4. Compare the proposed slice against the competing alternative: blocker link, opportunity cost, why-now, and what breaks if we do not do it now.
-5. Challenge the slice from four directions: smaller, later, different, and return-to-mainline.
+5. Challenge the slice from five directions: smaller, more coherent, later, different, and return-to-mainline.
 6. Name the source of truth and the best-practice basis. If either is missing, do not proceed casually.
 7. Decide whether the slice is mainline, future-wave, guard-only, contract-only, offline-only, detour, distraction, or should be held.
 8. If the verdict is `proceed` or `narrow`, define the exact implementation boundary, exit gate, and explicit do-not-cross lines.
@@ -132,8 +132,9 @@ Why now:
 Source of truth:
 Best-practice basis:
 Dependency preconditions:
-Smallest safe slice:
+Right-sized slice:
 Smaller alternative:
+More coherent alternative:
 Later / hold alternative:
 Different-shape alternative:
 Return-to-mainline alternative:
@@ -158,7 +159,9 @@ Handoff skills:
 - A verdict of `proceed` or `narrow` requires a named competing mainline slice and a reason the proposed slice beats it now.
 - If no competing mainline-first alternative is named, the verdict cannot be `proceed`; use `narrow`, `hold`, or `return_to_mainline`.
 - "Already built", "nearly done", "low risk", "small bridge", "CI green", and "easy to merge" are not direction evidence.
-- The smallest safe slice is not the smallest possible PR; it must independently remove a blocker, deliver a user/operator-visible capability, or unlock a named decision.
+- The right-sized slice is not necessarily the smallest possible PR; it must independently remove a blocker, deliver a user/operator-visible capability, or unlock a named decision.
+- Do not split a coherent vertical slice merely to make PRs smaller when the split adds coordination debt, stale-base risk, or review confusion.
+- A verdict of `narrow` means "tighten to the right boundary"; it does not always mean "make it smaller."
 - Wrapper/evidence wiring is acceptable only when it connects an already-built capability to an existing gate, closeout chain, or decision that currently cannot see the evidence.
 - If several wrapper/evidence wiring PRs share the same blocker, same gate, and no independent rollback or review value, prefer a consolidated vertical slice or an explicit short PR train over more leaf PRs.
 
@@ -171,7 +174,7 @@ Do not approve the proposed slice when:
 - a repo or project checklist has been filled but no direction challenge was run or explicitly skipped for a non-trivial slice
 - there is no source of truth for the claimed blocker or scope
 - there is no best-practice basis for an architecture, runtime, or workflow change
-- a clearly smaller or more reversible slice exists and has not been rebutted
+- a clearly right-sized, more reversible, or more coherent slice exists and has not been rebutted
 - the review proves only that the slice is safe, not that it should happen now
 - no competing mainline-first slice is named
 - opportunity cost is omitted
@@ -181,6 +184,7 @@ Do not approve the proposed slice when:
 - a chain of tiny PRs repeatedly updates closeout, bundle, report, runner, smoke-test inclusion, or status projection for the same blocker
 - the slice exists mainly to make a future PR useful, but does not itself answer a current blocker, capability question, or merge decision
 - the work could be one coherent vertical capability slice but is split into multiple wrapper PRs with no independent review or rollback value
+- the reviewer is forcing smaller PRs without naming the risk reduced by the split
 - a future-wave bridge is justified by being small, safe, or already started rather than by current mainline impact
 - future-wave or speculative work is being framed as immediate mainline necessity
 - "green CI", "done branch", or "we already built most of it" is used as direction evidence
@@ -196,7 +200,7 @@ Before claiming the slice is right, name:
 - the opportunity cost and detour exit gate when relevant
 - the source-of-truth artifact
 - the best-practice basis
-- why smaller/later/different/return-to-mainline alternatives were rejected
+- why smaller/more-coherent/later/different/return-to-mainline alternatives were rejected
 
 If the verdict is `proceed`, the next plan or spec should preserve the `Current mainline blocker`, `Exact implementation boundary`, and `Do-not-cross lines` verbatim or explain why they changed.
 

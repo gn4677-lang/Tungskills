@@ -16,13 +16,16 @@ Use 5-8 of these questions per review. Do not dump the full list unless the prop
 
 ## Scope
 
-- What is the smallest safe slice that still changes the real outcome?
+- What is the right-sized slice that still changes the real outcome?
+- Would a larger coherent vertical slice reduce coordination, stale-base, or review risk better than many tiny PRs?
 - What can be removed without losing the mainline value?
 - Is this one slice, or multiple slices wearing one name?
 
 ## Alternatives
 
 - What is the smaller alternative?
+- What is the more coherent alternative?
+- If you split this, what risk does the split reduce?
 - What is the defer/hold alternative?
 - What is the different-shape alternative that keeps the goal but reduces coupling?
 - Why is the current proposal better than those alternatives right now?

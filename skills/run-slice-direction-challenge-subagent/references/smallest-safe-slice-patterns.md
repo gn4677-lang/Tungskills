@@ -1,10 +1,12 @@
-﻿# Smallest Safe Slice Patterns
+﻿# Right-Sized Slice Patterns
 
 Use this reference when a proposal feels too broad, too integrated, too eager, or fragmented into too many tiny coordination slices.
 
-## Prefer These Slice Shapes First
+The goal is not to force the smallest PR. The goal is to choose a slice that is coherent enough to remove a blocker and small enough to review, validate, and roll back.
 
-| Pattern | Use when | Why it is smaller/safer |
+## Prefer These Slice Shapes When They Fit
+
+| Pattern | Use when | Why it is right-sized |
 | --- | --- | --- |
 | Guard-only | You need to stop harm or block invalid states | Adds protection without committing to a full capability. |
 | Contract/schema-only | Multiple teams or slices need a stable interface | Locks integration shape before implementation breadth. |
@@ -75,7 +77,13 @@ Prefer the slice that:
 
 ## Output Reminder
 
-If you say a larger slice is still correct, explain:
+If you say a smaller slice is correct, explain:
+
+- what risk the split reduces
+- whether the smaller slice has independent blocker, review, and rollback value
+- why it will not create stale-base or queue debt
+
+If you say a larger or more coherent slice is still correct, explain:
 
 - what smaller slice was considered
 - why it was insufficient

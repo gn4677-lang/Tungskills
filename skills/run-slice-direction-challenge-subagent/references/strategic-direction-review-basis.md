@@ -20,7 +20,7 @@ That second question belongs to planning, architecture, delivery, and code-revie
 
 ## Best-Practice Basis
 
-- Google Engineering Practices favors small CLs because they are easier to review, easier to improve, less likely to block, and easier to roll back. This supports small slices, but only after the slice direction is justified.
+- Google Engineering Practices favors small CLs because they are easier to review, easier to improve, less likely to block, and easier to roll back. This supports right-sized slices, but only after the slice direction is justified; it does not require fragmenting one coherent vertical change into wrapper PRs.
 - DORA treats working in small batches as a way to shorten feedback loops, test hypotheses, and reduce AI-accelerated delivery instability. Small batches are not a license for small busywork.
 - Continuous integration and trunk-based practices favor frequent integration of small changes so teams can detect drift and recover quickly. This supports short-lived slices tied to a real integration point.
 - Shape Up frames product work as bets, not backlog grooming. A slice should compete against other shaped options; useful-later work is not automatically worth doing now.

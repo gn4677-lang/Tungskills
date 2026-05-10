@@ -1,6 +1,6 @@
 ﻿# Research Basis
 
-This skill exists because several external practices converge on the same pattern: clarify the customer or product goal, state the current blocker, challenge alternatives early, choose the smallest meaningful slice, and keep written decision context.
+This skill exists because several external practices converge on the same pattern: clarify the customer or product goal, state the current blocker, challenge alternatives early, choose the right-sized meaningful slice, and keep written decision context.
 
 ## Product Goal Before Solution
 
@@ -11,7 +11,7 @@ This skill exists because several external practices converge on the same patter
 
 - Google recommends small, self-contained changes because large changes waste more work when the overall direction is wrong, are harder to design well, and are harder to merge and roll back.
 - Trunk-Based Development recommends short-lived branches and incremental, independently shippable steps instead of one branch per big story.
-- This skill uses "smallest safe slice" as a first-class output, not as an afterthought.
+- This skill uses "right-sized slice" as a first-class output, not as an afterthought. Right-sized may mean smaller, larger, or more coherent depending on blocker link, reviewability, rollback value, and integration risk.
 
 ## Written Decision Basis
 
@@ -35,7 +35,7 @@ This skill exists because several external practices converge on the same patter
 - whether the proposed slice should exist now
 - whether it is mainline or future-wave
 - whether it is too large, too early, or too speculative
-- what smaller/later/different alternatives deserve challenge
+- what smaller/more-coherent/later/different alternatives deserve challenge
 - what exact implementation boundary should be preserved if the slice proceeds
 
 ## What This Skill Does Not Own

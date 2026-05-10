@@ -42,7 +42,7 @@ If the task is small and already inside one stable interface, state only `Build 
 3. Place the work in one bounded context; do not mix domain language or ownership.
 4. Assign behavior to the object/module with the needed information and responsibility.
 5. Point dependencies toward stable policy, abstractions, or domain behavior; avoid cycles.
-6. Build the smallest capability that unblocks the next capability.
+6. Build the right-sized capability slice that unblocks the next capability.
 7. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
 8. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, and boundary checks for that slice.
 9. Right-size the PR grain: split when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
@@ -90,7 +90,7 @@ Do not proceed with the proposed order when:
 - future-wave implementation is treated as mergeable before its contract, guard, or activation boundary exists
 - parallel branches are sequenced by PR age instead of capability dependency and trunk integration safety
 - a PR is opened before track, parent dependency, required report, or boundary evidence is clear
-- capability sequencing is used to justify a slice whose direction, mainline status, or smallest safe scope has not been accepted
+- capability sequencing is used to justify a slice whose direction, mainline status, or right-sized scope has not been accepted
 - issue slicing creates many wrapper-only PRs whose value is only status projection, report plumbing, artifact copying, or closeout visibility
 - "small PR" is used to justify splitting one coherent vertical path into fragments that cannot be reviewed or rolled back independently
 
