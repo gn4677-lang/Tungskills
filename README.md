@@ -2,7 +2,7 @@
 
 Personal Codex skill collection for reusable engineering governance, agent runtime architecture, eval design, UI/UX review, environment parity, and Windows/CJK text integrity.
 
-The goal is to make Codex behave more like a careful senior engineer across projects: clear boundaries, narrow claims, explicit evidence, small mergeable slices, readable code, and safer agent-runtime decisions.
+The goal is to make Codex behave more like a careful senior engineer across projects: clear boundaries, evidence-backed claims, explicit verification, right-sized blocker/product slices, readable code, and safer agent-runtime decisions.
 
 ## Design Model
 
@@ -11,10 +11,23 @@ Tungskills uses an action-protocol model inspired by Superpowers:
 - skill names are actions, not domains
 - `description` is trigger-only and should not summarize the workflow
 - `SKILL.md` starts with the smallest executable protocol
+- each skill states a `Positive default` so the agent knows what useful outcome to pursue, not only what to avoid
 - each skill has `Default Output`, `Stop Signals`, and `Verification`
 - heavy framework notes, examples, and rubrics stay in `references/`
 
 The intended flow is: recognize the task action, load the matching skill, run the protocol, produce the output contract, and hand off instead of answering from a loose checklist.
+
+## Naming Contract
+
+Skill names are treated as stable command names. Rename only when the current name blocks discovery or points agents toward the wrong behavior. A good Tungskills name should:
+
+- start with a verb or action phrase
+- describe the decision or protocol, not a project or incident
+- stay generic across repositories
+- be searchable from natural user phrases and neighboring skill handoffs
+- avoid promising automation that the skill body cannot perform
+
+Long names are acceptable only when they buy important trigger behavior. For example, `run-slice-direction-challenge-subagent` intentionally includes `subagent` because its job is to dispatch a direction-review subagent before execution work.
 
 ## Contents
 
@@ -43,8 +56,8 @@ This repository contains 21 custom skills under `skills/`.
 - `review-code-excellence` - readable code, DSA fit, hot-path efficiency, unnecessary abstraction, no-behavior refactor safety.
 - `gate-delivery-readiness` - CI/CD, merge gates, private/free GitHub limits, PR debt, merge queue fallback.
 - `align-development-environments` - Windows/macOS/Linux setup parity, devcontainers, Python/venv, local vs CI.
-- `run-slice-direction-challenge-subagent` - dispatches a strategic direction reviewer before next-slice, mainline/detour, opportunity-cost, why-now, and smallest-safe-scope decisions.
-- `narrow-evidence-claims` - prevents overbroad done/ready/all-green/merge-safe/code-clean claims.
+- `run-slice-direction-challenge-subagent` - dispatches a strategic direction reviewer before next-slice, mainline/detour, opportunity-cost, why-now, and right-sized-scope decisions.
+- `narrow-evidence-claims` - calibrates done/ready/all-green/merge-safe/code-clean claims to their evidence boundary.
 
 ### Security
 

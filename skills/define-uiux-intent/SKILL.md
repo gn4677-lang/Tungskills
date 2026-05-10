@@ -13,6 +13,8 @@ Use this as a design-intent protocol. Define audience, purpose, interaction mode
 
 Use this skill to make UI/UX work purpose-driven before building. The output should connect each design decision to user intent, system behavior, and explicit human alignment instead of relying on vague taste words like "modern" or "clean."
 
+Positive default: define the clearest product-specific experience direction that lets implementation start with fewer taste guesses and fewer generic AI-looking defaults.
+
 ## Core Rule
 
 Do not start visual or interaction implementation until the design intent is strong enough to explain:

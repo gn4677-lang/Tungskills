@@ -15,6 +15,8 @@ Use this to judge delivery safety when pipeline evidence, platform enforcement, 
 
 Core principle: CI output is evidence, but branch protection, deployment gates, and human approval decide whether that evidence is enforceable.
 
+Positive default: turn delivery evidence into the strongest valid merge, queue, release, or deploy decision while keeping product progress, CI status, and platform enforcement separate.
+
 Hard stop: CI green, pre-PR pass, queue-ready, merge-ready, deploy-ready, and production-ready are separate claims.
 
 ## Read First

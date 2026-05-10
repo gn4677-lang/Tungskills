@@ -15,6 +15,8 @@ Use this to diagnose whether a project can be reproduced across machines without
 
 Core principle: the authoritative runtime, local convenience path, and CI/merge authority must be named separately.
 
+Positive default: make the project runnable on the target machine through the repo-owned setup path while preserving CI as the authority for merge and release claims.
+
 ## Read First
 
 Read `references/cross-machine-environment-patterns.md` when setup differs across Windows/macOS/Linux, Docker or Dev Containers are present, Python/venv/toolchain versions disagree, `.env` or secrets are involved, or local pass conflicts with CI.

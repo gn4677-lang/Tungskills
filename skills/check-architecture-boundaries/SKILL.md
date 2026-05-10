@@ -15,6 +15,8 @@ Use this as a lightweight guardrail before architecture-sensitive work. Keep out
 
 Core principle: name the global boundary before optimizing locally.
 
+Positive default: choose the smallest boundary-preserving design that advances the requested capability without moving ownership, public contracts, or runtime truth unnecessarily.
+
 For agent runtime, prompt, provider adapter, composition/application orchestration, shared utility, cross-domain import, or fat composition-layer risk, read `references/runtime-composition-boundaries.md` before choosing placement.
 
 For module/API interface shape, deep-module review, deletion tests, or exploratory architecture improvement, read `references/interface-and-deep-module-patterns.md` before proposing interfaces or refactors.

@@ -15,6 +15,8 @@ Use this skill when provider failures, model failures, or invisible runtime erro
 
 Use this as a reliability workflow, not a list of fallback ideas. Start from a concrete failure surface, then define retry, failover, degraded behavior, traces, and evals as one contract.
 
+Positive default: preserve the user's current goal under failure with the least replay, corruption, or confusion, then record the trace/eval evidence needed to prevent recurrence.
+
 Before reading references, write down:
 
 - the operation that failed

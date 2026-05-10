@@ -15,6 +15,8 @@ Use this before editing or diagnosing text that may be misread by Windows tools,
 
 Core principle: terminal rendering is not encoding evidence; bytes and consumers decide.
 
+Positive default: preserve byte truth and recover trustworthy readable text before editing content, rewriting files, or claiming corruption/fix status.
+
 Hard gate: do not edit or "fix" suspected corruption until byte-level evidence or the real consumer failure is known.
 
 ## Default Output

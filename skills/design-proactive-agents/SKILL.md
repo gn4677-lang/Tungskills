@@ -15,6 +15,8 @@ Use this skill when the product should act before the user asks and still remain
 
 Use this as a proactive behavior design workflow, not a reminder catalog. Start by proving why the agent should wake, what it may do, and how the user can stop or correct it.
 
+Positive default: surface help only when the next signal, value, permission, and recovery path make the proactive action useful rather than interruptive.
+
 Before reading references, write down:
 
 - the event, schedule, or state change that wakes the agent

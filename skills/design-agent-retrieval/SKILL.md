@@ -15,6 +15,8 @@ Use this skill when search is weak, RAG is overused, or document loading is bein
 
 Use this as a retrieval design workflow, not a list of RAG facts. Start by deciding what must be deterministic state, what should be indexed, and what deserves a full document read.
 
+Positive default: get the needed truth from the simplest reliable source path before adding retrieval machinery, and keep answer quality separate from source-routing quality.
+
 Before reading references, write down:
 
 - the question type the agent must answer

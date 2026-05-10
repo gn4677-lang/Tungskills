@@ -15,6 +15,8 @@ Use this skill when the agent must stay recoverable, synchronized, and budget-aw
 
 Use this as an operational design workflow, not a memory reference. Start from the runtime's failure and recovery requirements, then define the durable control plane.
 
+Positive default: keep useful long-running work recoverable, observable, and idempotent while protecting users from duplicate side effects or silent loss.
+
 Before reading references, write down:
 
 - the work that continues outside the foreground turn

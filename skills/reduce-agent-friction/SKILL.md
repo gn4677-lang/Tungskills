@@ -15,6 +15,8 @@ Use this skill when the agent feels heavy, slow, uncertain, or overly form-drive
 
 Use this as an interaction redesign workflow, not a UX note dump. Start from the user's effort, remove unnecessary steps, and then add agentic behavior only where it reduces work.
 
+Positive default: deliver first value with the least necessary interruption, then expose progress, blocked states, and correction paths where uncertainty remains.
+
 Before reading references, write down:
 
 - the moment where the user feels blocked, unsure, or slowed down

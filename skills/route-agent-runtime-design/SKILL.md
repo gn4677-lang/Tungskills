@@ -11,6 +11,8 @@ Use this as a routing protocol. Pick one primary runtime owner, name rejected ne
 
 Do not solve the whole runtime architecture here. The job is to choose the owner, name why adjacent owners were rejected, and hand off with the minimum context needed.
 
+Positive default: route to the one runtime owner most likely to remove the current bottleneck, then preserve clean handoff context instead of expanding into a general architecture answer.
+
 ## Classification
 
 Choose one primary capability:

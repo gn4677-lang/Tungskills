@@ -15,6 +15,8 @@ Use this to keep AI-assisted code clear, efficient, reviewable, and easy to own 
 
 Core principle: code quality is not terseness; it is the smallest understandable design that preserves behavior, uses fitting data structures, and can be verified.
 
+Positive default: make the code easier to understand, cheaper to change, and efficient on real hot paths without changing behavior or inventing abstractions for polish.
+
 Read `references/code-excellence-rubric.md` when the review involves AI-generated code quality, algorithm/data-structure tradeoffs, hot paths, profiling, broad refactors, quality baselines, or senior-engineer readability.
 
 ## Default Output

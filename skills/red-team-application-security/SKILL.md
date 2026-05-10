@@ -15,6 +15,8 @@ Use this to run authorized adversarial security reasoning for websites, apps, AP
 
 Core principle: threat model first, pick one primary trust boundary and one primary attack family, and keep discovery, validation, remediation, and rollout claims separate.
 
+Positive default: find the most decision-relevant security weakness in authorized scope, validate what is actually exploitable, and route fixes without turning plausible risk into an overclaim.
+
 This is not a generic code-review skill and not a malware-writing skill.
 
 ## Operating Mode

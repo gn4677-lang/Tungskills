@@ -15,6 +15,8 @@ Use this before making success, readiness, pass, or completion claims.
 
 Core principle: match claim scope to evidence scope. Partial evidence supports only a partial claim.
 
+Positive default: state the strongest useful claim the evidence really supports, then name the proof gaps instead of hiding them or weakening the whole result.
+
 Hard gate: if the evidence boundary cannot be named, the claim must be narrowed or withheld.
 
 ## Default Output

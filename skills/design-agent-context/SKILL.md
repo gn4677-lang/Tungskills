@@ -15,6 +15,8 @@ Use this skill when the agent forgets, leaks context across sessions, or carries
 
 Use this as a design workflow, not a knowledge pack. Start from the user's failure case, identify the state boundary, and produce an implementable context contract.
 
+Positive default: preserve the right context at the right scope so the agent can act correctly without leaking private state, reviving stale state, or bloating the prompt.
+
 Before reading references, write down:
 
 - the user-visible symptom

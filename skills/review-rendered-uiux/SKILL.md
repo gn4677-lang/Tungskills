@@ -13,6 +13,8 @@ Use this as a rendered-review protocol. Inspect real UI evidence across states/v
 
 Use this skill to reject objectively weak UI before relying on human taste. Separate what can be checked from what still needs product, brand, or aesthetic judgment.
 
+Positive default: make the rendered experience coherent, usable, responsive, accessible, and specific to the product task before judging subjective polish.
+
 ## Core Rule
 
 Never claim a UI is "good", "polished", "ready", or "well designed" from code inspection alone. Verify the rendered surface when possible, then report:

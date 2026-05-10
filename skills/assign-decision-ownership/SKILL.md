@@ -15,6 +15,8 @@ Use this to assign decision ownership before changing agent runtime behavior.
 
 Core principle: deterministic code may constrain or verify LLM decisions, but it must not silently rewrite completed semantic decisions.
 
+Positive default: assign each decision to the layer that can make it correctly, verify it cheaply, and expose failures without hidden semantic overrides.
+
 Hard stop: deterministic code cannot own semantic intent, route, action, or disposition unless a product-approved oracle is named.
 
 Hard stop: keyword lists, regexes, lexical hints, dictionaries, or fixture labels cannot prove semantic support unless a product-approved oracle explicitly gives that lexical rule ownership.

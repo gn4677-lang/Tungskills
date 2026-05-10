@@ -15,6 +15,8 @@ Use this to decide how far an agentic capability may be turned on.
 
 Core principle: capability dependency decides what to build next; activation ladder decides how safely a built capability may run.
 
+Positive default: promote a built capability only to the highest runtime stage supported by current evidence, permissions, rollback, and user impact controls.
+
 Hard stop: built, tested, green, shadowed, or merged does not by itself permit user-facing or mutation-bearing activation.
 
 ## Default Output

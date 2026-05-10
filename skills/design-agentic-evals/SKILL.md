@@ -15,6 +15,8 @@ Use this to design evals that validate agentic product behavior without letting 
 
 Core principle: eval assets validate product truth; they do not define architecture, manager contracts, tool semantics, or user-visible behavior.
 
+Positive default: build evals that expose real product regressions, preserve decision ownership, and give future agents replayable evidence without shaping the product around the harness.
+
 Hard stop: do not use eval, fixture, runner, or live-failure evidence as the only source for product semantics or contract hardening.
 
 ## Read First
