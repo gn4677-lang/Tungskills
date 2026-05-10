@@ -73,6 +73,7 @@ decision: proceed | narrow | stop
 19. Delivery evidence does not approve product direction. For a non-trivial new slice, require a slice acceptance record from the user, controller note, or `run-slice-direction-challenge-subagent`; otherwise mark delivery readiness as blocked by direction acceptance, not by CI.
 20. Many tiny green PRs can still be delivery risk. If several PRs only wire artifacts, reports, status projections, smoke inclusion, or closeout visibility for the same blocker, mark `over_split_pr_debt` and require consolidation, a declared train, or a queue-owner decision.
 21. Wrapper/evidence wiring is merge-relevant only when it makes existing capability evidence visible to an existing gate or decision. It is not merge justification by itself.
+22. Delivery green is not product progress. If the question is whether work advances capability or removes the blocker, hand off to `run-slice-direction-challenge-subagent` or `sequence-capability-work` and require a slice kind/progress priority.
 
 ## Heuristics
 
@@ -93,6 +94,7 @@ decision: proceed | narrow | stop
 | CI green but adversarial security evidence missing | Narrow; CI and red-team results are separate gates. |
 | PR is mechanically ready but the slice direction is unaccepted | Hold delivery readiness; use `run-slice-direction-challenge-subagent` instead of treating queue order as product strategy. |
 | Many small PRs only move evidence between reports or closeout artifacts | Mark PR debt; consolidate or make the train explicit before queueing more leaf PRs. |
+| PR is green but product value is unclear | Require `slice_kind` and `progress_priority`; do not treat delivery readiness as product progress. |
 
 ## Stop Signals
 
@@ -105,6 +107,7 @@ Stop or narrow when:
 - queue, CI, or PR readiness is used to justify what should be built next
 - a set of wrapper/evidence wiring PRs is treated as harmless because each individual PR is small
 - closeout/report/artifact plumbing is queued without naming the existing gate or decision it makes visible
+- green checks, queue eligibility, or mergeability are used as evidence of blocker removal or product capability
 
 ## Verification
 

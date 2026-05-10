@@ -13,6 +13,8 @@ Core principle: challenge direction before optimizing execution.
 
 Primary question: should this slice exist now?
 
+Positive default: prefer the slice that most directly removes the current blocker, creates the next user/operator-visible product capability, or unlocks a real decision.
+
 Secondary question: if yes, what is the right-sized shape?
 
 Right-sizing question: does this slice have coherent blocker value, or has it been split or expanded for the wrong reason?
@@ -81,7 +83,7 @@ If a required contrarian subagent is not run, the controller must say so explici
 1. State the product goal, current mainline, and current mainline blocker in plain language.
 2. Restate the proposed slice as a falsifiable hypothesis, not a commitment.
 3. Name the competing mainline-first alternative before evaluating the proposed slice.
-4. Compare the proposed slice against the competing alternative: blocker link, opportunity cost, why-now, and what breaks if we do not do it now.
+4. Compare the proposed slice against the competing alternative: blocker removal, product capability gain, decision unlock, opportunity cost, why-now, and what breaks if we do not do it now.
 5. Challenge the slice from five directions: more coherent, smaller, later, different, and return-to-mainline.
 6. Name the source of truth and the best-practice basis. If either is missing, do not proceed casually.
 7. Decide whether the slice is mainline, future-wave, guard-only, contract-only, offline-only, detour, distraction, or should be held.
@@ -121,6 +123,8 @@ Skip reason, if any:
 Product goal:
 Current mainline blocker:
 Proposed slice:
+Positive progress type: blocker_removal | product_capability | decision_unlock | risk_reduction | none
+Product/operator capability advanced:
 Right-sized slice check:
 Wrapper/evidence wiring role:
 Competing mainline slice:
@@ -155,6 +159,8 @@ Handoff skills:
 ## Verdict Rules
 
 - `safe_to_proceed_now` is not the same as `should_proceed_now`.
+- Prefer `blocker_removal`, `product_capability`, or `decision_unlock` over proof-only, status-only, readiness-only, or wrapper/evidence wiring work.
+- If two slices are both safe, choose the one that more directly changes what the user/operator can do or removes the current mainline blocker.
 - A small slice is not automatically a good slice; small but unrelated work is `hold` or `return_to_mainline`.
 - `allowed_detour` requires a named blocker link, necessary near-term learning artifact, or explicit detour exit gate. Without one, default to `hold` or `return_to_mainline`.
 - A verdict of `proceed` or `right_size` requires a named competing mainline slice and a reason the proposed slice beats it now.

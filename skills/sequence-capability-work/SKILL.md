@@ -15,6 +15,8 @@ Use this to decide what to build next from capability dependencies, not from cla
 
 Core principle: business capability first, capability dependency second, bounded context third, OOD responsibility and dependency direction fourth.
 
+Positive default: pick the next right-sized slice that directly advances user/operator capability or removes the blocker preventing that capability.
+
 ## Default Output
 
 Keep the answer compact:
@@ -25,6 +27,7 @@ Domain / bounded context: ...
 Direction accepted by: inline | run-slice-direction-challenge-subagent | user | not_applicable
 Capability dependency: ...
 Slice kind: product_capability | vertical_proof | contract_guard | ops_test_stability | wrapper_evidence_wiring
+Progress priority: blocker_removal | product_capability | decision_unlock | risk_reduction | maintenance_only
 Slice grain: right_sized | too_large | over_split | wrapper_only
 Consolidation candidate: yes | no
 OOD responsibility owner: ...
@@ -39,15 +42,17 @@ If the task is small and already inside one stable interface, state only `Build 
 ## Decision Order
 
 1. Name the business capability or domain outcome.
-2. Identify which capability must exist before another capability can work.
-3. Place the work in one bounded context; do not mix domain language or ownership.
-4. Assign behavior to the object/module with the needed information and responsibility.
-5. Point dependencies toward stable policy, abstractions, or domain behavior; avoid cycles.
-6. Build the right-sized capability slice that unblocks the next capability.
-7. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
-8. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, and boundary checks for that slice.
-9. Right-size the PR grain: split only when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
-10. Classify proof-only or ops/test-stability work honestly; do not count it as product capability unless it directly changes user/operator capability.
+2. Name the blocker that prevents that capability from working or being safely accepted.
+3. Identify which capability must exist before another capability can work.
+4. Prefer `blocker_removal` and `product_capability` before `decision_unlock`, then `risk_reduction`, then `maintenance_only`, unless the user explicitly chooses otherwise.
+5. Place the work in one bounded context; do not mix domain language or ownership.
+6. Assign behavior to the object/module with the needed information and responsibility.
+7. Point dependencies toward stable policy, abstractions, or domain behavior; avoid cycles.
+8. Build the right-sized capability slice that unblocks the next capability.
+9. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
+10. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, and boundary checks for that slice.
+11. Right-size the PR grain: split only when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
+12. Classify proof-only or ops/test-stability work honestly; do not count it as product capability unless it directly changes user/operator capability.
 
 Use `check-architecture-boundaries` when the sequence crosses ownership, public APIs, data models, runtime boundaries, or subagent responsibilities.
 
