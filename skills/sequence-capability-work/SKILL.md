@@ -63,6 +63,8 @@ Use `gate-delivery-readiness` when the primary question is PR readiness, merge q
 
 Read `references/domain-language-and-product-slicing.md` when capability order depends on domain glossary terms, `CONTEXT.md`, ADRs, PRD shape, vertical issue slicing, HITL/AFK labels, or issue-publishing approval boundaries.
 
+Read `references/slice-kind-taxonomy.md` when deciding whether a PR/slice is product capability, vertical proof, contract guard, ops/test stability, or wrapper/evidence wiring.
+
 ## Build-Order Heuristics
 
 | If you see | Prefer |

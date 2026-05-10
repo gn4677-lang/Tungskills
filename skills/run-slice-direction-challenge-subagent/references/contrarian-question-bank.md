@@ -23,8 +23,8 @@ Use 5-8 of these questions per review. Do not dump the full list unless the prop
 
 ## Alternatives
 
-- What is the smaller alternative?
 - What is the more coherent alternative?
+- If smaller would reduce a named risk, what is the smaller alternative?
 - If you split this, what risk does the split reduce?
 - What is the defer/hold alternative?
 - What is the different-shape alternative that keeps the goal but reduces coupling?

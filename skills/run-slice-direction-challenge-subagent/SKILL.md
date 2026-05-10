@@ -73,7 +73,7 @@ If a required contrarian subagent is not run, the controller must say so explici
 
 - Read `references/research-basis.md` when the direction basis or process rationale is disputed.
 - Read `references/contrarian-question-bank.md` when you need sharper challenge questions.
-- Read `references/smallest-safe-slice-patterns.md` when a proposal feels too large, too coupled, or too eager.
+- Read `references/right-sized-slice-patterns.md` when a proposal feels too large, too coupled, too eager, or fragmented into too many tiny coordination slices.
 - Read `references/strategic-direction-review-basis.md` when the question is opportunity cost, mainline vs detour, Shape Up-style bet/appetite, small batches, or whether a safe slice should be done now.
 
 ## Workflow
@@ -82,7 +82,7 @@ If a required contrarian subagent is not run, the controller must say so explici
 2. Restate the proposed slice as a falsifiable hypothesis, not a commitment.
 3. Name the competing mainline-first alternative before evaluating the proposed slice.
 4. Compare the proposed slice against the competing alternative: blocker link, opportunity cost, why-now, and what breaks if we do not do it now.
-5. Challenge the slice from five directions: smaller, more coherent, later, different, and return-to-mainline.
+5. Challenge the slice from five directions: more coherent, smaller, later, different, and return-to-mainline.
 6. Name the source of truth and the best-practice basis. If either is missing, do not proceed casually.
 7. Decide whether the slice is mainline, future-wave, guard-only, contract-only, offline-only, detour, distraction, or should be held.
 8. If the verdict is `proceed` or `right_size`, define the exact implementation boundary, exit gate, and explicit do-not-cross lines.
@@ -109,7 +109,7 @@ Proposed slice:
 Reason controller challenge is required:
 ```
 
-Use `./contrarian-reviewer-prompt.md` as the dispatch template. Use `references/contrarian-question-bank.md` when you need sharper lenses than smaller/later/different.
+Use `./contrarian-reviewer-prompt.md` as the dispatch template. Use `references/contrarian-question-bank.md` when you need sharper lenses than more-coherent/smaller/later/different.
 
 ## Default Output
 
@@ -133,11 +133,12 @@ Source of truth:
 Best-practice basis:
 Dependency preconditions:
 Right-sized slice:
-Smaller alternative:
-More coherent alternative:
-Later / hold alternative:
-Different-shape alternative:
-Return-to-mainline alternative:
+Right-sizing alternatives:
+- more coherent:
+- smaller:
+- later / hold:
+- different shape:
+- return_to_mainline:
 Detour classification:
 Detour exit gate:
 Return-to-mainline condition:
@@ -200,7 +201,7 @@ Before claiming the slice is right, name:
 - the opportunity cost and detour exit gate when relevant
 - the source-of-truth artifact
 - the best-practice basis
-- why smaller/more-coherent/later/different/return-to-mainline alternatives were rejected
+- why more-coherent/smaller/later/different/return-to-mainline alternatives were rejected
 
 If the verdict is `proceed`, the next plan or spec should preserve the `Current mainline blocker`, `Exact implementation boundary`, and `Do-not-cross lines` verbatim or explain why they changed.
 

@@ -35,7 +35,7 @@ This skill exists because several external practices converge on the same patter
 - whether the proposed slice should exist now
 - whether it is mainline or future-wave
 - whether it is too large, too early, or too speculative
-- what smaller/more-coherent/later/different alternatives deserve challenge
+- what more-coherent/smaller/later/different alternatives deserve challenge
 - what exact implementation boundary should be preserved if the slice proceeds
 
 ## What This Skill Does Not Own

@@ -43,8 +43,8 @@ Task tool (general-purpose):
     - what breaks if we do not do this now
     - opportunity cost
     - right-sized slice
-    - smaller alternative
     - more coherent alternative
+    - smaller alternative
     - defer/hold alternative
     - different-shape alternative
     - return-to-mainline alternative
@@ -75,11 +75,12 @@ Task tool (general-purpose):
     Best-practice basis:
     Dependency preconditions:
     Right-sized slice:
-    Smaller alternative:
-    More coherent alternative:
-    Later / hold alternative:
-    Different-shape alternative:
-    Return-to-mainline alternative:
+    Right-sizing alternatives:
+    - more coherent:
+    - smaller:
+    - later / hold:
+    - different shape:
+    - return_to_mainline:
     Detour classification:
     Detour exit gate:
     Return-to-mainline condition:
