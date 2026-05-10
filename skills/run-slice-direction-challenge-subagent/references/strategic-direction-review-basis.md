@@ -69,6 +69,6 @@ Otherwise prefer `hold` or `return_to_mainline`.
 
 - If the blocker is vague, use `hold`.
 - If the competing mainline alternative is stronger, use `return_to_mainline`.
-- If the direction is right but the shape is too broad, use `narrow` or `split`.
+- If the direction is right but the shape is not right-sized, use `right_size` or `split`.
 - If the detour lacks an exit gate, use `hold`.
 - If the slice is directly tied to the blocker and beats the alternative, use `proceed` with explicit do-not-cross lines.

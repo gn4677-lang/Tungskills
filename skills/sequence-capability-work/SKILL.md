@@ -24,6 +24,7 @@ Business capability: ...
 Domain / bounded context: ...
 Direction accepted by: inline | run-slice-direction-challenge-subagent | user | not_applicable
 Capability dependency: ...
+Slice kind: product_capability | vertical_proof | contract_guard | ops_test_stability | wrapper_evidence_wiring
 Slice grain: right_sized | too_large | over_split | wrapper_only
 Consolidation candidate: yes | no
 OOD responsibility owner: ...
@@ -45,7 +46,8 @@ If the task is small and already inside one stable interface, state only `Build 
 6. Build the right-sized capability slice that unblocks the next capability.
 7. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
 8. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, and boundary checks for that slice.
-9. Right-size the PR grain: split when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
+9. Right-size the PR grain: split only when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
+10. Classify proof-only or ops/test-stability work honestly; do not count it as product capability unless it directly changes user/operator capability.
 
 Use `check-architecture-boundaries` when the sequence crosses ownership, public APIs, data models, runtime boundaries, or subagent responsibilities.
 
@@ -76,6 +78,7 @@ Read `references/domain-language-and-product-slicing.md` when capability order d
 | Builder wants to open PR but track, parent, report, or boundary evidence is unclear | Define slice readiness before implementation or queue work. |
 | Several accepted slices only connect reports, artifacts, closeout steps, or candidate bundles for the same blocker | Consolidate into one vertical evidence-wiring slice or one explicit short PR train. |
 | A slice has no independent rollback value and no direct capability or decision value | Merge it into the adjacent capability slice or hold it. |
+| Pointer, CLI root path, smoke inclusion, report lineage, or candidate-bundle field only | Treat as `ops_test_stability` or `wrapper_evidence_wiring`, not product capability. |
 
 ## Stop Signals
 

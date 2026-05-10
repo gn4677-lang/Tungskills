@@ -43,13 +43,13 @@ For purely cosmetic, copy-only, or local work inside an existing interface, eith
 
 ## Escalation Actions
 
-Choose the smallest action that controls the risk:
+Choose the least sufficient action that controls the risk:
 
 - ADR/update recommendation for public contracts, ownership models, or long-lived direction.
 - Architecture fitness check for tests, dependency rules, lint, schemas, or CI.
 - Dependency direction check for domain/application/infrastructure or caller/callee inversion risk.
 - Ownership split before subagent dispatch across modules, domains, or responsibility owners.
-- Owner-module check or smallest extraction when a protected legacy, fat, freeze-growth, or active-code boundary would absorb new responsibility.
+- Owner-module check or least sufficient extraction when a protected legacy, fat, freeze-growth, or active-code boundary would absorb new responsibility.
 
 Do not require diagrams, full inventories, or ADRs for low-risk work.
 
@@ -63,7 +63,7 @@ Do not require diagrams, full inventories, or ADRs for low-risk work.
 - Ports and adapters: keep core/domain independent of UI, database, network, framework, and tool adapters.
 - C4 level check: do not solve a system/container problem only at component/code level.
 - Team/API ownership: one module, task, or subagent should have one primary responsibility.
-- Capability order: build the smallest stable capability that unlocks the next step.
+- Capability order: build the right-sized stable capability that unlocks the next step.
 - Freeze-growth: do not let protected legacy or fat files absorb new ownership because it is locally faster.
 
 ## Mistakes
@@ -75,7 +75,7 @@ Do not require diagrams, full inventories, or ADRs for low-risk work.
 | Subagents split by file count only | Split by responsibility boundaries. |
 | ADRs for every small edit | Reserve ADRs for high-risk decisions. |
 | Quick fix creates reverse dependency | Check dependency direction first. |
-| Helper added to a protected/fat file because it is faster | Find the owner module or extract the smallest responsibility boundary. |
+| Helper added to a protected/fat file because it is faster | Find the owner module or extract the least sufficient responsibility boundary. |
 
 ## Stop Signals
 

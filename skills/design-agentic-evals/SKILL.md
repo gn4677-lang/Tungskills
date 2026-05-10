@@ -81,7 +81,7 @@ Decision: proceed | narrow | stop
 | If you see | Prefer |
 | --- | --- |
 | Benchmark payload shaping a manager contract | Stop; resolve product truth first. |
-| Multi-agent split because the task feels complex | Narrow; require eval-backed reason for added orchestration. |
+| Multi-agent split because the task feels complex | Right-size; require eval-backed reason for added orchestration. |
 | Final answer looks good | Check tool, handoff, guard, state, and manager traces. |
 | One SKU or one case fixed by a prompt | Check the broader failure family before patching. |
 | Live failure triggers schema or prompt hardening | Stop; require attribution, product semantic source, representability coverage, and holdout cases first. |

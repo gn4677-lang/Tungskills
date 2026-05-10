@@ -12,7 +12,7 @@ Task tool (general-purpose):
     Secondary question: if yes, what is the right-sized shape?
     Not primary: can this be implemented safely?
 
-    A narrow, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
+    A bounded, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
     A smaller slice is not automatically better; do not split a coherent vertical slice unless the split reduces a named risk.
 
     ## Product Goal
@@ -53,7 +53,7 @@ Task tool (general-purpose):
     - boundary/ownership risk
     - over-engineering/speculative-flexibility risk
 
-    Do not approve a proposal casually just because it is plausible, useful later, narrow, safe, already started, or low risk.
+    Do not approve a proposal casually just because it is plausible, useful later, bounded, safe, already started, or low risk.
 
     You must propose at least one mainline-first alternative and compare the proposed slice against it. If no competing mainline alternative can be named from the provided context, say so and do not return `proceed`.
 
@@ -87,12 +87,12 @@ Task tool (general-purpose):
     Over-engineering risk:
     Future-wave or mainline:
     Questions that must be answered:
-    Verdict: proceed | narrow | split | hold | return_to_mainline
+    Verdict: proceed | right_size | split | hold | return_to_mainline
     If proceed, exact implementation boundary:
     Do-not-cross lines:
     Handoff skills:
 
-    Prefer `narrow`, `split`, `hold`, or `return_to_mainline` when the blocker is vague, the source of truth is weak, a competing mainline slice is missing, the opportunity cost is omitted, a detour has no exit gate, or a right-sized/later/different/return-to-mainline slice has not been rebutted.
+    Prefer `right_size`, `split`, `hold`, or `return_to_mainline` when the blocker is vague, the source of truth is weak, a competing mainline slice is missing, the opportunity cost is omitted, a detour has no exit gate, or a right-sized/later/different/return-to-mainline slice has not been rebutted.
 
     Use `split` only when the split creates independently reviewable, reversible, blocker-linked work. Do not recommend splitting solely because small PRs are generally good.
 ```

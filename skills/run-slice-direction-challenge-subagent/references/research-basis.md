@@ -4,7 +4,7 @@ This skill exists because several external practices converge on the same patter
 
 ## Product Goal Before Solution
 
-- AWS Working Backwards starts with the final customer outcome before code. Amazon writes a PR/FAQ before building so teams stay rooted in customer value, test assumptions early, and narrow toward the simplest effective solution.
+- AWS Working Backwards starts with the final customer outcome before code. Amazon writes a PR/FAQ before building so teams stay rooted in customer value, test assumptions early, and converge on the simplest effective solution.
 - This skill borrows that shape: product goal first, proposal second, challenge third.
 
 ## Smallest Safe Slice

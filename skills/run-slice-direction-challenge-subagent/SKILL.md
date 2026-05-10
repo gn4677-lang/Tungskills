@@ -19,7 +19,7 @@ Right-sizing question: does this slice have coherent blocker value, or has it be
 
 Not primary: can this be implemented safely?
 
-A narrow, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
+A bounded, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
 
 Small batches are good only when each batch independently removes a blocker, advances a capability, or unlocks a named decision. Do not force smaller slices when one coherent vertical slice is easier to review, validate, and land safely.
 
@@ -27,7 +27,7 @@ Small batches are good only when each batch independently removes a blocker, adv
 
 - High-risk mode: the root/controller agent MUST dispatch a fresh contrarian subagent for medium/high-risk slice decisions.
 - Inline mode is acceptable only for small, obviously bounded, low-reversibility-cost decisions.
-- This skill does not approve implementation details; it approves, narrows, splits, holds, or returns slice direction to the mainline.
+- This skill does not approve implementation details; it approves, right-sizes, splits, holds, or returns slice direction to the mainline.
 - A repo bootstrap checklist, planning YAML, or mainline/detour declaration is not a substitute for this skill when the slice direction itself is under question.
 
 ## When to Use
@@ -85,7 +85,7 @@ If a required contrarian subagent is not run, the controller must say so explici
 5. Challenge the slice from five directions: smaller, more coherent, later, different, and return-to-mainline.
 6. Name the source of truth and the best-practice basis. If either is missing, do not proceed casually.
 7. Decide whether the slice is mainline, future-wave, guard-only, contract-only, offline-only, detour, distraction, or should be held.
-8. If the verdict is `proceed` or `narrow`, define the exact implementation boundary, exit gate, and explicit do-not-cross lines.
+8. If the verdict is `proceed` or `right_size`, define the exact implementation boundary, exit gate, and explicit do-not-cross lines.
 9. Hand off to planning or sequencing only after the boundary is accepted.
 
 For medium/high-risk cases, spawn a fresh subagent with only:
@@ -145,7 +145,7 @@ Boundary / ownership risks:
 Over-engineering risk:
 Future-wave or mainline:
 Questions that must be answered:
-Verdict: proceed | narrow | split | hold | return_to_mainline
+Verdict: proceed | right_size | split | hold | return_to_mainline
 If proceed, exact implementation boundary:
 Do-not-cross lines:
 Handoff skills:
@@ -156,12 +156,12 @@ Handoff skills:
 - `safe_to_proceed_now` is not the same as `should_proceed_now`.
 - A small slice is not automatically a good slice; small but unrelated work is `hold` or `return_to_mainline`.
 - `allowed_detour` requires a named blocker link, necessary near-term learning artifact, or explicit detour exit gate. Without one, default to `hold` or `return_to_mainline`.
-- A verdict of `proceed` or `narrow` requires a named competing mainline slice and a reason the proposed slice beats it now.
-- If no competing mainline-first alternative is named, the verdict cannot be `proceed`; use `narrow`, `hold`, or `return_to_mainline`.
+- A verdict of `proceed` or `right_size` requires a named competing mainline slice and a reason the proposed slice beats it now.
+- If no competing mainline-first alternative is named, the verdict cannot be `proceed`; use `right_size`, `hold`, or `return_to_mainline`.
 - "Already built", "nearly done", "low risk", "small bridge", "CI green", and "easy to merge" are not direction evidence.
 - The right-sized slice is not necessarily the smallest possible PR; it must independently remove a blocker, deliver a user/operator-visible capability, or unlock a named decision.
 - Do not split a coherent vertical slice merely to make PRs smaller when the split adds coordination debt, stale-base risk, or review confusion.
-- A verdict of `narrow` means "tighten to the right boundary"; it does not always mean "make it smaller."
+- A verdict of `right_size` means "adjust to the right boundary"; it may make the slice smaller, larger, or more coherent.
 - Wrapper/evidence wiring is acceptable only when it connects an already-built capability to an existing gate, closeout chain, or decision that currently cannot see the evidence.
 - If several wrapper/evidence wiring PRs share the same blocker, same gate, and no independent rollback or review value, prefer a consolidated vertical slice or an explicit short PR train over more leaf PRs.
 
