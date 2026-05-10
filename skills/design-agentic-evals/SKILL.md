@@ -1,6 +1,6 @@
 ---
 name: design-agentic-evals
-description: "Use when designing or revising agentic evals, Eval Driven Development, trace replay, graders, rubrics, regression seeds, holdouts, tool/manager behavior tests, adversarial replay, or harness leakage. Trigger on eval overfitting, fixture-shaped eval, raw prompt to route, runner-inferred semantics, oracle leakage, or 評測驅動."
+description: "Use when designing or revising agentic evals, Eval Driven Development, trace replay, graders, rubrics, regression seeds, holdouts, tool/manager behavior tests, adversarial replay, or harness leakage. Trigger on eval overfitting, fixture-shaped eval, raw prompt to route, runner-inferred semantics, oracle leakage, keyword scaffold dependency, lexical oracle, evidence-span support eval, or 評測驅動."
 ---
 
 # Design Agentic Evals
@@ -27,7 +27,8 @@ Hard stop: do not use eval, fixture, runner, or live-failure evidence as the onl
 2. Separate agent/model decision, deterministic validation, and state/output correctness.
 3. Choose trace fields before grader type.
 4. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
-5. Add negative or holdout coverage before using eval results to change prompts, schemas, or contracts.
+5. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
+6. Add negative or holdout coverage before using eval results to change prompts, schemas, or contracts.
 
 ## Default Output
 
@@ -44,6 +45,8 @@ Capability or regression: ...
 Regression seed provenance: ...
 Rubric calibration / acceptance threshold: ...
 Fixture-shape risk: ...
+Keyword scaffold risk: ...
+Semantic support evidence: evidence span | product oracle | lexical smoke | missing
 Harness leakage risk: ...
 Contract change source: product rule | trace attribution | eval failure only | unknown
 Representability / legal-flow coverage: ...
@@ -70,6 +73,8 @@ Decision: proceed | narrow | stop
 15. Treat live, provider, or full-suite failures as evidence for attribution, semantic audit, representability review, and holdout design; do not let them directly justify prompt, schema, or contract hardening.
 16. Before tightening a contract from eval evidence, require a product-approved semantic source plus legal-flow or representability coverage and holdout cases that catch both over-triggering and over-blocking.
 17. Use `red-team-application-security` when the primary task is adversarial discovery, app/API attack-family selection, prompt/tool attack design, memory or RAG poisoning exploration, or authorized white-hat probing rather than replay and regression design.
+18. When an eval involves semantic support, groundedness, category support, or axis support, test evidence-span support rather than only keyword or term-list hits.
+19. A keyword scaffold dependency requires holdouts for paraphrase/synonym support, keyword false positives, no-keyword true support, multilingual or oral phrasing, cited-span containment, and unsupported/partial review routing.
 
 ## Heuristics
 
@@ -85,6 +90,9 @@ Decision: proceed | narrow | stop
 | Provider timeout, rate limit, or failover issue | Route to `design-agent-fallbacks`. |
 | Subjective quality claim | Add rubric plus human calibration or sampling. |
 | Eval checks exact steps or tool order instead of useful outcomes | Prefer outcome grading, partial credit, and negative cases that catch overtriggering. |
+| Term list or fixture label is the eval oracle for semantic support | Stop; move proof to evidence span, product oracle, model/human grader, or reviewable state. |
+| Keyword present but source meaning is different | Add false-positive holdout and require cited evidence support. |
+| Support exists without expected keyword | Add paraphrase/no-keyword holdout so the eval does not reward lexical overfit. |
 
 ## Stop Signals
 
@@ -93,6 +101,8 @@ Do not proceed when:
 - fixtures, runner fields, or benchmark vocabulary define product architecture
 - no trace can show the agent behavior under eval
 - eval or harness logic maps raw input keywords directly to intent, route, action, mutation disposition, or workflow outcome
+- eval or harness logic treats keyword, regex, term-list, dictionary, or fixture-label hits as semantic support proof
+- a support eval lacks cited evidence spans, source-region checks, or unsupported/partial review cases
 - runner, verifier, seed data, or guard fabricates a missing semantic decision instead of checking trace or structured agent output
 - capability and regression evals are mixed into one pass/fail claim
 - a judge prompt is treated as truth without calibration

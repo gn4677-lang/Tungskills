@@ -1,6 +1,6 @@
 ---
 name: narrow-evidence-claims
-description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
+description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, keyword proof, term-list pass, lexical smoke, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
 ---
 
 # Narrow Evidence Claims
@@ -53,6 +53,8 @@ Decision: proceed | narrow | stop
 17. Use `gate-delivery-readiness` when the primary work is diagnosing CI/CD, required checks, merge queue eligibility, branch protection, base drift, deployment gates, or release readiness; this skill narrows the claim after that evidence is named.
 18. A red-team pass, pentest, or security review supports only the tested attack surface and evidence boundary; it does not prove general safety against XSS, SQLi, SSRF, auth bypass, IDOR/BOLA, exfiltration, prompt injection, or other untested families.
 19. A mainline/detour checklist, CI pass, merged PR, or queue position does not prove that the next slice is directionally justified. Route direction claims through `run-slice-direction-challenge-subagent` or name the explicit user/controller acceptance evidence.
+20. A keyword, regex, dictionary, term-list, or lexical smoke pass proves only that lexical scaffold behavior ran; it does not prove semantic support, groundedness, category truth, user intent, or product truth.
+21. A semantic support claim requires its evidence boundary: cited span or source region, support state, provenance, product-approved oracle, model/human grader, or explicit review-needed status.
 
 ## Heuristics
 
@@ -78,6 +80,8 @@ Decision: proceed | narrow | stop
 | Pre-PR gate passed | Ready to open a PR for review. | Queue-ready, merge-ready, deploy-ready, or product-ready. |
 | PR readiness gate passed | Eligible to enter the integration queue. | Merge result is safe. |
 | Merge queue or `merge_group` passed | The tested target-branch candidate passed that queue scope. | Production-ready or deploy-safe without deploy evidence. |
+| Keyword or term-list support check passed | The lexical scaffold check passed. | Semantic support, groundedness, or product truth is proven. |
+| Cited evidence span is present and validated | The cited span exists in the named source boundary. | The semantic interpretation is correct unless a model/human/product oracle judged support. |
 
 ## Stop Signals
 
@@ -98,6 +102,8 @@ Stop or narrow when:
 - clean, maintainable, optimized, or efficient is claimed from green checks without code-health or performance evidence
 - direction, alignment, or "best next slice" is claimed from an inline checklist without source-of-truth and direction acceptance evidence
 - pre-PR, queue-ready, merge-ready, and deploy-ready are collapsed into one "ready" claim
+- keyword, regex, dictionary, or term-list checks are summarized as semantic proof
+- lexical smoke or negative guard output is used to claim groundedness, category support, or product truth
 
 ## Verification
 
@@ -107,6 +113,7 @@ Before finalizing, name the evidence and its boundary: command output, report pa
 
 - Use `design-agentic-evals` when the missing evidence is eval oracle quality, regression coverage, holdout design, trace replay, or whether agent-written tests prove product truth.
 - Use `assign-decision-ownership` when tests, guards, validators, or runners may be encoding semantic truth, intent, route, action, or product decision ownership.
+- Use `assign-decision-ownership` when keyword scaffolds, term lists, regexes, dictionaries, or lexical hints may be treated as semantic proof.
 - Use `gate-delivery-readiness` when the primary question is CI/CD, pre-PR, PR readiness, merge queue eligibility, base drift, deploy gates, or release readiness.
 - Use `review-code-excellence` when clean, maintainable, readable, efficient, optimized, or no-behavior-refactor claims need code-health evidence.
 - Use `red-team-application-security` when security, pentest, red-team, prompt-injection-safe, or exfiltration-safe claims need attack-surface evidence.
