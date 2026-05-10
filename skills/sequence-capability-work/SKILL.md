@@ -1,6 +1,6 @@
 ---
 name: sequence-capability-work
-description: "Use when direction is accepted and the task is deciding build order, capability dependencies, bounded context, PRD/issue slicing, parent dependencies, pre-PR readiness, trunk-safe slices, contract-first work, or parallel capability sequencing. Trigger on 先做哪個, 開 PR 前檢查, issue slicing, PRD slicing, capability order, domain glossary, or build next."
+description: "Use when direction is accepted and the task is deciding build order, capability dependencies, bounded context, PRD/issue slicing, parent dependencies, pre-PR readiness, trunk-safe slices, right-sized slices, over-split PR trains, wrapper/evidence wiring, contract-first work, or parallel capability sequencing. Trigger on 先做哪個, 開 PR 前檢查, issue slicing, PRD slicing, capability order, domain glossary, build next, or 過細切片."
 ---
 
 # Sequence Capability Work
@@ -24,6 +24,8 @@ Business capability: ...
 Domain / bounded context: ...
 Direction accepted by: inline | run-slice-direction-challenge-subagent | user | not_applicable
 Capability dependency: ...
+Slice grain: right_sized | too_large | over_split | wrapper_only
+Consolidation candidate: yes | no
 OOD responsibility owner: ...
 Dependency direction: ...
 Build next: ...
@@ -43,6 +45,7 @@ If the task is small and already inside one stable interface, state only `Build 
 6. Build the smallest capability that unblocks the next capability.
 7. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
 8. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, and boundary checks for that slice.
+9. Right-size the PR grain: split when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
 
 Use `check-architecture-boundaries` when the sequence crosses ownership, public APIs, data models, runtime boundaries, or subagent responsibilities.
 
@@ -71,6 +74,8 @@ Read `references/domain-language-and-product-slicing.md` when capability order d
 | Multiple agents build adjacent capabilities | Define track ownership and trunk-safe slice boundaries before implementation order. |
 | Quality cleanup competes with feature work | Baseline/gate first; then target hot-path or responsibility-bound refactors. |
 | Builder wants to open PR but track, parent, report, or boundary evidence is unclear | Define slice readiness before implementation or queue work. |
+| Several accepted slices only connect reports, artifacts, closeout steps, or candidate bundles for the same blocker | Consolidate into one vertical evidence-wiring slice or one explicit short PR train. |
+| A slice has no independent rollback value and no direct capability or decision value | Merge it into the adjacent capability slice or hold it. |
 
 ## Stop Signals
 
@@ -86,6 +91,8 @@ Do not proceed with the proposed order when:
 - parallel branches are sequenced by PR age instead of capability dependency and trunk integration safety
 - a PR is opened before track, parent dependency, required report, or boundary evidence is clear
 - capability sequencing is used to justify a slice whose direction, mainline status, or smallest safe scope has not been accepted
+- issue slicing creates many wrapper-only PRs whose value is only status projection, report plumbing, artifact copying, or closeout visibility
+- "small PR" is used to justify splitting one coherent vertical path into fragments that cannot be reviewed or rolled back independently
 
 ## Verification
 

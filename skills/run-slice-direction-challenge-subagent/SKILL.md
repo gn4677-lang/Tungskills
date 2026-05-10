@@ -1,6 +1,6 @@
 ---
 name: run-slice-direction-challenge-subagent
-description: "Use when the root/controller should run a contrarian direction-review subagent before choosing what to build next, opening a new slice after merge/PR, approving mainline vs detour, or checking product-goal fit, current blocker, opportunity cost, mainline-first alternative, detour exit gate, source of truth, best-practice basis, over-engineering, overfit, and future-wave risk. Trigger on subagent direction challenge, contrarian reviewer, next slice, why now, 做歪, 新 slice."
+description: "Use when the root/controller should run a contrarian direction-review subagent before choosing what to build next, opening a new slice after merge/PR, approving mainline vs detour, or checking product-goal fit, current blocker, opportunity cost, mainline-first alternative, detour exit gate, source of truth, best-practice basis, over-engineering, overfit, over-split PRs, wrapper/evidence wiring, closeout/report sprawl, and future-wave risk. Trigger on subagent direction challenge, contrarian reviewer, next slice, why now, 做歪, 新 slice, 過細切片."
 ---
 
 # Run Slice Direction Challenge Subagent
@@ -15,9 +15,13 @@ Primary question: should this slice exist now?
 
 Secondary question: if yes, what is the smallest safe shape?
 
+Right-sizing question: is this the smallest useful slice, or only the smallest possible PR?
+
 Not primary: can this be implemented safely?
 
 A narrow, safe, low-risk slice can still be wrong if it does not beat the best mainline alternative.
+
+Small batches are good only when each batch independently removes a blocker, advances a capability, or unlocks a named decision.
 
 ## Operating Mode
 
@@ -117,6 +121,8 @@ Skip reason, if any:
 Product goal:
 Current mainline blocker:
 Proposed slice:
+Right-sized slice check:
+Wrapper/evidence wiring role:
 Competing mainline slice:
 Why this beats mainline work:
 What breaks if we do not do this now:
@@ -152,6 +158,9 @@ Handoff skills:
 - A verdict of `proceed` or `narrow` requires a named competing mainline slice and a reason the proposed slice beats it now.
 - If no competing mainline-first alternative is named, the verdict cannot be `proceed`; use `narrow`, `hold`, or `return_to_mainline`.
 - "Already built", "nearly done", "low risk", "small bridge", "CI green", and "easy to merge" are not direction evidence.
+- The smallest safe slice is not the smallest possible PR; it must independently remove a blocker, deliver a user/operator-visible capability, or unlock a named decision.
+- Wrapper/evidence wiring is acceptable only when it connects an already-built capability to an existing gate, closeout chain, or decision that currently cannot see the evidence.
+- If several wrapper/evidence wiring PRs share the same blocker, same gate, and no independent rollback or review value, prefer a consolidated vertical slice or an explicit short PR train over more leaf PRs.
 
 ## Stop Signals
 
@@ -168,6 +177,10 @@ Do not approve the proposed slice when:
 - opportunity cost is omitted
 - an `allowed_detour` has no blocker link, learning objective, exit gate, or return-to-mainline condition
 - diagnostic/offline sidecar work creates another artifact or report family without naming the current decision it unlocks
+- wrapper/evidence wiring only copies status between artifacts, reports, bundles, runners, or closeout steps without a named capability or decision it unlocks
+- a chain of tiny PRs repeatedly updates closeout, bundle, report, runner, smoke-test inclusion, or status projection for the same blocker
+- the slice exists mainly to make a future PR useful, but does not itself answer a current blocker, capability question, or merge decision
+- the work could be one coherent vertical capability slice but is split into multiple wrapper PRs with no independent review or rollback value
 - a future-wave bridge is justified by being small, safe, or already started rather than by current mainline impact
 - future-wave or speculative work is being framed as immediate mainline necessity
 - "green CI", "done branch", or "we already built most of it" is used as direction evidence

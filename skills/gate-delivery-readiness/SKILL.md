@@ -1,6 +1,6 @@
 ---
 name: gate-delivery-readiness
-description: "Use when deciding CI/CD, pre-PR, PR readiness, merge queue, merge_group checks, queue eligibility, stale base, base drift, draft/stacked PRs, required checks, branch protection, release gates, deploy readiness, rollback, or whether green checks mean open-PR, queue, merge, deploy, or release ready."
+description: "Use when deciding CI/CD, pre-PR, PR readiness, merge queue, merge_group checks, queue eligibility, stale base, base drift, draft/stacked PRs, over-split PR debt, wrapper/evidence wiring, required checks, branch protection, release gates, deploy readiness, rollback, or whether green checks mean open-PR, queue, merge, deploy, or release ready."
 ---
 
 # Gate Delivery Readiness
@@ -40,6 +40,8 @@ slice_acceptance_record: ...
 missing_builder_artifacts: ...
 required_report_status: ...
 merge_group_check_status: ...
+over_split_pr_debt: none | warning | blocking
+wrapper_evidence_wiring_role: necessary_gate_visibility | status_projection | unclear | not_applicable
 artifact_log_retention: ...
 deploy_or_release_gate: ...
 smoke_or_rollback_plan: ...
@@ -69,6 +71,8 @@ decision: proceed | narrow | stop
 17. GitHub Actions workflows used as required merge queue checks need a `merge_group` trigger; otherwise queue checks may never report on the merge group.
 18. Adversarial security evidence is a separate gate from CI, PR readiness, merge readiness, deploy readiness, and rollout permission; name where that gate is enforced and what it covers.
 19. Delivery evidence does not approve product direction. For a non-trivial new slice, require a slice acceptance record from the user, controller note, or `run-slice-direction-challenge-subagent`; otherwise mark delivery readiness as blocked by direction acceptance, not by CI.
+20. Many tiny green PRs can still be delivery risk. If several PRs only wire artifacts, reports, status projections, smoke inclusion, or closeout visibility for the same blocker, mark `over_split_pr_debt` and require consolidation, a declared train, or a queue-owner decision.
+21. Wrapper/evidence wiring is merge-relevant only when it makes existing capability evidence visible to an existing gate or decision. It is not merge justification by itself.
 
 ## Heuristics
 
@@ -88,6 +92,7 @@ decision: proceed | narrow | stop
 | PR is green but queue entry is blocked | Separate PR readiness from merge-group readiness and name the missing queue condition. |
 | CI green but adversarial security evidence missing | Narrow; CI and red-team results are separate gates. |
 | PR is mechanically ready but the slice direction is unaccepted | Hold delivery readiness; use `run-slice-direction-challenge-subagent` instead of treating queue order as product strategy. |
+| Many small PRs only move evidence between reports or closeout artifacts | Mark PR debt; consolidate or make the train explicit before queueing more leaf PRs. |
 
 ## Stop Signals
 
@@ -98,6 +103,8 @@ Stop or narrow when:
 - a stale branch result is used as current target-branch evidence
 - a deployment workflow is a placeholder but described as CD
 - queue, CI, or PR readiness is used to justify what should be built next
+- a set of wrapper/evidence wiring PRs is treated as harmless because each individual PR is small
+- closeout/report/artifact plumbing is queued without naming the existing gate or decision it makes visible
 
 ## Verification
 
