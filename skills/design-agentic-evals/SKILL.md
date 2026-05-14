@@ -1,6 +1,6 @@
 ---
 name: design-agentic-evals
-description: "Use when designing or revising agentic evals, Eval Driven Development, trace replay, graders, rubrics, regression seeds, holdouts, tool/manager behavior tests, adversarial replay, or harness leakage. Trigger on eval overfitting, fixture-shaped eval, raw prompt to route, runner-inferred semantics, oracle leakage, keyword scaffold dependency, lexical oracle, evidence-span support eval, or 評測驅動."
+description: "Use when designing or revising agentic evals, Eval Driven Development, trace replay, graders, rubrics, regression seeds, holdouts, tool/manager behavior tests, adversarial replay, harness leakage, fake pass, capability realism, browser-green-but-product-fake, template response risk, or tests passing while real AI behavior is missing. Trigger on eval overfitting, fixture-shaped eval, raw prompt to route, runner-inferred semantics, oracle leakage, keyword scaffold dependency, lexical oracle, evidence-span support eval, or 評測假通過."
 ---
 
 # Design Agentic Evals
@@ -42,6 +42,7 @@ Agent behavior under eval: ...
 Decision under test: ...
 Trace surface: ...
 Grader type: deterministic | model | human | hybrid
+Capability realism check: ...
 Deterministic validation boundary: ...
 Capability or regression: ...
 Regression seed provenance: ...
@@ -77,6 +78,9 @@ Decision: proceed | narrow | stop
 17. Use `red-team-application-security` when the primary task is adversarial discovery, app/API attack-family selection, prompt/tool attack design, memory or RAG poisoning exploration, or authorized white-hat probing rather than replay and regression design.
 18. When an eval involves semantic support, groundedness, category support, or axis support, test evidence-span support rather than only keyword or term-list hits.
 19. A keyword scaffold dependency requires holdouts for paraphrase/synonym support, keyword false positives, no-keyword true support, multilingual or oral phrasing, cited-span containment, and unsupported/partial review routing.
+20. For user-facing AI capability claims, require a capability realism check: the actual user entrypoint must exercise the intended owner, trace the expected decision path, and verify the final user-visible output source instead of only proving shell, persistence, fixture, or read-model behavior.
+21. If a product claim says "agent", "manager-style", "natural assistant", or "intelligent response", the eval must distinguish structured decision quality from final-response composition quality; a deterministic renderer or template can pass safety checks but cannot by itself prove natural-language assistant capability.
+22. Browser-executed, live-invoked, or runtime-backed evidence still needs a user-perceived product assertion: representative raw prompts, actual output text, trace owner, and acceptance rubric or human sample for the claimed experience.
 
 ## Heuristics
 
@@ -88,6 +92,8 @@ Decision: proceed | narrow | stop
 | One SKU or one case fixed by a prompt | Check the broader failure family before patching. |
 | Live failure triggers schema or prompt hardening | Stop; require attribution, product semantic source, representability coverage, and holdout cases first. |
 | Full-suite pass after hardening | Narrow; check whether the pass is scaffold/provider-specific before upgrading claims. |
+| Browser or route gate passes but manual use feels fake | Check capability realism: entrypoint, owner trace, output source, and user-perceived behavior. |
+| Live manager trace exists but final message is templated | Split the claim into structured manager decision vs final-response composition. |
 | A prompt-injection or poisoning bug is already known | Design attack replay, poisoned-context replay, and adversarial holdouts before claiming it is closed. |
 | Provider timeout, rate limit, or failover issue | Route to `design-agent-fallbacks`. |
 | Subjective quality claim | Add rubric plus human calibration or sampling. |
@@ -112,6 +118,8 @@ Do not proceed when:
 - repeated eval passes make a guard, repair loop, or scaffold look necessary without testing holdout cases, model tiers, and harness confounders
 - a live or full-suite failure is used as the only source for prompt, schema, contract, or product semantic hardening
 - hardening lacks a legal-flow, representability, or holdout anti-overfit check
+- a pass claim is based on shell navigation, fixture manager output, deterministic renderer text, or read-model persistence while the claimed capability is user-perceived AI behavior
+- "manager-style" or "agentic" is claimed without evidence that the intended semantic owner, tool path, and final response owner all ran in the real entrypoint
 
 ## Verification
 

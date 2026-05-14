@@ -1,6 +1,6 @@
 ---
 name: narrow-evidence-claims
-description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, keyword proof, term-list pass, lexical smoke, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
+description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, fake pass, fixture pass, browser green, live invoked, template response, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
 ---
 
 # Narrow Evidence Claims
@@ -57,6 +57,8 @@ Decision: proceed | narrow | stop
 19. A mainline/detour checklist, CI pass, merged PR, or queue position does not prove that the next slice is directionally justified. Route direction claims through `run-slice-direction-challenge-subagent` or name the explicit user/controller acceptance evidence.
 20. A keyword, regex, dictionary, term-list, or lexical smoke pass proves only that lexical scaffold behavior ran; it does not prove semantic support, groundedness, category truth, user intent, or product truth.
 21. A semantic support claim requires its evidence boundary: cited span or source region, support state, provenance, product-approved oracle, model/human grader, or explicit review-needed status.
+22. Browser execution, route navigation, persistence checks, fixture-manager passes, and `live_llm_invoked=true` do not by themselves prove user-perceived AI capability, natural conversation, intent discrimination, or manager-style product behavior.
+23. A deterministic renderer, template response, or canned copy can support output-safety and factual-display claims, but not a claim that the final answer is LLM-composed or conversationally intelligent unless that response owner was actually exercised and evaluated.
 
 ## Heuristics
 
@@ -72,6 +74,8 @@ Decision: proceed | narrow | stop
 | Repeated strict harness runs passed | That harness passed under those model/scaffold/environment settings. | Generally stable, model-portable, production ready, or architecture optimal. |
 | Full suite passed after prompt/schema/contract hardening | That suite passed under the new scaffold and evidence scope. | Product semantics are correct, model-portable, or readiness is unlocked. |
 | Single-profile live evidence passed | That profile produced diagnostic evidence. | Provider portability, production readiness, or private-use readiness. |
+| Browser green with fixture or template output | The UI route and checked state passed. | The AI product experience or natural assistant behavior is proven. |
+| Live manager invoked but deterministic renderer wrote final text | The structured manager path ran. | Final answer quality, tone, or natural-language intelligence is proven. |
 | Red-team run found no issue | The tested attack set produced no confirmed issue. | Safe against prompt injection, exfiltration, or agent attacks in general. |
 | Large `rg` or shell output was truncated | The visible subset was inspected. | Full scan completed, no references exist, or the whole folder was checked. |
 | Bounded scan artifact says `truncated=true` | Results are partial up to the stated limit. | Complete absence, complete coverage, or no remaining matches. |
@@ -106,6 +110,8 @@ Stop or narrow when:
 - pre-PR, queue-ready, merge-ready, and deploy-ready are collapsed into one "ready" claim
 - keyword, regex, dictionary, or term-list checks are summarized as semantic proof
 - lexical smoke or negative guard output is used to claim groundedness, category support, or product truth
+- shell, browser, fixture, live-invocation, or persistence evidence is summarized as "the agent works" without naming the actual user-visible AI behavior that was exercised
+- final response quality is claimed from marker checks or template copy without a response-owner trace, representative prompts, and a human/model rubric when the claim is subjective
 
 ## Verification
 

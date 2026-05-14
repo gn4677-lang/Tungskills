@@ -1,6 +1,6 @@
 ---
 name: gate-agent-activation
-description: "Use when deciding whether an agent capability may move from fake/local/offline to live provider, diagnostic, shadow, canary, user-facing, mutation-bearing, or production-like operation. Trigger on live test, canary, shadow, rollout, 開給使用者, 寫入真實資料, mutation authority, red-team pass, or activation readiness."
+description: "Use when deciding whether an agent capability may move from fake/local/offline to live provider, diagnostic, shadow, canary, user-facing, mutation-bearing, or production-like operation. Trigger on live test, canary, shadow, rollout, user-facing enablement, 開給使用者, 寫入真實資料, mutation authority, red-team pass, fake pass, capability realism, or activation readiness."
 ---
 
 # Gate Agent Activation
@@ -34,6 +34,7 @@ Mutation changed: true | false
 Required evidence: ...
 Tested adversarial surfaces: ...
 Residual risk / untested surfaces: ...
+Capability realism evidence: ...
 Safe fallback: ...
 Decision: proceed | narrow | stop
 ```
@@ -64,6 +65,8 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 16. Guard, contract, schema, and no-runtime-effect slices may enter main as activation controls; hidden or shadow implementation must remain non-authoritative until the next ladder step has evidence.
 17. A red-team pass, no-findings report, pentest, or prompt-injection review is not rollout permission; it proves only the tested adversarial scope.
 18. Before canary, user-facing, or mutation-bearing promotion, name which adversarial surfaces were tested, which were not tested, and which safeguards still bound the residual risk.
+19. Before user-facing promotion of an AI capability, require capability realism evidence: real entrypoint, intended semantic owner, final response owner, representative raw prompts, trace path, state effect, and user-perceived output check.
+20. Do not promote a capability from shell/browser/persistence/fixture evidence when the product value depends on natural-language understanding, tool choice, or conversational response quality that was not exercised.
 
 ## Heuristics
 
@@ -78,6 +81,8 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 | Red-team pass or pentest report -> canary now | Narrow; adversarial evidence is one input, not activation permission by itself. |
 | All providers live in parallel | Narrow; isolate one provider/model first or route fallback concerns. |
 | Capability built -> activate for users | Stop; build completion is not activation permission. |
+| Browser dogfood baseline passes but the assistant feels templated | Keep activation below user-facing capability claim; require capability realism evidence. |
+| Live LLM invoked but final text is deterministic copy | Treat as structured-decision evidence only unless final response composition is also evaluated. |
 | Future-wave PR wants merge because implementation is complete | Narrow; merge only activation controls unless the capability is promoted. |
 | Hidden code touches route, scheduler, or mutation path | Stop; that is activation, not passive shadow code. |
 
