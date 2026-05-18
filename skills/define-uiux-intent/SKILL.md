@@ -1,6 +1,6 @@
 ---
 name: define-uiux-intent
-description: "Use before designing, redesigning, building, modifying, or critiquing user-facing UI/UX when intent, audience, product purpose, interaction behavior, visual direction, animation purpose, anti-goals, or AI-slop avoidance needs clarification. Trigger on UI/UX design, interface as user surface, visual direction, generic AI-looking UI, template-like UI, or 設計做歪."
+description: "Use before designing, redesigning, building, modifying, or critiquing user-facing UI/UX when intent, audience, product purpose, interaction behavior, visual direction, landing page contracts, product proof, section flow, animation purpose, anti-goals, or AI-slop avoidance needs clarification. Trigger on UI/UX design, SaaS landing page, interface as user surface, visual direction, generic AI-looking UI, template-like UI, product proof, or 設計做歪."
 ---
 
 # Define UI/UX Intent
@@ -42,12 +42,13 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 2. Build a concise intent brief. Use `references/intent-brief-template.md` when the task is broad or ambiguous.
 3. Add a system-first pass. Use `references/system-first-brief.md` for products with many features, AI agents, editors, dashboards, or workflows.
 4. When generic AI output is a risk, add anti-slop constraints before visual exploration: unique product signal, literal proof, density target, and tropes to avoid. Use `references/anti-slop-design-brief.md` and `references/anti-slop-direction-examples.md` when you need concrete contrast, and use `../review-rendered-uiux/references/visual-example-index.md` when a paired visual example would help.
-5. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
-6. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
-7. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
-8. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
-9. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
-10. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
+5. For SaaS, product marketing, or landing pages, use `references/saas-landing-design-contracts.md` before implementation. Produce explicit contracts for product proof, section inventory, CTA/navigation hierarchy, copy outcome, interaction completeness, motion purpose, and reference extraction. Do not output vague quality levels or taste scores.
+6. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
+7. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
+8. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
+9. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
+10. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
+11. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
 
 ## Default Output
 
@@ -56,6 +57,7 @@ Intent brief: ...
 Assumptions or questions: ...
 Recommended direction: ...
 Anti-slop constraints: ...
+Landing/page contracts: ...
 Purpose trace: ...
 Interaction feedback map: needed | not needed | ...
 Human judgment still needed: ...
@@ -79,6 +81,7 @@ When the task asks for design generation rather than only intent review, include
 - Assumptions or questions.
 - 2-3 directions with tradeoffs and a recommendation.
 - Anti-slop constraints when the surface risks generic AI output.
+- Landing/page contracts when designing SaaS, product marketing, or landing pages.
 - Purpose trace for the selected direction.
 - Interaction feedback map when relevant.
 - Human judgment items that remain unresolved.

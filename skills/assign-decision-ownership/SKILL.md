@@ -1,6 +1,6 @@
 ---
 name: assign-decision-ownership
-description: "Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, routers, tools, humans, renderers, or product oracles should own a decision or user-visible answer. Trigger on prompt vs code, semantic ownership, response ownership, template response, deterministic renderer, guard became router, raw-input oracle, runner-inferred semantics, validator infers intent/action, keyword scaffold, semantic support validator, evidence-span support, or deterministic boundary risk."
+description: "Use when deciding whether LLMs, deterministic code, validators, guards, repair loops, prompts, routers, tools, humans, renderers, or product oracles should own a decision or user-visible answer. Trigger on prompt vs code, semantic ownership, response ownership, template response, guard became router, raw-input oracle, runner-inferred semantics, keyword scaffold, evidence-span support, or deterministic boundary risk."
 ---
 
 # Assign Decision Ownership
@@ -45,47 +45,27 @@ Decision: proceed | narrow | stop
 
 ## Decision Rules
 
-1. Start from the product decision being made, not from the easiest code hook.
-2. Give deterministic ownership to formulas, schemas, thresholds, legality, persistence invariants, routing constraints, and exact guard conditions.
-3. Give LLM ownership to ambiguous language understanding, synthesis, classification, explanation, and user-intent judgment when no deterministic oracle exists.
-4. Use hybrid ownership when deterministic code frames allowed options and the LLM chooses or explains within that frame.
-5. Allow deterministic code to validate, reject, downgrade, derive, or request one bounded repair round.
-6. Deterministic verifier, runner, or guard may validate, reject, constrain, or request repair, but must not fabricate, infer, or overwrite semantic decisions unless a product-approved oracle exists.
-7. If deterministic code claims semantic ownership, name the approved product rule or oracle; test convenience, fixture shape, or runner availability is not enough.
-8. Stop if deterministic code rewrites a completed LLM semantic field only because a heuristic pattern matched.
-9. Prefer a validator or repair contract before changing prompts for one-off failures.
-10. Use `check-architecture-boundaries` when the ownership decision changes module placement, public API, data model, dependency direction, or runtime boundary.
-11. Use `design-agentic-evals` when the boundary must be validated through eval datasets, graders, traces, or regression seeds.
-12. Do not harden guard, repair, or deterministic override policy only because one model tier needs help on a small or repeated eval set; compare whether other capable models solve the same product decision without the scaffold.
-13. A provider failure, live diagnostic failure, or strict-suite failure is not a semantic owner; contract or schema hardening still needs a product-approved semantic source.
-14. Do not turn provider-specific failure behavior into shared product contract without attribution, representability coverage, and holdout checks.
-15. Term lists, regexes, lexical hints, dictionary matches, and keyword maps may warn, reject, prioritize review, or run smoke checks; they must not prove semantic support unless a product-approved oracle gives that exact rule ownership.
-16. For semantic support claims, prefer evidence-span ownership: an LLM, human, tool, or approved oracle proposes the support state and cites source evidence; deterministic code validates shape, provenance, enum legality, span containment, and review routing.
-17. Deterministic code may validate that `support_state`, `evidence_region_id`, cited span, source ID, enum value, and review state are present and internally consistent.
-18. Deterministic code must not decide embodied meaning, user intent, domain category, semantic axis support, claim entailment, or groundedness from keyword hits alone.
-19. Assign final response ownership separately from structured decision ownership. A manager may own intent/tool/final-action decisions while a deterministic renderer owns the visible text; do not claim natural-language assistant behavior unless the response owner is an LLM/hybrid composer or an approved human/product copy surface.
-20. Deterministic renderers may own canonical facts, safety wording, and stable display text; they should expose their limits when the product goal is conversational intelligence, tone adaptation, or user-intent-sensitive explanation.
+1. Start from the product decision, not the easiest code hook.
+2. Deterministic code owns formulas, schemas, thresholds, legality, persistence invariants, routing constraints, and exact guard conditions.
+3. LLMs own ambiguous language understanding, synthesis, classification, explanation, and user-intent judgment when no deterministic oracle exists.
+4. Hybrid ownership is valid when deterministic code frames allowed options and the LLM chooses or explains within that frame.
+5. Deterministic code may validate, reject, downgrade, derive, or request one bounded repair round.
+6. Deterministic guards, verifiers, runners, and repair loops must not fabricate, infer, or overwrite semantic decisions unless a product-approved oracle exists.
+7. Provider failures, live failures, and strict-suite failures are diagnostic evidence, not semantic owners.
+8. Keyword lists, regexes, lexical hints, dictionaries, and fixture labels may warn, reject, prioritize review, or smoke test; they must not prove semantic support.
+9. For semantic support, prefer evidence-span ownership: LLM/human/tool/oracle proposes support state and cited evidence; deterministic code validates shape, provenance, containment, enum legality, and review routing.
+10. Assign final response ownership separately from structured decision ownership. Do not claim natural assistant behavior if visible text is owned by a deterministic template.
 
 ## Heuristics
 
 | If you see | Prefer |
 | --- | --- |
-| Post-pass override of `action_taken`, `follow_up_needed`, routing, or disposition | Stop; assign truth ownership first. |
-| Prompt patch for one benchmark case | Narrow; identify the failure family. |
 | LLM asked to enforce exact schema or threshold | Move that role to deterministic validation. |
-| Deterministic keyword router for semantic intent | Use it only as guard, prior, or reject rule unless product truth approves it. |
-| Raw-input oracle maps text directly to intent, route, or action | Stop; evaluate the agent/model decision or cite the product-approved oracle first. |
-| Term list proves a category, axis, claim, groundedness, or support state | Stop; downgrade to warning/review/smoke unless a product-approved oracle owns that exact lexical rule. |
-| LLM proposes semantic support with cited source span | Let deterministic code validate provenance, span containment, schema, and review routing; do not reinterpret meaning from keywords. |
-| Lexical hint disagrees with cited evidence | Route to review or unsupported/partial state; do not let the hint overwrite evidence-backed semantic ownership. |
-| Structured manager is live but the visible answer is templated | Split ownership: manager decision vs renderer response; validate the claim at the correct layer. |
-| User expects a natural assistant but code returns fixed copy | Assign final-response ownership before adding more eval gates. |
-| External content or tool output tells the agent to ignore prior priorities | Stop; handle untrusted content and ownership separately before patching prompts or guards. |
-| Verifier or guard becomes the semantic router | Stop; separate semantic decision ownership from validation boundaries. |
-| Repair loop with no attempt limit | Add bounded repair and stop condition. |
-| A model passes only with heavy guard/repair scaffold | Treat as a model-capability/scaffold tradeoff; do not freeze the scaffold until cross-model behavior and product truth are checked. |
-| Live failure suggests tightening the contract | Treat the failure as diagnostic evidence; require product semantic ownership before hardening. |
-| Provider-specific pass/fail drives shared schema | Narrow; separate shared invariants from provider/profile adaptation. |
+| Deterministic keyword router for semantic intent | Use only as guard, prior, warning, or review trigger unless product truth approves it. |
+| LLM proposes support with cited source span | Let deterministic code validate provenance and containment; do not reinterpret meaning from keywords. |
+| Visible answer is templated | Split manager decision ownership from final-response ownership. |
+| Verifier or guard becomes the semantic router | Stop; separate decision ownership from validation. |
+| Live failure suggests tightening the contract | Treat as diagnostic evidence until product semantic ownership is named. |
 
 ## Stop Signals
 

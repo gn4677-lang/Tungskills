@@ -47,43 +47,26 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 
 ## Decision Rules
 
-1. A capability may run live LLM diagnostic before it is user-facing.
-2. A capability must not become user-facing or mutation-bearing just because fake, fixture, unit, runner, or diagnostic tests passed.
-3. To move into `live-diagnostic`, require a contract-backed input/output boundary, trace surface, deterministic closure gate, and no direct user-visible or mutation authority.
-4. To move into `shadow`, require live-diagnostic evidence, comparable current-path output, and isolated candidate output.
-5. To move into `canary` or `user-facing`, require shadow evidence, rollback or no-commit fallback, guard behavior, monitoring, and claim boundaries.
-6. To move into `mutation-bearing`, require user-facing stability, explicit mutation boundary, audit trail, rollback or compensation path, and human/product approval where needed.
-7. Route timeout, rate limit, provider failover, or concurrency as the primary problem to `design-agent-fallbacks`.
-8. Use `narrow-evidence-claims` before claiming rollout readiness.
-9. Use `design-agentic-evals` when the primary task is designing the eval suite, grader, trace replay, or regression seed rather than deciding activation stage.
-10. Use `assign-decision-ownership` when activation would change whether LLM output, deterministic code, or a human owns runtime truth.
-11. Use `gate-delivery-readiness` when the question is whether a PR, queue candidate, CI result, or deployment pipeline may merge or release the capability.
-12. Passing a strict harness, diagnostic suite, or repeated stability runs is activation evidence only; it does not freeze guard/repair architecture, prove model portability, or skip shadow/canary checks across model tiers.
-13. Single-profile live evidence or full-suite diagnostic pass remains `live-diagnostic` evidence until model/profile diversity, holdout coverage, claim boundaries, and rollback/no-commit fallback are present.
-14. A pass that appears only after prompt, schema, guard, or contract hardening must not advance activation until overfit risk and legal-flow representability are reviewed.
-15. A future-wave PR being implemented, reviewed, or green is not activation permission; merging active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority requires an activation-stage decision.
-16. Guard, contract, schema, and no-runtime-effect slices may enter main as activation controls; hidden or shadow implementation must remain non-authoritative until the next ladder step has evidence.
-17. A red-team pass, no-findings report, pentest, or prompt-injection review is not rollout permission; it proves only the tested adversarial scope.
-18. Before canary, user-facing, or mutation-bearing promotion, name which adversarial surfaces were tested, which were not tested, and which safeguards still bound the residual risk.
-19. Before user-facing promotion of an AI capability, require capability realism evidence: real entrypoint, intended semantic owner, final response owner, representative raw prompts, trace path, state effect, and user-perceived output check.
-20. Do not promote a capability from shell/browser/persistence/fixture evidence when the product value depends on natural-language understanding, tool choice, or conversational response quality that was not exercised.
+1. Move one activation step at a time unless the skipped stage is explicitly irrelevant.
+2. Fake, fixture, unit, runner, diagnostic, or strict-suite passes do not permit user-facing or mutation-bearing activation.
+3. `live-diagnostic` needs contract-backed I/O, trace surface, deterministic closure gate, and no user-visible or mutation authority.
+4. `shadow` needs live-diagnostic evidence, comparable current-path output, and isolated candidate output.
+5. `canary` or `user-facing` needs shadow evidence, rollback/no-commit fallback, guard behavior, monitoring, and claim boundaries.
+6. `mutation-bearing` needs explicit mutation boundary, audit trail, rollback/compensation path, and human/product approval where needed.
+7. Single-profile live evidence remains diagnostic until diversity, holdouts, fallback, and claim boundaries are present.
+8. Red-team or no-findings evidence is not rollout permission; it covers only the tested adversarial scope.
+9. Future-wave implementation being green is not activation permission; active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority require activation review.
+10. AI user-facing promotion needs capability realism evidence: real entrypoint, intended semantic owner, final response owner, representative raw prompts, trace path, state effect, and user-perceived output check.
 
 ## Heuristics
 
 | If you see | Prefer |
 | --- | --- |
 | Fake provider green -> live user-facing | Stop; require live diagnostic and shadow first. |
-| Closure gate green -> live diagnostic with no product change | Proceed if traces and fallback exist. |
 | Shadow looks better once -> write canonical state | Stop; mutation-bearing needs rollout evidence. |
-| Strict harness passes repeatedly -> freeze scaffold | Narrow; compare shadow behavior across model tiers before treating guard/repair weight as product architecture. |
-| Single-profile live pass -> private use or canary | Stop; require portability evidence and explicit activation review. |
-| Full-suite pass after hardening -> readiness | Narrow; check overfit risk, representability, and holdout coverage first. |
-| Red-team pass or pentest report -> canary now | Narrow; adversarial evidence is one input, not activation permission by itself. |
-| All providers live in parallel | Narrow; isolate one provider/model first or route fallback concerns. |
-| Capability built -> activate for users | Stop; build completion is not activation permission. |
-| Browser dogfood baseline passes but the assistant feels templated | Keep activation below user-facing capability claim; require capability realism evidence. |
-| Live LLM invoked but final text is deterministic copy | Treat as structured-decision evidence only unless final response composition is also evaluated. |
-| Future-wave PR wants merge because implementation is complete | Narrow; merge only activation controls unless the capability is promoted. |
+| Single-profile live pass -> canary | Require portability evidence and activation review. |
+| Browser baseline passes but assistant feels templated | Require capability realism evidence before user-facing AI claims. |
+| Live LLM invoked but final text is deterministic copy | Treat as structured-decision evidence only. |
 | Hidden code touches route, scheduler, or mutation path | Stop; that is activation, not passive shadow code. |
 
 ## Stop Signals

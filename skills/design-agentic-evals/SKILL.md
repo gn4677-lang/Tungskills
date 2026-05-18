@@ -1,6 +1,6 @@
 ---
 name: design-agentic-evals
-description: "Use when designing or revising agentic evals, Eval Driven Development, trace replay, graders, rubrics, regression seeds, holdouts, tool/manager behavior tests, adversarial replay, harness leakage, fake pass, capability realism, browser-green-but-product-fake, template response risk, or tests passing while real AI behavior is missing. Trigger on eval overfitting, fixture-shaped eval, raw prompt to route, runner-inferred semantics, oracle leakage, keyword scaffold dependency, lexical oracle, evidence-span support eval, or 評測假通過."
+description: "Use when designing or revising agentic evals, EDD, Golden Sets, trace replay, graders, holdouts, mechanism-first checks, implementation-reference passes, fake pass prevention, capability realism, browser-green-but-product-fake, template response risk, harness leakage, eval overfitting, fixture-shaped evals, runner-inferred semantics, lexical oracle risk, evidence-span support, or tests passing while real AI behavior is missing."
 ---
 
 # Design Agentic Evals
@@ -22,15 +22,18 @@ Hard stop: do not use eval, fixture, runner, or live-failure evidence as the onl
 ## Read First
 
 - Read `references/semantic-ownership-and-harness-leakage.md` when evals, runners, fixtures, guards, or verifiers may infer semantic decisions from raw input, dataset wording, or test convenience.
+- Read `references/mechanism-first-edd.md` when Golden Sets grow without a named mechanism, manual product use contradicts green tests, or a long EDD loop keeps moving failures between cases.
 
 ## Workflow
 
 1. Name the product truth and the agent behavior under eval.
-2. Separate agent/model decision, deterministic validation, and state/output correctness.
-3. Choose trace fields before grader type.
-4. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
-5. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
-6. Add negative or holdout coverage before using eval results to change prompts, schemas, or contracts.
+2. For fake-pass or capability-realism failures, classify the failure family and inspect the real code/trace path before changing Golden Sets or adding cases.
+3. Separate agent/model decision, deterministic validation, and state/output correctness.
+4. Choose trace fields before grader type.
+5. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
+6. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
+7. When mechanism quality is unclear, separate normative basis from implementation references: official docs explain the rule; mature GitHub/code examples show mechanism shape; repo truth remains the product source.
+8. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
 
 ## Default Output
 
@@ -39,10 +42,17 @@ Keep the answer compact:
 ```text
 Product truth: ...
 Agent behavior under eval: ...
+Failure family: ...
+Mechanism under test: ...
+Golden Set capability mapping: ...
+Mechanism map status: present | needed | not_needed
 Decision under test: ...
 Trace surface: ...
 Grader type: deterministic | model | human | hybrid
 Capability realism check: ...
+Code references inspected: ...
+Normative basis: ...
+Implementation references inspected: ...
 Deterministic validation boundary: ...
 Capability or regression: ...
 Regression seed provenance: ...
@@ -54,76 +64,53 @@ Harness leakage risk: ...
 Contract change source: product rule | trace attribution | eval failure only | unknown
 Representability / legal-flow coverage: ...
 Negative / holdout coverage: ...
+Targeted E2E plan: ...
 Decision: proceed | narrow | stop
 ```
-
 ## Decision Rules
 
 1. Start from intended user-visible behavior and truth ownership.
-2. Name the agent behavior being evaluated: manager decision, tool call, handoff, guard, state transition, final response, or multi-agent coordination.
-3. Define the trace surface before choosing graders.
-4. Separate the agent/model decision under test, deterministic validation boundary, and state/output correctness before writing pass/fail logic.
-5. Do not let evals, harnesses, or runners infer semantic route, intent, action, mutation disposition, or workflow outcome from raw input keywords unless a product-approved oracle exists.
-6. Do not let regression seeds turn fixture wording, dataset labels, seed data, or runner convenience into product semantics.
-7. Separate capability evals from regression evals.
-8. Prefer deterministic graders where possible; use model or human graders for subjective behavior and calibrate them.
-9. Treat a green fixture with wrong product behavior as incomplete or misaligned eval evidence.
-10. Use `design-agent-fallbacks` instead when the primary problem is retry, failover, degraded mode, runtime failure class, or failure regression.
-11. Use `assign-decision-ownership` when an eval failure exposes a truth-owner conflict between LLM judgment, prompt behavior, deterministic code, validators, or guards.
-12. Use `gate-agent-activation` when the primary question is whether an evaluated capability may run live, user-facing, canary, shadow, or mutation-bearing.
-13. When converting trace replay into regression seeds, name seed provenance, replay selection criteria, rubric calibration, and the acceptance threshold.
-14. Do not let fixed strict cases, path-specific pass criteria, repair success, or repeated stability runs define product architecture; include outcome-based grading, negative/holdout cases, and model-tier comparison when eval or scaffold overfitting is a risk.
-15. Treat live, provider, or full-suite failures as evidence for attribution, semantic audit, representability review, and holdout design; do not let them directly justify prompt, schema, or contract hardening.
-16. Before tightening a contract from eval evidence, require a product-approved semantic source plus legal-flow or representability coverage and holdout cases that catch both over-triggering and over-blocking.
-17. Use `red-team-application-security` when the primary task is adversarial discovery, app/API attack-family selection, prompt/tool attack design, memory or RAG poisoning exploration, or authorized white-hat probing rather than replay and regression design.
-18. When an eval involves semantic support, groundedness, category support, or axis support, test evidence-span support rather than only keyword or term-list hits.
-19. A keyword scaffold dependency requires holdouts for paraphrase/synonym support, keyword false positives, no-keyword true support, multilingual or oral phrasing, cited-span containment, and unsupported/partial review routing.
-20. For user-facing AI capability claims, require a capability realism check: the actual user entrypoint must exercise the intended owner, trace the expected decision path, and verify the final user-visible output source instead of only proving shell, persistence, fixture, or read-model behavior.
-21. If a product claim says "agent", "manager-style", "natural assistant", or "intelligent response", the eval must distinguish structured decision quality from final-response composition quality; a deterministic renderer or template can pass safety checks but cannot by itself prove natural-language assistant capability.
-22. Browser-executed, live-invoked, or runtime-backed evidence still needs a user-perceived product assertion: representative raw prompts, actual output text, trace owner, and acceptance rubric or human sample for the claimed experience.
+2. Name the behavior under eval: manager decision, tool call, handoff, guard, state transition, final response, or multi-agent coordination.
+3. Define trace fields before choosing graders.
+4. Separate model decision, deterministic validation, and final state/output correctness.
+5. Do not let runners, fixtures, dataset labels, raw keywords, or seed data infer product semantics.
+6. Separate capability evals from regression evals.
+7. Prefer deterministic graders where possible; calibrate model or human graders when judgment is subjective.
+8. Treat a green fixture with wrong product behavior as incomplete eval evidence.
+9. Treat live or full-suite failures as attribution and holdout evidence, not direct contract-hardening authority.
+10. For user-facing AI capability claims, the real entrypoint must exercise the intended owner, trace the decision path, and verify final user-visible output.
+11. For semantic support, groundedness, or axis support, evaluate cited evidence spans, not only keyword or term-list hits.
+12. Before patching a high-impact Golden Set, run the mechanism-first gate and add a mechanism map only for capability families that need it.
 
 ## Heuristics
 
 | If you see | Prefer |
 | --- | --- |
-| Benchmark payload shaping a manager contract | Stop; resolve product truth first. |
-| Multi-agent split because the task feels complex | Right-size; require eval-backed reason for added orchestration. |
+| Benchmark payload shapes product contract | Stop; resolve product truth first. |
 | Final answer looks good | Check tool, handoff, guard, state, and manager traces. |
-| One SKU or one case fixed by a prompt | Check the broader failure family before patching. |
-| Live failure triggers schema or prompt hardening | Stop; require attribution, product semantic source, representability coverage, and holdout cases first. |
-| Full-suite pass after hardening | Narrow; check whether the pass is scaffold/provider-specific before upgrading claims. |
-| Browser or route gate passes but manual use feels fake | Check capability realism: entrypoint, owner trace, output source, and user-perceived behavior. |
-| Live manager trace exists but final message is templated | Split the claim into structured manager decision vs final-response composition. |
-| A prompt-injection or poisoning bug is already known | Design attack replay, poisoned-context replay, and adversarial holdouts before claiming it is closed. |
-| Provider timeout, rate limit, or failover issue | Route to `design-agent-fallbacks`. |
-| Subjective quality claim | Add rubric plus human calibration or sampling. |
-| Eval checks exact steps or tool order instead of useful outcomes | Prefer outcome grading, partial credit, and negative cases that catch overtriggering. |
-| Term list or fixture label is the eval oracle for semantic support | Stop; move proof to evidence span, product oracle, model/human grader, or reviewable state. |
-| Keyword present but source meaning is different | Add false-positive holdout and require cited evidence support. |
-| Support exists without expected keyword | Add paraphrase/no-keyword holdout so the eval does not reward lexical overfit. |
+| Live failure triggers schema/prompt hardening | Require attribution, product source, representability, and holdouts first. |
+| Browser or route gate passes but manual use feels fake | Check entrypoint, owner trace, output source, and user-perceived behavior. |
+| Golden Set grows but mechanism is unnamed | Run the mechanism-first gate before adding cases. |
+| Fixture label or term list is the semantic oracle | Move proof to cited evidence span, product oracle, calibrated judge, or reviewable state. |
 
 ## Stop Signals
 
 Do not proceed when:
 
-- fixtures, runner fields, or benchmark vocabulary define product architecture
+- fixtures, runner fields, raw keywords, or benchmark vocabulary define product architecture
 - no trace can show the agent behavior under eval
-- eval or harness logic maps raw input keywords directly to intent, route, action, mutation disposition, or workflow outcome
-- eval or harness logic treats keyword, regex, term-list, dictionary, or fixture-label hits as semantic support proof
-- a support eval lacks cited evidence spans, source-region checks, or unsupported/partial review cases
-- runner, verifier, seed data, or guard fabricates a missing semantic decision instead of checking trace or structured agent output
+- harness logic fabricates a missing semantic decision instead of checking trace or structured output
 - capability and regression evals are mixed into one pass/fail claim
 - a judge prompt is treated as truth without calibration
-- evals optimize a happy path while hiding tool, guard, or handoff failures
-- repeated eval passes make a guard, repair loop, or scaffold look necessary without testing holdout cases, model tiers, and harness confounders
-- a live or full-suite failure is used as the only source for prompt, schema, contract, or product semantic hardening
-- hardening lacks a legal-flow, representability, or holdout anti-overfit check
-- a pass claim is based on shell navigation, fixture manager output, deterministic renderer text, or read-model persistence while the claimed capability is user-perceived AI behavior
-- "manager-style" or "agentic" is claimed without evidence that the intended semantic owner, tool path, and final response owner all ran in the real entrypoint
+- a pass claim rests on shell navigation, fixtures, deterministic renderer text, or read-model persistence while claiming user-perceived AI behavior
+- "manager-style" or "agentic" is claimed without evidence that semantic owner, tool path, and final-response owner ran in the real entrypoint
+- Golden Sets or browser suites are patched before failure family, code references, mechanism under test, and targeted E2E plan are named
+- a long EDD loop moves failures between cases instead of shrinking one named failure family
+- "best practice" is cited for a mechanism change using only official docs while implementation shape remains unclear
 
 ## Verification
 
-Before claiming an agentic eval is useful, name the evidence: trace sample, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, or explicit product-truth rationale.
+Before claiming an agentic eval is useful, name the evidence: trace sample, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, targeted E2E result, or explicit product-truth rationale.
 
 ## Handoffs
 

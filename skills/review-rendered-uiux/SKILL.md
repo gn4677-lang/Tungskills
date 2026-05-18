@@ -1,6 +1,6 @@
 ---
 name: review-rendered-uiux
-description: "Use when reviewing, verifying, QAing, or improving rendered UI/UX with screenshots, browser checks, accessibility, responsive behavior, interaction states, visual polish, AI-slop patterns, layout overlap, or viewport/state evidence. Trigger on UI review, visual QA, screenshot review, accessibility, responsive check, or rendered design quality."
+description: "Use when reviewing, verifying, QAing, or improving rendered UI/UX with screenshots, browser checks, accessibility, responsive behavior, interaction states, visual polish, SaaS landing page contracts, product proof, CTA/navigation hierarchy, section inventory, AI-slop patterns, layout overlap, or viewport/state evidence. Trigger on UI review, visual QA, screenshot review, accessibility, responsive check, product proof review, landing page review, or rendered design quality."
 ---
 
 # Review Rendered UI/UX
@@ -33,15 +33,16 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 3. Review desktop and mobile viewports for layout stability, text fit, hierarchy, and task clarity.
 4. Exercise important states: default, hover, focus, active, disabled, loading, empty, error, success, and reduced motion where relevant.
 5. Run available automated checks without overstating them: axe, Lighthouse, Playwright screenshots, visual regression, keyboard smoke tests.
-6. Apply objective rubrics:
-   - `references/objective-quality-checklist.md`
-   - `references/ai-slop-rejection-checklist.md`
-   - `references/ai-slop-example-gallery.md`
-   - `references/visual-example-index.md`
-   - `references/code-smell-to-ui-failure-map.md`
-   - `references/interaction-truthfulness-check.md`
-   - `references/heuristic-review-rubric.md`
-7. If reviewing a live or local implementation, follow `references/rendered-ui-review-protocol.md`.
+6. Apply only the relevant rubric:
+   - baseline rendered review: `references/objective-quality-checklist.md`
+   - generic AI-looking UI: `references/ai-slop-rejection-checklist.md`
+   - SaaS/product landing pages: `references/saas-landing-rendered-contract-review.md`
+   - stateful/async/agent UI: `references/interaction-truthfulness-check.md`
+   - live/local implementation review: `references/rendered-ui-review-protocol.md`
+   - source-only warning signs: `references/code-smell-to-ui-failure-map.md`
+   - visual contrast examples: `references/ai-slop-example-gallery.md` or `references/visual-example-index.md`
+   - subjective scoring: `references/heuristic-review-rubric.md`
+7. Load at most one or two reference files unless the review is explicitly broad.
 8. Report issues by severity and tie each issue to a user impact.
 
 ## Default Output
@@ -50,6 +51,7 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 Rendered artifact: screenshot | browser | local app | prototype | missing
 Objective checks passed: ...
 AI slop signals: ...
+Contract failures: ...
 Must-fix failures: ...
 Should-fix risks: ...
 Human judgment needed: ...
@@ -62,7 +64,7 @@ Decision: ready | narrow | stop
 Use these categories unless the user requests a different format:
 
 - `must fix`: broken task completion, unreadable content, misleading state, accessibility blocker, layout overlap, clipped controls, fake product proof, or motion that prevents use.
-- `should fix`: weak hierarchy, avoidable cognitive load, generic AI styling, domain mismatch, unclear copy, inconsistent spacing, incomplete states, or questionable interaction timing.
+- `should fix`: weak hierarchy, avoidable cognitive load, generic AI styling, repeated template sections, weak product proof, domain mismatch, unclear copy, inconsistent spacing, incomplete states, or questionable interaction timing.
 - `human judgment needed`: brand tone, taste, novelty, emotional feel, market positioning, and whether the design is distinctive enough.
 
 ## Objective Rejection Rules
@@ -77,6 +79,7 @@ Reject the design as not ready when any of these are true:
 - The interface looks like a generic AI template with no intentional brand or product fit.
 - Major interactive elements cannot be reached or understood by keyboard and visible focus.
 - Screenshots, charts, demos, or operational data look fake, low-fidelity, or unrelated to the core task.
+- A SaaS/product landing page cannot identify product proof, section purpose, CTA hierarchy, interaction completeness, and motion purpose from rendered evidence.
 
 ## Stop Signals
 

@@ -1,6 +1,6 @@
 ---
 name: sequence-capability-work
-description: "Use when direction is accepted and the task is deciding build order, capability dependencies, bounded context, PRD/issue slicing, parent dependencies, pre-PR readiness, trunk-safe slices, right-sized slices, over-split PR trains, wrapper/evidence wiring, contract-first work, or parallel capability sequencing. Trigger on 先做哪個, 開 PR 前檢查, issue slicing, PRD slicing, capability order, domain glossary, build next, or 過細切片."
+description: "Use when accepted direction needs build order, capability dependencies, bounded context, PRD/issue slicing, parent dependencies, pre-PR readiness, trunk-safe slices, over-split PR trains, wrapper/evidence wiring, contract-first work, harness bootstrap, product truth, invariants, golden flows, fake pass prevention, parallel sequencing, 先做哪個, 開 PR 前檢查, or 過細切片."
 ---
 
 # Sequence Capability Work
@@ -70,21 +70,17 @@ Read `references/domain-language-and-product-slicing.md` when capability order d
 
 Read `references/slice-kind-taxonomy.md` when deciding whether a PR/slice is product capability, vertical proof, contract guard, ops/test stability, or wrapper/evidence wiring.
 
+Read `references/ai-development-blueprint-harness.md` when starting or auditing a new repo, product, major capability, or AI-assisted implementation harness that needs product truth, workflow map, target architecture, invariants, golden flows, evidence matrix, completion standard, or fake-pass prevention before build order is trusted.
+
 ## Build-Order Heuristics
 
 | If you see | Prefer |
 | --- | --- |
-| User flow spans payments, inventory, checkout, fulfillment | Capability dependency map before classes. |
-| Proposed shared utility, platform, framework, or service | Wait for two real consumers or one strong boundary need. |
+| Proposed shared utility/platform/service | Wait for two real consumers or one strong boundary need. |
 | UI or infrastructure before domain behavior | Testable domain behavior first when possible. |
-| Cross-context data access | Explicit integration contract, event, API, or adapter. |
-| Circular domain dependency | Split responsibility, invert dependency, or introduce a stable contract. |
 | Future capability appears before MVP dependency is stable | Merge only guard/contract/no-runtime-effect slices; keep implementation draft or shadow. |
-| Multiple agents build adjacent capabilities | Define track ownership and trunk-safe slice boundaries before implementation order. |
-| Quality cleanup competes with feature work | Baseline/gate first; then target hot-path or responsibility-bound refactors. |
-| Builder wants to open PR but track, parent, report, or boundary evidence is unclear | Define slice readiness before implementation or queue work. |
-| Several accepted slices only connect reports, artifacts, closeout steps, or candidate bundles for the same blocker | Consolidate into one vertical evidence-wiring slice or one explicit short PR train. |
-| A slice has no independent rollback value and no direct capability or decision value | Merge it into the adjacent capability slice or hold it. |
+| Multiple agents build adjacent capabilities | Define track ownership and trunk-safe boundaries before implementation order. |
+| Several slices only connect reports/artifacts for the same blocker | Consolidate into one evidence-wiring slice or explicit short train. |
 | Pointer, CLI root path, smoke inclusion, report lineage, or candidate-bundle field only | Treat as `ops_test_stability` or `wrapper_evidence_wiring`, not product capability. |
 
 ## Stop Signals

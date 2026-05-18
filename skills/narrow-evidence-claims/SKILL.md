@@ -36,82 +36,44 @@ Decision: proceed | narrow | stop
 
 ## Decision Rules
 
-1. A unit test pass only proves that unit test pass.
-2. A runner green only proves the runner's completed scope.
-3. A partial, timed-out, interrupted, mocked, skipped, or incomplete run cannot support a full pass claim.
-4. Final answer quality does not prove tool calls, handoffs, guard decisions, state transitions, or traces were correct.
-5. Do not claim readiness if required parity, coverage, trace, human/founder review, or production checks are missing.
-6. If evidence is missing, narrow the claim instead of making a broad success statement.
-7. If evidence contradicts product truth, product truth wins and the eval/report is incomplete or misaligned evidence.
-8. If you did not personally run or inspect the evidence in the current task context, say so.
-9. Truncated shell, terminal, or `rg` output supports only partial inspection unless a complete artifact, count summary, or bounded scan metadata proves the scan scope.
-10. For large repository searches, prefer bounded JSON artifacts with `truncated=true/false`; do not treat terminal display as complete evidence.
-11. A passing PR check on a stale branch proves only that checked ref passed; it does not prove the PR is merge-ready against the current target branch.
-12. A draft or open PR proves work exists for review; it does not prove the capability is still in scope, current with main, or safe to merge.
-13. Lint, type, formatting, or unit-test passes do not by themselves prove code is clean, maintainable, readable, or efficient; route code-health claims through `review-code-excellence`.
-14. A pre-PR gate pass supports only "ready to open PR"; it does not prove queue-ready, merge-ready, deploy-ready, or product-ready.
-15. A PR readiness pass supports only queue eligibility; it does not prove the merge queue candidate will pass.
-16. A merge queue pass supports the tested target-branch candidate; it does not prove deployment or production readiness unless deploy gates also passed.
-17. Use `gate-delivery-readiness` when the primary work is diagnosing CI/CD, required checks, merge queue eligibility, branch protection, base drift, deployment gates, or release readiness; this skill narrows the claim after that evidence is named.
-18. A red-team pass, pentest, or security review supports only the tested attack surface and evidence boundary; it does not prove general safety against XSS, SQLi, SSRF, auth bypass, IDOR/BOLA, exfiltration, prompt injection, or other untested families.
-19. A mainline/detour checklist, CI pass, merged PR, or queue position does not prove that the next slice is directionally justified. Route direction claims through `run-slice-direction-challenge-subagent` or name the explicit user/controller acceptance evidence.
-20. A keyword, regex, dictionary, term-list, or lexical smoke pass proves only that lexical scaffold behavior ran; it does not prove semantic support, groundedness, category truth, user intent, or product truth.
-21. A semantic support claim requires its evidence boundary: cited span or source region, support state, provenance, product-approved oracle, model/human grader, or explicit review-needed status.
-22. Browser execution, route navigation, persistence checks, fixture-manager passes, and `live_llm_invoked=true` do not by themselves prove user-perceived AI capability, natural conversation, intent discrimination, or manager-style product behavior.
-23. A deterministic renderer, template response, or canned copy can support output-safety and factual-display claims, but not a claim that the final answer is LLM-composed or conversationally intelligent unless that response owner was actually exercised and evaluated.
+1. A test, runner, CI job, scan, browser check, or queue pass proves only its named scope.
+2. Partial, timed-out, interrupted, mocked, skipped, stale, or truncated evidence supports only a partial claim.
+3. If you did not personally run or inspect the evidence in this task context, say so.
+4. If evidence contradicts product truth or manual product use, the report is incomplete or misaligned.
+5. Final answer quality does not prove tool calls, guard decisions, state transitions, or traces.
+6. Green infrastructure does not prove product capability, architecture quality, or direction correctness.
+7. Delivery states are separate: pre-PR, PR-ready, queue-ready, merge-ready, deploy-ready, production-ready.
+8. A security or red-team pass covers only the tested attack surface and attack families.
+9. Lint, type, formatting, and unit tests do not prove maintainability or efficiency without code-health evidence.
+10. Lexical checks, term lists, regexes, and fixture labels do not prove semantic support or product truth.
+11. Browser execution, route navigation, persistence, fixture manager output, or `live_llm_invoked=true` do not prove user-perceived AI capability unless the intended entrypoint, owner trace, and final response owner ran.
+12. Direction claims require source-of-truth and acceptance evidence, not CI green, queue position, or a filled checklist.
 
 ## Heuristics
 
 | If you see | Allowed claim | Forbidden claim |
 | --- | --- | --- |
-| Pytest or unit tests passed | The named tests passed. | Feature complete. |
-| Runner green but trace missing | Runner completed its visible checks. | Full eval pass. |
-| Agent-written or AI-generated tests passed | Those tests passed under their own oracle. | The test oracle is correct, coverage is enough, or product truth is verified. |
-| Bundle P0 passed but founder review not run | P0 runner passed; founder status not run. | Ready for E2E or bundle complete. |
-| One benchmark case fixed | That case is fixed. | Failure family closed. |
-| All visible checks passed | Visible checks passed. | No issues or production ready. |
-| Timeout, skipped tests, mocks, or partial report | Evidence is incomplete. | All passed. |
-| Repeated strict harness runs passed | That harness passed under those model/scaffold/environment settings. | Generally stable, model-portable, production ready, or architecture optimal. |
-| Full suite passed after prompt/schema/contract hardening | That suite passed under the new scaffold and evidence scope. | Product semantics are correct, model-portable, or readiness is unlocked. |
-| Single-profile live evidence passed | That profile produced diagnostic evidence. | Provider portability, production readiness, or private-use readiness. |
-| Browser green with fixture or template output | The UI route and checked state passed. | The AI product experience or natural assistant behavior is proven. |
-| Live manager invoked but deterministic renderer wrote final text | The structured manager path ran. | Final answer quality, tone, or natural-language intelligence is proven. |
-| Red-team run found no issue | The tested attack set produced no confirmed issue. | Safe against prompt injection, exfiltration, or agent attacks in general. |
-| Large `rg` or shell output was truncated | The visible subset was inspected. | Full scan completed, no references exist, or the whole folder was checked. |
-| Bounded scan artifact says `truncated=true` | Results are partial up to the stated limit. | Complete absence, complete coverage, or no remaining matches. |
-| Branch CI passed before main advanced | That branch ref passed those checks. | Current-base merge-ready. |
-| Draft PR exists for future work | The future work has a review artifact. | Mainline scope approved or merge-safe. |
-| Mainline checklist filled inline | The checklist fields were completed. | Direction was independently challenged or the slice is justified. |
-| Lint and tests passed after refactor | The named checks passed. | The refactor is behavior-preserving, readable, or efficient without review evidence. |
-| Pre-PR gate passed | Ready to open a PR for review. | Queue-ready, merge-ready, deploy-ready, or product-ready. |
-| PR readiness gate passed | Eligible to enter the integration queue. | Merge result is safe. |
-| Merge queue or `merge_group` passed | The tested target-branch candidate passed that queue scope. | Production-ready or deploy-safe without deploy evidence. |
-| Keyword or term-list support check passed | The lexical scaffold check passed. | Semantic support, groundedness, or product truth is proven. |
-| Cited evidence span is present and validated | The cited span exists in the named source boundary. | The semantic interpretation is correct unless a model/human/product oracle judged support. |
+| Named tests passed | Those tests passed. | Feature complete. |
+| Full suite passed after hardening | The suite passed under that scaffold. | Product semantics are correct. |
+| Browser green with fixture/template output | The route and checked state passed. | The AI experience is proven. |
+| Red-team found no issue | Tested attacks found no confirmed issue. | Generally secure. |
+| `rg`/shell output truncated | Visible subset inspected. | Full scan/no references. |
+| Stale branch CI passed | That branch ref passed. | Current-base merge-ready. |
+| Pre-PR/PR/queue gate passed | That gate's scope passed. | Later delivery gates passed. |
+| Lexical support check passed | Lexical scaffold ran. | Semantic support is proven. |
 
 ## Stop Signals
 
 Stop or narrow when:
 
-- mixed status is being compressed into `all good`
-- missing artifacts are hidden in a success summary
+- mixed status is compressed into `all good`
+- missing, skipped, stale, partial, mocked, or truncated evidence is hidden
 - green infrastructure is treated as product correctness
-- a local test result is used as architecture, readiness, or production evidence
-- agent-generated tests are treated as independent evidence without reviewing their oracle, coverage, and product-truth alignment
-- tests assert implementation details or harness behavior while the claim talks about user-visible product truth
-- a full-suite pass after hardening is used to claim product semantic correctness without holdout or representability evidence
-- single-profile live evidence is used to claim model portability or readiness
-- terminal, shell, or search output is truncated but summarized as complete
-- a broad no-result claim is made without full scan metadata or a complete artifact
-- a report says pass but also says partial, interrupted, skipped, mocked, or not run
-- PR status is summarized as merge-ready without current-base evidence or merge simulation
-- clean, maintainable, optimized, or efficient is claimed from green checks without code-health or performance evidence
-- direction, alignment, or "best next slice" is claimed from an inline checklist without source-of-truth and direction acceptance evidence
-- pre-PR, queue-ready, merge-ready, and deploy-ready are collapsed into one "ready" claim
-- keyword, regex, dictionary, or term-list checks are summarized as semantic proof
-- lexical smoke or negative guard output is used to claim groundedness, category support, or product truth
-- shell, browser, fixture, live-invocation, or persistence evidence is summarized as "the agent works" without naming the actual user-visible AI behavior that was exercised
-- final response quality is claimed from marker checks or template copy without a response-owner trace, representative prompts, and a human/model rubric when the claim is subjective
+- agent-generated tests are treated as independent truth without oracle review
+- delivery gate levels are collapsed into one "ready"
+- code health, performance, security, or direction is claimed from unrelated checks
+- lexical, fixture, shell, browser, persistence, or live-invocation evidence is summarized as semantic or user-perceived AI proof
+- final response quality is claimed from templates or marker checks without response-owner trace and rubric evidence
 
 ## Verification
 
