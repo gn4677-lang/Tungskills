@@ -1,6 +1,6 @@
 ---
 name: design-agentic-evals
-description: "Use when designing or revising agentic evals, EDD, Golden Sets, trace replay, graders, holdouts, mechanism-first checks, implementation-reference passes, fake pass prevention, capability realism, browser-green-but-product-fake, template response risk, harness leakage, eval overfitting, fixture-shaped evals, runner-inferred semantics, lexical oracle risk, evidence-span support, or tests passing while real AI behavior is missing."
+description: "Use when designing or revising agentic evals, EDD, Golden Sets, trace replay, graders, holdouts, pre-live gates, live-failure regression, trace-distilled gates, mechanism-first checks, implementation-reference passes, fake pass prevention, capability realism, browser-green-but-product-fake, template response risk, harness leakage, eval overfitting, fixture-shaped evals, runner-inferred semantics, lexical oracle risk, evidence-span support, or tests passing while real AI behavior is missing."
 ---
 
 # Design Agentic Evals
@@ -34,7 +34,8 @@ Hard stop: do not use eval, fixture, runner, or live-failure evidence as the onl
 6. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
 7. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
 8. When mechanism quality is unclear, separate normative basis from implementation references: official docs explain the rule; mature GitHub/code examples show mechanism shape; repo truth remains the product source.
-9. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
+9. Distill traceable live failures into pre-live gates only when they have a named failure family, cheap replay surface, invariant or mechanism gap, and owner.
+10. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
 
 ## Default Output
 
@@ -59,6 +60,8 @@ Implementation references inspected: ...
 Deterministic validation boundary: ...
 Capability or regression: ...
 Regression seed provenance: ...
+Live failure promotion: diagnostic_note | pre_live_gate | not_applicable
+Pre-live gate criteria: traceable | failure_family | cheap_replay | invariant_or_mechanism_gap | owner
 Rubric calibration / acceptance threshold: ...
 Fixture-shape risk: ...
 Keyword scaffold risk: ...
@@ -84,7 +87,8 @@ Decision: proceed | narrow | stop
 10. Treat live or full-suite failures as attribution and holdout evidence, not direct contract-hardening authority.
 11. For user-facing AI capability claims, the real entrypoint must exercise the intended owner, trace the decision path, and verify final user-visible output.
 12. For semantic support, groundedness, or axis support, evaluate cited evidence spans, not only keyword or term-list hits.
-13. Before patching a high-impact Golden Set, run the mechanism-first gate and add a mechanism map only for capability families that need it.
+13. Promote a live failure into a pre-live gate only when it is traceable, classified, cheap to replay, tied to an invariant or mechanism gap, and assigned to an owner.
+14. Before patching a high-impact Golden Set, run the mechanism-first gate and add a mechanism map only for capability families that need it.
 
 ## Heuristics
 
@@ -93,6 +97,7 @@ Decision: proceed | narrow | stop
 | Benchmark payload shapes product contract | Stop; resolve product truth first. |
 | Final answer looks good | Check tool, handoff, guard, state, and manager traces. |
 | Live failure triggers schema/prompt hardening | Require attribution, product source, representability, and holdouts first. |
+| Live failure repeats or is expensive to rerun | Distill it into a cheap pre-live gate if the promotion criteria are met. |
 | Browser or route gate passes but manual use feels fake | Check entrypoint, owner trace, output source, and user-perceived behavior. |
 | Golden Set grows but mechanism is unnamed | Run the mechanism-first gate before adding cases. |
 | Fixture label or term list is the semantic oracle | Move proof to cited evidence span, product oracle, calibrated judge, or reviewable state. |
@@ -110,12 +115,13 @@ Do not proceed when:
 - a pass claim rests on shell navigation, fixtures, deterministic renderer text, or read-model persistence while claiming user-perceived AI behavior
 - "manager-style" or "agentic" is claimed without evidence that semantic owner, tool path, and final-response owner ran in the real entrypoint
 - Golden Sets or browser suites are patched before failure family, code references, mechanism under test, and targeted E2E plan are named
+- every live observation is promoted into a permanent gate without trace evidence, failure-family classification, cheap replay, invariant/mechanism gap, and owner
 - a long EDD loop moves failures between cases instead of shrinking one named failure family
 - "best practice" is cited for a mechanism change using only official docs while implementation shape remains unclear
 
 ## Verification
 
-Before claiming an agentic eval is useful, name the evidence: trace sample, invariant observation, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, targeted E2E result, or explicit product-truth rationale.
+Before claiming an agentic eval is useful, name the evidence: trace sample, invariant observation, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, pre-live gate result, targeted E2E result, or explicit product-truth rationale.
 
 ## Handoffs
 

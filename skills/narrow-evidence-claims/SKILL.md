@@ -1,6 +1,6 @@
 ---
 name: narrow-evidence-claims
-description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, fake pass, fixture pass, browser green, live invoked, template response, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
+description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, fake pass, fixture pass, browser green, live invoked, template response, pre-live gate, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
 ---
 
 # Narrow Evidence Claims
@@ -30,6 +30,7 @@ Tested attack surface: ...
 Evidence present: ...
 Evidence missing: ...
 Invariant evidence: present | missing | not_applicable
+Pre-live gate evidence: present | missing | not_applicable
 Allowed claim: ...
 Forbidden claim: ...
 Decision: proceed | narrow | stop
@@ -49,7 +50,8 @@ Decision: proceed | narrow | stop
 10. Lint, type, formatting, and unit tests do not prove maintainability or efficiency without code-health evidence.
 11. Lexical checks, term lists, regexes, and fixture labels do not prove semantic support or product truth.
 12. Browser execution, route navigation, persistence, fixture manager output, or `live_llm_invoked=true` do not prove user-perceived AI capability unless the intended entrypoint, owner trace, and final response owner ran.
-13. Direction claims require source-of-truth and acceptance evidence, not CI green, queue position, or a filled checklist.
+13. A pre-live gate pass proves known trace-distilled failure families were checked before live spend; it does not prove live E2E, provider stability, or readiness.
+14. Direction claims require source-of-truth and acceptance evidence, not CI green, queue position, or a filled checklist.
 
 ## Heuristics
 
@@ -62,6 +64,7 @@ Decision: proceed | narrow | stop
 | `rg`/shell output truncated | Visible subset inspected. | Full scan/no references. |
 | Stale branch CI passed | That branch ref passed. | Current-base merge-ready. |
 | Pre-PR/PR/queue gate passed | That gate's scope passed. | Later delivery gates passed. |
+| Pre-live gate passed | Known pre-live checks passed. | Live E2E passed or readiness is proven. |
 | Lexical support check passed | Lexical scaffold ran. | Semantic support is proven. |
 
 ## Stop Signals
@@ -72,6 +75,7 @@ Stop or narrow when:
 - missing, skipped, stale, partial, mocked, or truncated evidence is hidden
 - green infrastructure is treated as product correctness
 - a capability or readiness claim ignores the invariant it was supposed to preserve
+- pre-live gate green is summarized as live E2E green, canary-ready, or product-ready
 - agent-generated tests are treated as independent truth without oracle review
 - delivery gate levels are collapsed into one "ready"
 - code health, performance, security, or direction is claimed from unrelated checks
@@ -80,7 +84,7 @@ Stop or narrow when:
 
 ## Verification
 
-Before finalizing, name the evidence and its boundary: command output, report path, trace artifact, coverage result, parity audit, human or founder status, CI job, tested attack surface, or explicit not-run status.
+Before finalizing, name the evidence and its boundary: command output, report path, trace artifact, pre-live gate result, coverage result, parity audit, human or founder status, CI job, tested attack surface, or explicit not-run status.
 
 ## Handoffs
 

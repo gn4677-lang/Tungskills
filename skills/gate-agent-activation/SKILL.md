@@ -1,6 +1,6 @@
 ---
 name: gate-agent-activation
-description: "Use when deciding whether an agent capability may move from fake/local/offline to live provider, diagnostic, shadow, canary, user-facing, mutation-bearing, or production-like operation. Trigger on live test, canary, shadow, rollout, user-facing enablement, 開給使用者, 寫入真實資料, mutation authority, red-team pass, fake pass, capability realism, or activation readiness."
+description: "Use when deciding whether an agent capability may move from fake/local/offline to live provider, diagnostic, shadow, canary, user-facing, mutation-bearing, or production-like operation. Trigger on live test, pre-live gate, live-failure regression, canary, shadow, rollout, user-facing enablement, 開給使用者, 寫入真實資料, mutation authority, red-team pass, fake pass, capability realism, or activation readiness."
 ---
 
 # Gate Agent Activation
@@ -32,6 +32,7 @@ User-facing changed: true | false
 Runtime truth changed: true | false
 Mutation changed: true | false
 Activation invariant: ...
+Known live-failure gates: passed | missing | not_applicable
 Required evidence: ...
 Tested adversarial surfaces: ...
 Residual risk / untested surfaces: ...
@@ -55,10 +56,11 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 5. `shadow` needs live-diagnostic evidence, comparable current-path output, and isolated candidate output.
 6. `canary` or `user-facing` needs shadow evidence, rollback/no-commit fallback, guard behavior, monitoring, and claim boundaries.
 7. `mutation-bearing` needs explicit mutation boundary, audit trail, rollback/compensation path, and human/product approval where needed.
-8. Single-profile live evidence remains diagnostic until diversity, holdouts, fallback, and claim boundaries are present.
-9. Red-team or no-findings evidence is not rollout permission; it covers only the tested adversarial scope.
-10. Future-wave implementation being green is not activation permission; active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority require activation review.
-11. AI user-facing promotion needs capability realism evidence: real entrypoint, intended semantic owner, final response owner, representative raw prompts, trace path, state effect, and user-perceived output check.
+8. Before spending another live/canary run, pass pre-live gates for known traceable live-failure families when such gates exist.
+9. Single-profile live evidence remains diagnostic until diversity, holdouts, fallback, and claim boundaries are present.
+10. Red-team or no-findings evidence is not rollout permission; it covers only the tested adversarial scope.
+11. Future-wave implementation being green is not activation permission; active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority require activation review.
+12. AI user-facing promotion needs capability realism evidence: real entrypoint, intended semantic owner, final response owner, representative raw prompts, trace path, state effect, and user-perceived output check.
 
 ## Heuristics
 
@@ -67,17 +69,18 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 | Fake provider green -> live user-facing | Stop; require live diagnostic and shadow first. |
 | Shadow looks better once -> write canonical state | Stop; mutation-bearing needs rollout evidence. |
 | Single-profile live pass -> canary | Require portability evidence and activation review. |
+| Previous live failure has a cheap pre-live gate | Run that gate before another live/canary attempt. |
 | Browser baseline passes but assistant feels templated | Require capability realism evidence before user-facing AI claims. |
 | Live LLM invoked but final text is deterministic copy | Treat as structured-decision evidence only. |
 | Hidden code touches route, scheduler, or mutation path | Stop; that is activation, not passive shadow code. |
 
 ## Stop Signals
 
-Stop or narrow when live LLM output would own product truth, user-visible behavior, or mutation before the stage has required evidence, or when the activation invariant is not named.
+Stop or narrow when live LLM output would own product truth, user-visible behavior, or mutation before the stage has required evidence, when the activation invariant is not named, or when known live-failure gates are missing before the next live/canary run.
 
 ## Verification
 
-Before advancing, name the evidence: activation invariant, contract, deterministic gate, live trace, shadow comparison, canary metric, guard result, rollback/no-commit fallback, audit trail, or approval.
+Before advancing, name the evidence: activation invariant, known live-failure gate result, contract, deterministic gate, live trace, shadow comparison, canary metric, guard result, rollback/no-commit fallback, audit trail, or approval.
 
 ## Handoffs
 
