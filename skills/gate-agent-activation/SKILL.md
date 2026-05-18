@@ -1,6 +1,6 @@
 ---
 name: gate-agent-activation
-description: "Use when deciding whether an agent capability may move from fake/local/offline to live provider, diagnostic, shadow, canary, user-facing, mutation-bearing, or production-like operation. Trigger on live test, pre-live gate, live-failure regression, canary, shadow, rollout, user-facing enablement, 開給使用者, 寫入真實資料, mutation authority, red-team pass, fake pass, capability realism, or activation readiness."
+description: "Use when deciding whether an agent capability may move from fake/local/offline to live provider, diagnostic, shadow, canary, user-facing, mutation-bearing, or production-like operation. Trigger on live test, pre-live gate, live-failure regression, browser evaluator evidence, canary, shadow, rollout, user-facing enablement, 開給使用者, 寫入真實資料, mutation authority, red-team pass, fake pass, capability realism, or activation readiness."
 ---
 
 # Gate Agent Activation
@@ -37,6 +37,7 @@ Required evidence: ...
 Tested adversarial surfaces: ...
 Residual risk / untested surfaces: ...
 Capability realism evidence: ...
+Independent evaluator evidence: required | present | missing | not_applicable
 Safe fallback: ...
 Decision: proceed | narrow | stop
 ```
@@ -61,6 +62,7 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 10. Red-team or no-findings evidence is not rollout permission; it covers only the tested adversarial scope.
 11. Future-wave implementation being green is not activation permission; active imports, routes, schedulers, DB migrations, user-visible behavior, or mutation authority require activation review.
 12. AI user-facing promotion needs capability realism evidence: real entrypoint, intended semantic owner, final response owner, representative raw prompts, trace path, state effect, and user-perceived output check.
+13. For high-risk user-facing browser or agentic workflows, builder self-check is not enough; require independent evaluator evidence or explicitly mark it not run and keep the activation claim narrow.
 
 ## Heuristics
 
@@ -71,16 +73,17 @@ Move one step at a time unless the skipped stage is explicitly irrelevant:
 | Single-profile live pass -> canary | Require portability evidence and activation review. |
 | Previous live failure has a cheap pre-live gate | Run that gate before another live/canary attempt. |
 | Browser baseline passes but assistant feels templated | Require capability realism evidence before user-facing AI claims. |
+| Builder self-check passes a browser workflow | Require independent evaluator evidence for user-facing activation, or keep it diagnostic. |
 | Live LLM invoked but final text is deterministic copy | Treat as structured-decision evidence only. |
 | Hidden code touches route, scheduler, or mutation path | Stop; that is activation, not passive shadow code. |
 
 ## Stop Signals
 
-Stop or narrow when live LLM output would own product truth, user-visible behavior, or mutation before the stage has required evidence, when the activation invariant is not named, or when known live-failure gates are missing before the next live/canary run.
+Stop or narrow when live LLM output would own product truth, user-visible behavior, or mutation before the stage has required evidence, when the activation invariant is not named, when required independent evaluator evidence is missing for a high-risk user-facing/browser flow, or when known live-failure gates are missing before the next live/canary run.
 
 ## Verification
 
-Before advancing, name the evidence: activation invariant, known live-failure gate result, contract, deterministic gate, live trace, shadow comparison, canary metric, guard result, rollback/no-commit fallback, audit trail, or approval.
+Before advancing, name the evidence: activation invariant, known live-failure gate result, contract, deterministic gate, independent evaluator result when required, real-entrypoint browser evidence, live trace, shadow comparison, canary metric, guard result, rollback/no-commit fallback, audit trail, or approval.
 
 ## Handoffs
 

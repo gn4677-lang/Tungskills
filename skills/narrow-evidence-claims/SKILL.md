@@ -1,6 +1,6 @@
 ---
 name: narrow-evidence-claims
-description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, fake pass, fixture pass, browser green, live invoked, template response, pre-live gate, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
+description: "Use before claiming or summarizing done, fixed, ready, safe, clean, maintainable, efficient, optimized, justified, aligned, all passed, green, no issues, merge-ready, deploy-ready, production-ready, security reviewed, red-teamed, prompt-injection safe, semantic support, grounded, fake pass, fixture pass, browser green, independent evaluator pass, live invoked, template response, pre-live gate, full-suite pass, partial scan, skipped tests, stale base, or incomplete evidence."
 ---
 
 # Narrow Evidence Claims
@@ -31,6 +31,7 @@ Evidence present: ...
 Evidence missing: ...
 Invariant evidence: present | missing | not_applicable
 Pre-live gate evidence: present | missing | not_applicable
+Independent evaluator evidence: present | missing | not_applicable
 Allowed claim: ...
 Forbidden claim: ...
 Decision: proceed | narrow | stop
@@ -52,6 +53,7 @@ Decision: proceed | narrow | stop
 12. Browser execution, route navigation, persistence, fixture manager output, or `live_llm_invoked=true` do not prove user-perceived AI capability unless the intended entrypoint, owner trace, and final response owner ran.
 13. A pre-live gate pass proves known trace-distilled failure families were checked before live spend; it does not prove live E2E, provider stability, or readiness.
 14. Direction claims require source-of-truth and acceptance evidence, not CI green, queue position, or a filled checklist.
+15. An independent browser evaluator pass proves only the tested task, entrypoint, viewport/state, and evidence surface; it does not prove whole-product readiness or all agent behavior.
 
 ## Heuristics
 
@@ -60,6 +62,7 @@ Decision: proceed | narrow | stop
 | Named tests passed | Those tests passed. | Feature complete. |
 | Full suite passed after hardening | The suite passed under that scaffold. | Product semantics are correct. |
 | Browser green with fixture/template output | The route and checked state passed. | The AI experience is proven. |
+| Independent evaluator used Playwright on one flow | That flow was evaluated under the named rubric. | All browser/agent flows are ready. |
 | Red-team found no issue | Tested attacks found no confirmed issue. | Generally secure. |
 | `rg`/shell output truncated | Visible subset inspected. | Full scan/no references. |
 | Stale branch CI passed | That branch ref passed. | Current-base merge-ready. |
@@ -76,6 +79,7 @@ Stop or narrow when:
 - green infrastructure is treated as product correctness
 - a capability or readiness claim ignores the invariant it was supposed to preserve
 - pre-live gate green is summarized as live E2E green, canary-ready, or product-ready
+- independent evaluator evidence is generalized beyond the tested task, viewport, state, entrypoint, or rubric
 - agent-generated tests are treated as independent truth without oracle review
 - delivery gate levels are collapsed into one "ready"
 - code health, performance, security, or direction is claimed from unrelated checks

@@ -1,6 +1,6 @@
 ---
 name: design-agentic-evals
-description: "Use when designing or revising agentic evals, EDD, Golden Sets, trace replay, graders, holdouts, pre-live gates, live-failure regression, trace-distilled gates, mechanism-first checks, implementation-reference passes, fake pass prevention, capability realism, browser-green-but-product-fake, template response risk, harness leakage, eval overfitting, fixture-shaped evals, runner-inferred semantics, lexical oracle risk, evidence-span support, or tests passing while real AI behavior is missing."
+description: "Use when designing or revising agentic evals, EDD, Golden Sets, trace replay, graders, holdouts, browser evaluator subagents, independent evaluator gates, pre-live gates, live-failure regression, mechanism-first checks, fake pass prevention, capability realism, browser-green-but-product-fake, template response risk, harness leakage, eval overfitting, lexical oracle risk, evidence-span support, or tests passing while real AI behavior is missing."
 ---
 
 # Design Agentic Evals
@@ -23,6 +23,7 @@ Hard stop: do not use eval, fixture, runner, or live-failure evidence as the onl
 
 - Read `references/semantic-ownership-and-harness-leakage.md` when evals, runners, fixtures, guards, or verifiers may infer semantic decisions from raw input, dataset wording, or test convenience.
 - Read `references/mechanism-first-edd.md` when Golden Sets grow without a named mechanism, manual product use contradicts green tests, or a long EDD loop keeps moving failures between cases.
+- Read `references/independent-browser-evaluator.md` when a user-facing browser or agentic workflow can look green while still feeling fake, templated, or non-functional in real use.
 
 ## Workflow
 
@@ -35,7 +36,8 @@ Hard stop: do not use eval, fixture, runner, or live-failure evidence as the onl
 7. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
 8. When mechanism quality is unclear, separate normative basis from implementation references: official docs explain the rule; mature GitHub/code examples show mechanism shape; repo truth remains the product source.
 9. Distill traceable live failures into pre-live gates only when they have a named failure family, cheap replay surface, invariant or mechanism gap, and owner.
-10. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
+10. For high-risk user-facing browser or agentic flows, decide whether an independent evaluator subagent must test the real entrypoint with Playwright/browser evidence before trusting builder self-checks.
+11. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
 
 ## Default Output
 
@@ -53,6 +55,11 @@ Invariant evidence surface: DB | trace | artifact | UI | response | log | none
 Decision under test: ...
 Trace surface: ...
 Grader type: deterministic | model | human | hybrid
+Independent evaluator needed: yes | no | not_applicable
+Done contract: ...
+Evaluator rubric: ...
+Real entrypoint tested: yes | no | not_applicable
+Playwright/browser evidence: screenshot | DOM | network | console | DB/state | trace | not_run
 Capability realism check: ...
 Code references inspected: ...
 Normative basis: ...
@@ -89,6 +96,7 @@ Decision: proceed | narrow | stop
 12. For semantic support, groundedness, or axis support, evaluate cited evidence spans, not only keyword or term-list hits.
 13. Promote a live failure into a pre-live gate only when it is traceable, classified, cheap to replay, tied to an invariant or mechanism gap, and assigned to an owner.
 14. Before patching a high-impact Golden Set, run the mechanism-first gate and add a mechanism map only for capability families that need it.
+15. Use an independent evaluator subagent only when the flow is user-facing, browser-based, agentic, or previously fake-passed; do not require it for small deterministic changes.
 
 ## Heuristics
 
@@ -99,6 +107,7 @@ Decision: proceed | narrow | stop
 | Live failure triggers schema/prompt hardening | Require attribution, product source, representability, and holdouts first. |
 | Live failure repeats or is expensive to rerun | Distill it into a cheap pre-live gate if the promotion criteria are met. |
 | Browser or route gate passes but manual use feels fake | Check entrypoint, owner trace, output source, and user-perceived behavior. |
+| Builder says a user-facing browser flow is done | Require a done contract, then use an independent evaluator when fake-pass risk is high. |
 | Golden Set grows but mechanism is unnamed | Run the mechanism-first gate before adding cases. |
 | Fixture label or term list is the semantic oracle | Move proof to cited evidence span, product oracle, calibrated judge, or reviewable state. |
 
@@ -114,6 +123,7 @@ Do not proceed when:
 - a judge prompt is treated as truth without calibration
 - a pass claim rests on shell navigation, fixtures, deterministic renderer text, or read-model persistence while claiming user-perceived AI behavior
 - "manager-style" or "agentic" is claimed without evidence that semantic owner, tool path, and final-response owner ran in the real entrypoint
+- a high-risk browser or agentic workflow is graded only by the same builder that implemented it
 - Golden Sets or browser suites are patched before failure family, code references, mechanism under test, and targeted E2E plan are named
 - every live observation is promoted into a permanent gate without trace evidence, failure-family classification, cheap replay, invariant/mechanism gap, and owner
 - a long EDD loop moves failures between cases instead of shrinking one named failure family
@@ -121,7 +131,7 @@ Do not proceed when:
 
 ## Verification
 
-Before claiming an agentic eval is useful, name the evidence: trace sample, invariant observation, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, pre-live gate result, targeted E2E result, or explicit product-truth rationale.
+Before claiming an agentic eval is useful, name the evidence: trace sample, invariant observation, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, independent evaluator result when required, real-entrypoint browser evidence, deterministic oracle, human calibration, regression seed, pre-live gate result, targeted E2E result, or explicit product-truth rationale.
 
 ## Handoffs
 
