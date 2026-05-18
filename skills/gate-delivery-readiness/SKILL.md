@@ -44,6 +44,7 @@ required_report_status: ...
 merge_group_check_status: ...
 over_split_pr_debt: none | warning | blocking
 wrapper_evidence_wiring_role: necessary_gate_visibility | status_projection | unclear | not_applicable
+Delivery invariant: ...
 artifact_log_retention: ...
 deploy_or_release_gate: ...
 smoke_or_rollback_plan: ...
@@ -55,17 +56,18 @@ decision: proceed | narrow | stop
 ## Decision Rules
 
 1. Keep delivery layers separate: pre-PR, PR-ready, queue-ready, merge-ready, deploy-ready, release-ready, production-ready.
-2. CI green proves only completed CI scope. It does not prove merge, deploy, product, or activation readiness.
-3. A stale branch or untested merge result against the current target branch is not merge-ready.
-4. If platform-enforced gates are unavailable, name the manual fallback controls instead of pretending enforcement exists.
-5. A placeholder deployment workflow is not CD.
-6. Future-wave or non-mainline PRs default to draft, hold-as-shadow, or extract-only unless they are small guard/contract/no-runtime-effect slices.
-7. Multi-agent work needs base freshness, required checks, boundary review, and explicit queue/merge ownership; branch-local CI or subagent approval is not merge authorization.
-8. Repeated integration-owner fixes should move left into pre-PR or PR-readiness gates.
-9. Merge queue checks need `merge_group` coverage when the platform queue is used.
-10. Adversarial security evidence is separate from CI, merge, deploy, and rollout gates.
-11. Delivery evidence does not approve product direction; non-trivial new slices need user/controller/direction-challenge acceptance.
-12. Many tiny green PRs can still create delivery risk when they only move artifacts, reports, status projections, or closeout visibility for the same blocker.
+2. Name the delivery invariant when the risk is stale base, skipped gate, wrong queue order, or readiness overclaim.
+3. CI green proves only completed CI scope. It does not prove merge, deploy, product, or activation readiness.
+4. A stale branch or untested merge result against the current target branch is not merge-ready.
+5. If platform-enforced gates are unavailable, name the manual fallback controls instead of pretending enforcement exists.
+6. A placeholder deployment workflow is not CD.
+7. Future-wave or non-mainline PRs default to draft, hold-as-shadow, or extract-only unless they are small guard/contract/no-runtime-effect slices.
+8. Multi-agent work needs base freshness, required checks, boundary review, and explicit queue/merge ownership; branch-local CI or subagent approval is not merge authorization.
+9. Repeated integration-owner fixes should move left into pre-PR or PR-readiness gates.
+10. Merge queue checks need `merge_group` coverage when the platform queue is used.
+11. Adversarial security evidence is separate from CI, merge, deploy, and rollout gates.
+12. Delivery evidence does not approve product direction; non-trivial new slices need user/controller/direction-challenge acceptance.
+13. Many tiny green PRs can still create delivery risk when they only move artifacts, reports, status projections, or closeout visibility for the same blocker.
 
 ## Heuristics
 
@@ -90,7 +92,8 @@ Stop or narrow when:
 - a set of wrapper/evidence wiring PRs is treated as harmless because each individual PR is small
 - closeout/report/artifact plumbing is queued without naming the existing gate or decision it makes visible
 - green checks, queue eligibility, or mergeability are used as evidence of blocker removal or product capability
+- the delivery invariant is missing for a merge, deploy, or release readiness claim
 
 ## Verification
 
-Before finalizing, name the evidence: workflow files, `gh` output, GitHub settings screenshots, branch protection/ruleset status, environment list, workflow permissions, artifact/log retention, pre-PR gate result, PR readiness result, CI run status, red-team gate status, merge queue or manual queue artifact, `merge_group` trigger, base freshness, merge simulation result, deploy smoke result, rollback evidence, or explicit not-run status.
+Before finalizing, name the evidence: delivery invariant, workflow files, `gh` output, GitHub settings screenshots, branch protection/ruleset status, environment list, workflow permissions, artifact/log retention, pre-PR gate result, PR readiness result, CI run status, red-team gate status, merge queue or manual queue artifact, `merge_group` trigger, base freshness, merge simulation result, deploy smoke result, rollback evidence, or explicit not-run status.

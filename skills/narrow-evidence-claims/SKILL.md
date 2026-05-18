@@ -29,6 +29,7 @@ Claim type: implementation | test | eval | readiness | production | architecture
 Tested attack surface: ...
 Evidence present: ...
 Evidence missing: ...
+Invariant evidence: present | missing | not_applicable
 Allowed claim: ...
 Forbidden claim: ...
 Decision: proceed | narrow | stop
@@ -37,17 +38,18 @@ Decision: proceed | narrow | stop
 ## Decision Rules
 
 1. A test, runner, CI job, scan, browser check, or queue pass proves only its named scope.
-2. Partial, timed-out, interrupted, mocked, skipped, stale, or truncated evidence supports only a partial claim.
-3. If you did not personally run or inspect the evidence in this task context, say so.
-4. If evidence contradicts product truth or manual product use, the report is incomplete or misaligned.
-5. Final answer quality does not prove tool calls, guard decisions, state transitions, or traces.
-6. Green infrastructure does not prove product capability, architecture quality, or direction correctness.
-7. Delivery states are separate: pre-PR, PR-ready, queue-ready, merge-ready, deploy-ready, production-ready.
-8. A security or red-team pass covers only the tested attack surface and attack families.
-9. Lint, type, formatting, and unit tests do not prove maintainability or efficiency without code-health evidence.
-10. Lexical checks, term lists, regexes, and fixture labels do not prove semantic support or product truth.
-11. Browser execution, route navigation, persistence, fixture manager output, or `live_llm_invoked=true` do not prove user-perceived AI capability unless the intended entrypoint, owner trace, and final response owner ran.
-12. Direction claims require source-of-truth and acceptance evidence, not CI green, queue position, or a filled checklist.
+2. Scenario pass does not prove invariant pass; name the invariant evidence when making a capability or readiness claim.
+3. Partial, timed-out, interrupted, mocked, skipped, stale, or truncated evidence supports only a partial claim.
+4. If you did not personally run or inspect the evidence in this task context, say so.
+5. If evidence contradicts product truth or manual product use, the report is incomplete or misaligned.
+6. Final answer quality does not prove tool calls, guard decisions, state transitions, or traces.
+7. Green infrastructure does not prove product capability, architecture quality, or direction correctness.
+8. Delivery states are separate: pre-PR, PR-ready, queue-ready, merge-ready, deploy-ready, production-ready.
+9. A security or red-team pass covers only the tested attack surface and attack families.
+10. Lint, type, formatting, and unit tests do not prove maintainability or efficiency without code-health evidence.
+11. Lexical checks, term lists, regexes, and fixture labels do not prove semantic support or product truth.
+12. Browser execution, route navigation, persistence, fixture manager output, or `live_llm_invoked=true` do not prove user-perceived AI capability unless the intended entrypoint, owner trace, and final response owner ran.
+13. Direction claims require source-of-truth and acceptance evidence, not CI green, queue position, or a filled checklist.
 
 ## Heuristics
 
@@ -69,6 +71,7 @@ Stop or narrow when:
 - mixed status is compressed into `all good`
 - missing, skipped, stale, partial, mocked, or truncated evidence is hidden
 - green infrastructure is treated as product correctness
+- a capability or readiness claim ignores the invariant it was supposed to preserve
 - agent-generated tests are treated as independent truth without oracle review
 - delivery gate levels are collapsed into one "ready"
 - code health, performance, security, or direction is claimed from unrelated checks

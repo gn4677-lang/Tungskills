@@ -28,6 +28,7 @@ For ordinary work, emit at most this five-line note as the output contract, then
 ```text
 Boundary touched: <none | domain | data | API | runtime | ownership | dependency | capability | active-code | freeze-growth>
 Risk level: <low | elevated | high>
+Boundary invariant: <what must not move or break>
 Do not cross: <one boundary or "none">
 Minimum check: <one concrete check>
 Escalate only if: <specific trigger or "not needed">
@@ -62,6 +63,7 @@ Do not require diagrams, full inventories, or ADRs for low-risk work.
 - If the contested decision is whether prompt/LLM output or deterministic code owns product truth, route to `assign-decision-ownership` before choosing placement.
 - In parallel PR trains, treat active routes, manager/orchestration assembly, schedulers, DB migrations, truth-owner changes, and public contracts as high-risk boundaries; route merge readiness to `gate-delivery-readiness` and activation risk to `gate-agent-activation`.
 - If the primary problem is readability, cognitive complexity, algorithm/data-structure fit, hot-path efficiency, no-behavior refactor hygiene, or unnecessary abstraction that does not change ownership boundaries, route to `review-code-excellence`.
+- For elevated/high risk work, name the boundary invariant: the ownership, dependency direction, public contract, runtime truth, or active-code path that must not move.
 - Ports and adapters: keep core/domain independent of UI, database, network, framework, and tool adapters.
 - C4 level check: do not solve a system/container problem only at component/code level.
 - Team/API ownership: one module, task, or subagent should have one primary responsibility.
@@ -84,13 +86,14 @@ Do not require diagrams, full inventories, or ADRs for low-risk work.
 Stop or narrow when:
 
 - the change touches public API, persistence, auth, runtime behavior, or truth ownership without naming the owner boundary
+- elevated/high risk work has no boundary invariant
 - a shared helper, adapter, or abstraction appears before a real consumer or stable boundary exists
 - subagent or PR split follows file count rather than responsibility ownership
 - a local cleanup changes dependency direction, module responsibility, or active-code ownership
 
 ## Verification
 
-Before claiming boundary safety, name the evidence: test, build, lint, architecture rule, dependency graph, schema check, reviewer checklist, no-op rationale, or manual boundary check.
+Before claiming boundary safety, name the evidence: boundary invariant, test, build, lint, architecture rule, dependency graph, schema check, reviewer checklist, no-op rationale, or manual boundary check.
 
 ## Handoffs
 

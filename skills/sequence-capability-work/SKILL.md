@@ -30,6 +30,8 @@ Slice kind: product_capability | vertical_proof | contract_guard | ops_test_stab
 Progress priority: blocker_removal | product_capability | decision_unlock | risk_reduction | maintenance_only
 Slice grain: right_sized | too_large | over_split | wrapper_only
 Consolidation candidate: yes | no
+Capability invariant: ...
+Invariant evidence surface: ...
 OOD responsibility owner: ...
 Dependency direction: ...
 Build next: ...
@@ -43,16 +45,17 @@ If the task is small and already inside one stable interface, state only `Build 
 
 1. Name the business capability or domain outcome.
 2. Name the blocker that prevents that capability from working or being safely accepted.
-3. Identify which capability must exist before another capability can work.
-4. Prefer `blocker_removal` and `product_capability` before `decision_unlock`, then `risk_reduction`, then `maintenance_only`, unless the user explicitly chooses otherwise.
-5. Place the work in one bounded context; do not mix domain language or ownership.
-6. Assign behavior to the object/module with the needed information and responsibility.
-7. Point dependencies toward stable policy, abstractions, or domain behavior; avoid cycles.
-8. Build the right-sized capability slice that unblocks the next capability.
-9. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
-10. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, and boundary checks for that slice.
-11. Right-size the PR grain: split only when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
-12. Classify proof-only or ops/test-stability work honestly; do not count it as product capability unless it directly changes user/operator capability.
+3. Name the capability invariant that the slice must preserve or prove.
+4. Identify which capability must exist before another capability can work.
+5. Prefer `blocker_removal` and `product_capability` before `decision_unlock`, then `risk_reduction`, then `maintenance_only`, unless the user explicitly chooses otherwise.
+6. Place the work in one bounded context; do not mix domain language or ownership.
+7. Assign behavior to the object/module with the needed information and responsibility.
+8. Point dependencies toward stable policy, abstractions, or domain behavior; avoid cycles.
+9. Build the right-sized capability slice that unblocks the next capability.
+10. For parallel capability or domain work, classify each slice as current mainline, future-wave, guard/contract, or dependency bump before deciding build order or merge posture.
+11. Before a contributor or agent opens a PR, identify the required report fields, parent dependency, targeted tests, invariants, and boundary checks for that slice.
+12. Right-size the PR grain: split only when each PR has independent review, rollback, and blocker value; consolidate when several slices only wire the same evidence chain or closeout gate.
+13. Classify proof-only or ops/test-stability work honestly; do not count it as product capability unless it directly changes user/operator capability.
 
 Use `check-architecture-boundaries` when the sequence crosses ownership, public APIs, data models, runtime boundaries, or subagent responsibilities.
 
@@ -96,13 +99,14 @@ Do not proceed with the proposed order when:
 - future-wave implementation is treated as mergeable before its contract, guard, or activation boundary exists
 - parallel branches are sequenced by PR age instead of capability dependency and trunk integration safety
 - a PR is opened before track, parent dependency, required report, or boundary evidence is clear
+- a capability slice has no invariant or state/output condition that would prove it actually advanced the capability
 - capability sequencing is used to justify a slice whose direction, mainline status, or right-sized scope has not been accepted
 - issue slicing creates many wrapper-only PRs whose value is only status projection, report plumbing, artifact copying, or closeout visibility
 - "small PR" is used to justify splitting one coherent vertical path into fragments that cannot be reviewed or rolled back independently
 
 ## Verification
 
-Before claiming the order is correct, name the evidence: capability dependency map, user-flow trace, test slice, bounded-context note, parent dependency, required report, interface contract, architecture rule, or explicit manual ordering rationale.
+Before claiming the order is correct, name the evidence: capability dependency map, capability invariant, user-flow trace, test slice, bounded-context note, parent dependency, required report, interface contract, architecture rule, or explicit manual ordering rationale.
 
 ## Handoffs
 

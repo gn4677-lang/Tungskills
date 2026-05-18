@@ -38,6 +38,7 @@ Semantic proof source: evidence span | product oracle | lexical scaffold | none
 Deterministic role: validate | derive | reject | downgrade | repair | none
 Scaffold allowed role: warning | negative guard | smoke test | prior | none
 LLM role: judge | synthesize | classify | explain | none
+Ownership invariant: ...
 Do not override: ...
 Evidence needed: ...
 Decision: proceed | narrow | stop
@@ -49,12 +50,13 @@ Decision: proceed | narrow | stop
 2. Deterministic code owns formulas, schemas, thresholds, legality, persistence invariants, routing constraints, and exact guard conditions.
 3. LLMs own ambiguous language understanding, synthesis, classification, explanation, and user-intent judgment when no deterministic oracle exists.
 4. Hybrid ownership is valid when deterministic code frames allowed options and the LLM chooses or explains within that frame.
-5. Deterministic code may validate, reject, downgrade, derive, or request one bounded repair round.
-6. Deterministic guards, verifiers, runners, and repair loops must not fabricate, infer, or overwrite semantic decisions unless a product-approved oracle exists.
-7. Provider failures, live failures, and strict-suite failures are diagnostic evidence, not semantic owners.
-8. Keyword lists, regexes, lexical hints, dictionaries, and fixture labels may warn, reject, prioritize review, or smoke test; they must not prove semantic support.
-9. For semantic support, prefer evidence-span ownership: LLM/human/tool/oracle proposes support state and cited evidence; deterministic code validates shape, provenance, containment, enum legality, and review routing.
-10. Assign final response ownership separately from structured decision ownership. Do not claim natural assistant behavior if visible text is owned by a deterministic template.
+5. Name the ownership invariant: the decision that must not silently move to another layer.
+6. Deterministic code may validate, reject, downgrade, derive, or request one bounded repair round.
+7. Deterministic guards, verifiers, runners, and repair loops must not fabricate, infer, or overwrite semantic decisions unless a product-approved oracle exists.
+8. Provider failures, live failures, and strict-suite failures are diagnostic evidence, not semantic owners.
+9. Keyword lists, regexes, lexical hints, dictionaries, and fixture labels may warn, reject, prioritize review, or smoke test; they must not prove semantic support.
+10. For semantic support, prefer evidence-span ownership: LLM/human/tool/oracle proposes support state and cited evidence; deterministic code validates shape, provenance, containment, enum legality, and review routing.
+11. Assign final response ownership separately from structured decision ownership. Do not claim natural assistant behavior if visible text is owned by a deterministic template.
 
 ## Heuristics
 
@@ -72,6 +74,7 @@ Decision: proceed | narrow | stop
 Stop or narrow when:
 
 - deterministic code fabricates, infers, or overwrites intent, route, action, or disposition without a product-approved oracle
+- the ownership invariant is missing for a high-impact decision boundary
 - keyword lists, regexes, lexical hints, dictionaries, or fixture labels are treated as semantic proof
 - a validator claims category, axis, groundedness, or support from lexical hits instead of cited evidence spans or a product-approved oracle
 - a scaffold created for cheap warning, negative guard, or smoke testing becomes the primary semantic mechanism

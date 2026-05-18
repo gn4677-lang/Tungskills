@@ -24,6 +24,7 @@ Read `references/code-excellence-rubric.md` when the review involves AI-generate
 ```text
 Review target: ...
 Behavior boundary: no behavior change | behavior change | unclear
+Code invariant: ...
 Readability risk: ...
 Algorithm / DSA risk: ...
 Hot-path / profiling status: ...
@@ -38,12 +39,13 @@ Decision: proceed | narrow | stop
 ## Decision Rules
 
 1. Do not open a whole-repo cleanup PR unless the task is explicitly a baseline report with no product behavior change.
-2. Prefer small, reviewable changes: baseline/gate first, targeted refactor second, measured hot-path optimization third.
-3. For algorithmic or lookup-heavy code, state the data structure, expected operation count, and Big-O only where it affects product behavior, scale, or hot-path cost.
-4. For performance work, require profiling, query counts, benchmark output, or operation-count evidence before claiming an optimization.
-5. Remove shallow wrappers, speculative flexibility, and one-use abstractions unless they protect a real boundary or hide meaningful complexity behind a stable interface.
-6. Do not mix no-behavior refactors with behavior changes unless the risk is explicitly accepted and tests cover the changed behavior.
-7. Style/lint/test green is not enough to claim code is clean, maintainable, or efficient.
+2. Name the code invariant for the review: behavior preserved, hot-path cost bounded, API contract stable, or state transition unchanged.
+3. Prefer small, reviewable changes: baseline/gate first, targeted refactor second, measured hot-path optimization third.
+4. For algorithmic or lookup-heavy code, state the data structure, expected operation count, and Big-O only where it affects product behavior, scale, or hot-path cost.
+5. For performance work, require profiling, query counts, benchmark output, or operation-count evidence before claiming an optimization.
+6. Remove shallow wrappers, speculative flexibility, and one-use abstractions unless they protect a real boundary or hide meaningful complexity behind a stable interface.
+7. Do not mix no-behavior refactors with behavior changes unless the risk is explicitly accepted and tests cover the changed behavior.
+8. Style/lint/test green is not enough to claim code is clean, maintainable, or efficient.
 
 ## Heuristics
 
@@ -62,6 +64,7 @@ Decision: proceed | narrow | stop
 Stop or narrow when:
 
 - the proposed cleanup changes behavior without saying so
+- the code invariant is missing for a refactor, optimization, or cleanup claim
 - the code is made more abstract for hypothetical future needs
 - a reviewer says code is clean based only on lint or tests
 - an optimization lacks before/after evidence
@@ -70,7 +73,7 @@ Stop or narrow when:
 
 ## Verification
 
-Before claiming code is clean, maintainable, readable, or efficient, name the evidence: behavior boundary, targeted tests, lint/type result, complexity or size signal, profiling/benchmark/query-count result, before/after operation count, or explicit not-run status.
+Before claiming code is clean, maintainable, readable, or efficient, name the evidence: code invariant, behavior boundary, targeted tests, lint/type result, complexity or size signal, profiling/benchmark/query-count result, before/after operation count, or explicit not-run status.
 
 ## Handoffs
 

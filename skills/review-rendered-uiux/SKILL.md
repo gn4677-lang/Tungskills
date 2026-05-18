@@ -31,9 +31,10 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 1. Gather the design intent. If the goal is unclear, use `define-uiux-intent` first.
 2. Inspect the rendered UI when possible: browser, screenshots, local app, Storybook, prototype, or supplied images. If none exists, stop with the missing-artifact response.
 3. Review desktop and mobile viewports for layout stability, text fit, hierarchy, and task clarity.
-4. Exercise important states: default, hover, focus, active, disabled, loading, empty, error, success, and reduced motion where relevant.
-5. Run available automated checks without overstating them: axe, Lighthouse, Playwright screenshots, visual regression, keyboard smoke tests.
-6. Apply only the relevant rubric:
+4. Name the `Must not break` conditions before judging polish.
+5. Exercise important states: default, hover, focus, active, disabled, loading, empty, error, success, and reduced motion where relevant.
+6. Run available automated checks without overstating them: axe, Lighthouse, Playwright screenshots, visual regression, keyboard smoke tests.
+7. Apply only the relevant rubric:
    - baseline rendered review: `references/objective-quality-checklist.md`
    - generic AI-looking UI: `references/ai-slop-rejection-checklist.md`
    - SaaS/product landing pages: `references/saas-landing-rendered-contract-review.md`
@@ -42,8 +43,8 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
    - source-only warning signs: `references/code-smell-to-ui-failure-map.md`
    - visual contrast examples: `references/ai-slop-example-gallery.md` or `references/visual-example-index.md`
    - subjective scoring: `references/heuristic-review-rubric.md`
-7. Load at most one or two reference files unless the review is explicitly broad.
-8. Report issues by severity and tie each issue to a user impact.
+8. Load at most one or two reference files unless the review is explicitly broad.
+9. Report issues by severity and tie each issue to a user impact.
 
 ## Default Output
 
@@ -52,6 +53,7 @@ Rendered artifact: screenshot | browser | local app | prototype | missing
 Objective checks passed: ...
 AI slop signals: ...
 Contract failures: ...
+Must not break: ...
 Must-fix failures: ...
 Should-fix risks: ...
 Human judgment needed: ...
@@ -90,6 +92,7 @@ Stop or narrow when:
 - major viewports, interaction states, keyboard access, or loading/error/empty states are untested
 - objective failures are being reframed as taste preferences instead of must-fix issues
 - the review ignores obvious AI-slop signals because the pixels look "modern"
+- `Must not break` conditions are missing for a readiness or polish claim
 
 ## Common Mistakes
 
@@ -102,7 +105,7 @@ Stop or narrow when:
 
 ## Verification
 
-Before claiming a UI is polished, ready, or improved, name the evidence: rendered artifact, desktop/mobile viewport checks, interaction states exercised, accessibility or keyboard result, AI slop signals reviewed, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
+Before claiming a UI is polished, ready, or improved, name the evidence: rendered artifact, `Must not break` conditions, desktop/mobile viewport checks, interaction states exercised, accessibility or keyboard result, AI slop signals reviewed, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
 
 ## Handoffs
 

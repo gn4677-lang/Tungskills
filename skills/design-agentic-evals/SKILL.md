@@ -28,12 +28,13 @@ Hard stop: do not use eval, fixture, runner, or live-failure evidence as the onl
 
 1. Name the product truth and the agent behavior under eval.
 2. For fake-pass or capability-realism failures, classify the failure family and inspect the real code/trace path before changing Golden Sets or adding cases.
-3. Separate agent/model decision, deterministic validation, and state/output correctness.
-4. Choose trace fields before grader type.
-5. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
-6. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
-7. When mechanism quality is unclear, separate normative basis from implementation references: official docs explain the rule; mature GitHub/code examples show mechanism shape; repo truth remains the product source.
-8. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
+3. Name the core invariants that must hold regardless of implementation path.
+4. Separate agent/model decision, deterministic validation, and state/output correctness.
+5. Choose trace fields before grader type.
+6. Identify leakage risks from fixtures, runners, seeds, guards, and replay selection.
+7. Identify whether any keyword scaffold, term list, regex, dictionary, or fixture label is being used as semantic proof.
+8. When mechanism quality is unclear, separate normative basis from implementation references: official docs explain the rule; mature GitHub/code examples show mechanism shape; repo truth remains the product source.
+9. Add targeted E2E and negative/holdout coverage before using eval results to change prompts, schemas, or contracts.
 
 ## Default Output
 
@@ -46,6 +47,8 @@ Failure family: ...
 Mechanism under test: ...
 Golden Set capability mapping: ...
 Mechanism map status: present | needed | not_needed
+Core invariants: ...
+Invariant evidence surface: DB | trace | artifact | UI | response | log | none
 Decision under test: ...
 Trace surface: ...
 Grader type: deterministic | model | human | hybrid
@@ -73,14 +76,15 @@ Decision: proceed | narrow | stop
 2. Name the behavior under eval: manager decision, tool call, handoff, guard, state transition, final response, or multi-agent coordination.
 3. Define trace fields before choosing graders.
 4. Separate model decision, deterministic validation, and final state/output correctness.
-5. Do not let runners, fixtures, dataset labels, raw keywords, or seed data infer product semantics.
-6. Separate capability evals from regression evals.
-7. Prefer deterministic graders where possible; calibrate model or human graders when judgment is subjective.
-8. Treat a green fixture with wrong product behavior as incomplete eval evidence.
-9. Treat live or full-suite failures as attribution and holdout evidence, not direct contract-hardening authority.
-10. For user-facing AI capability claims, the real entrypoint must exercise the intended owner, trace the decision path, and verify final user-visible output.
-11. For semantic support, groundedness, or axis support, evaluate cited evidence spans, not only keyword or term-list hits.
-12. Before patching a high-impact Golden Set, run the mechanism-first gate and add a mechanism map only for capability families that need it.
+5. Include invariants for high-impact evals; scenario pass does not prove invariant pass.
+6. Do not let runners, fixtures, dataset labels, raw keywords, or seed data infer product semantics.
+7. Separate capability evals from regression evals.
+8. Prefer deterministic graders where possible; calibrate model or human graders when judgment is subjective.
+9. Treat a green fixture with wrong product behavior as incomplete eval evidence.
+10. Treat live or full-suite failures as attribution and holdout evidence, not direct contract-hardening authority.
+11. For user-facing AI capability claims, the real entrypoint must exercise the intended owner, trace the decision path, and verify final user-visible output.
+12. For semantic support, groundedness, or axis support, evaluate cited evidence spans, not only keyword or term-list hits.
+13. Before patching a high-impact Golden Set, run the mechanism-first gate and add a mechanism map only for capability families that need it.
 
 ## Heuristics
 
@@ -99,6 +103,7 @@ Do not proceed when:
 
 - fixtures, runner fields, raw keywords, or benchmark vocabulary define product architecture
 - no trace can show the agent behavior under eval
+- no invariant evidence surface exists for a high-impact capability claim
 - harness logic fabricates a missing semantic decision instead of checking trace or structured output
 - capability and regression evals are mixed into one pass/fail claim
 - a judge prompt is treated as truth without calibration
@@ -110,7 +115,7 @@ Do not proceed when:
 
 ## Verification
 
-Before claiming an agentic eval is useful, name the evidence: trace sample, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, targeted E2E result, or explicit product-truth rationale.
+Before claiming an agentic eval is useful, name the evidence: trace sample, invariant observation, mechanism map, inspected code references, implementation references, dataset source, grader type, rubric, deterministic oracle, human calibration, regression seed, targeted E2E result, or explicit product-truth rationale.
 
 ## Handoffs
 

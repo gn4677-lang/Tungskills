@@ -41,14 +41,15 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 1. Inspect existing product context first when available: screenshots, code, copy, design system, prior pages, or app behavior.
 2. Build a concise intent brief. Use `references/intent-brief-template.md` when the task is broad or ambiguous.
 3. Add a system-first pass. Use `references/system-first-brief.md` for products with many features, AI agents, editors, dashboards, or workflows.
-4. When generic AI output is a risk, add anti-slop constraints before visual exploration: unique product signal, literal proof, density target, and tropes to avoid. Use `references/anti-slop-design-brief.md` and `references/anti-slop-direction-examples.md` when you need concrete contrast, and use `../review-rendered-uiux/references/visual-example-index.md` when a paired visual example would help.
-5. For SaaS, product marketing, or landing pages, use `references/saas-landing-design-contracts.md` before implementation. Produce explicit contracts for product proof, section inventory, CTA/navigation hierarchy, copy outcome, interaction completeness, motion purpose, and reference extraction. Do not output vague quality levels or taste scores.
-6. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
-7. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
-8. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
-9. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
-10. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
-11. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
+4. Name the `Must not break` conditions for the surface, such as task clarity, truthful state, keyboard access, text fit, or product proof.
+5. When generic AI output is a risk, add anti-slop constraints before visual exploration: unique product signal, literal proof, density target, and tropes to avoid. Use `references/anti-slop-design-brief.md` and `references/anti-slop-direction-examples.md` when you need concrete contrast, and use `../review-rendered-uiux/references/visual-example-index.md` when a paired visual example would help.
+6. For SaaS, product marketing, or landing pages, use `references/saas-landing-design-contracts.md` before implementation. Produce explicit contracts for product proof, section inventory, CTA/navigation hierarchy, copy outcome, interaction completeness, motion purpose, and reference extraction. Do not output vague quality levels or taste scores.
+7. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
+8. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
+9. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
+10. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
+11. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
+12. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
 
 ## Default Output
 
@@ -58,6 +59,7 @@ Assumptions or questions: ...
 Recommended direction: ...
 Anti-slop constraints: ...
 Landing/page contracts: ...
+Must not break: ...
 Purpose trace: ...
 Interaction feedback map: needed | not needed | ...
 Human judgment still needed: ...
@@ -105,7 +107,8 @@ Stop or narrow when:
 - implementation starts before the design intent can explain each major region's user purpose
 - animation, AI autonomy, destructive action, or async work has no feedback or correction map
 - anti-goals are missing while the surface is at high risk of generic AI output
+- `Must not break` conditions are missing for a risky user-facing surface
 
 ## Verification
 
-Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, anti-slop constraints when relevant, purpose trace, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.
+Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, `Must not break` conditions, anti-slop constraints when relevant, purpose trace, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.

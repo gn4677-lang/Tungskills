@@ -33,12 +33,13 @@ This is not a generic code-review skill and not a malware-writing skill.
 
 1. Confirm the target is authorized for defensive review or controlled red teaming.
 2. Classify the primary system type and trust boundary: browser/UI, API, auth/session, storage/database, deployment/CI, business logic, or agentic/LLM.
-3. Choose one primary attack family before designing probes.
-4. Decide probe style: static/code review, runtime/manual, automated, or mixed.
-5. Use AI/Codex to expand hypotheses, trace code paths, cluster likely findings, and draft bounded probes, but do not treat model output as proof.
-6. Record observed evidence and proof gaps separately. Name the environment, tested surface, and whether the result is plausible or validated.
-7. Route remediation to the correct owner instead of fixing by convenience.
-8. Require replay, regression, monitoring, or revalidation before calling the issue closed.
+3. Name the security invariant the probe should try to break, such as tenant isolation, auth boundary, data non-disclosure, or no unauthorized mutation.
+4. Choose one primary attack family before designing probes.
+5. Decide probe style: static/code review, runtime/manual, automated, or mixed.
+6. Use AI/Codex to expand hypotheses, trace code paths, cluster likely findings, and draft bounded probes, but do not treat model output as proof.
+7. Record observed evidence and proof gaps separately. Name the environment, tested surface, and whether the result is plausible or validated.
+8. Route remediation to the correct owner instead of fixing by convenience.
+9. Require replay, regression, monitoring, or revalidation before calling the issue closed.
 
 ## Default Output
 
@@ -50,6 +51,7 @@ System type: website | web app | API | auth/session | storage/database | deploym
 Primary trust boundary: ...
 Primary threat family: ...
 Attacker goal: ...
+Security invariant: ...
 Test mode: static | runtime | automated | mixed
 Available capabilities/permissions: ...
 Evidence source: threat model | code path | HTTP trace | browser trace | tool transcript | artifact | none
@@ -84,6 +86,7 @@ Stop or narrow when:
 - the target is a real live system and no explicit defensive scope or approval boundary is named
 - the user asks for malware, persistence, stealth, credential theft, or operational evasion
 - a possible weakness is being described as a validated exploit without direct evidence
+- no security invariant or trust boundary is named for the probe
 - AI-generated output is being treated as sufficient proof without validation artifacts
 - the real work is repository, PR, commit, or diff-only scanning rather than application/runtime/security-boundary work
 - a tool choice is driving the scope before the trust boundary and attack family are named
@@ -95,6 +98,7 @@ Before claiming anything beyond hypothesis, name:
 - the exact authorized target and environment
 - the tested system type and trust boundary
 - the primary attack family and attacker goal
+- the security invariant under attack
 - the evidence source and proof gap
 - the immediate containment if the weakness is real
 - the required replay, regression, or revalidation so the issue can stay closed
