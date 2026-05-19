@@ -1,6 +1,6 @@
 ---
 name: define-uiux-intent
-description: "Use before designing, redesigning, building, modifying, or critiquing user-facing UI/UX when intent, audience, product purpose, interaction behavior, visual direction, landing page contracts, product proof, section flow, animation purpose, anti-goals, or AI-slop avoidance needs clarification. Trigger on UI/UX design, SaaS landing page, interface as user surface, visual direction, generic AI-looking UI, template-like UI, product proof, or 設計做歪."
+description: "Use before designing, redesigning, building, modifying, or critiquing user-facing UI/UX when intent, audience, product purpose, interaction behavior, motion feedback, transition meaning, visual direction, landing page contracts, product proof, section flow, animation purpose, anti-goals, or AI-slop avoidance needs clarification. Trigger on UI/UX design, SaaS landing page, interface as user surface, visual direction, generic AI-looking UI, template-like UI, product proof, or 設計做歪."
 ---
 
 # Define UI/UX Intent
@@ -35,6 +35,7 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 - When proceeding, state the selected direction as a recommendation and list assumptions. Do not imply the user approved unresolved taste, brand, or product-strategy choices.
 - For early concept work, keep the purpose trace at the region/component-group level. Expand it to states and controls after a direction is chosen or implementation begins.
 - Produce an interaction feedback map only when the surface includes motion, async work, AI agents, multi-step workflows, destructive actions, or interactive demos. A static landing page does not need one unless it contains an animated/product demo.
+- Every important operation needs perceivable feedback; animation is one feedback channel, not the only one. Motion must explain status, causality, continuity, hierarchy, affordance, or brand tone.
 
 ## Workflow
 
@@ -47,7 +48,7 @@ If the user explicitly wants speed, proceed with clear assumptions and list them
 7. Ask only high-impact questions that cannot be answered from available context. Prefer 1-3 concrete choices and recommend a default.
 8. Propose 2-3 design directions that differ by system model or user flow, not only visual style.
 9. Create a purpose trace: every major layout region, component group, CTA, state, and motion choice must have a user-facing reason.
-10. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`.
+10. For motion, AI agents, async work, or complex interactions, produce an interaction feedback map. Use `references/interaction-feedback-map.md`, including motion meaning and reduced-motion fallback when animation is part of the feedback.
 11. Align with the user at the appropriate gate before locking major direction. Use `references/human-alignment-gates.md`.
 12. When implementation is allowed, prefer a real runnable surface, browser screenshot, or prototype state over static description.
 
@@ -74,6 +75,7 @@ Decision: proceed | align first | stop
 - Center tasks over objects. Ask whether the UI is organized around what users are trying to accomplish or merely around files, data, screens, or internal modules.
 - Use playgrounds for complex interaction. Isolate the interaction feel before forcing it into production complexity.
 - Make motion serve attention. Motion must explain state, continuity, causality, feedback, spatial relationship, or brand tone; otherwise avoid it.
+- Make interaction feedback feel physically coherent: presses respond immediately, created surfaces originate from the action when useful, navigation preserves source/destination relationships, and completion/error states settle clearly.
 
 ## Generation Checklist
 
@@ -93,6 +95,7 @@ When the task asks for design generation rather than only intent review, include
 - Starting with layout before knowing the task.
 - Asking broad questions instead of choosing a reasonable default.
 - Treating "minimal" as empty or "premium" as more animation.
+- Adding motion without a meaning, or adding decorative feedback that does not match the user's action or the system state.
 - Adding features instead of unifying concepts.
 - Describing a UI as good without explaining what user outcome it supports.
 - Letting the model fill missing intent with generic SaaS tropes, fake charts, unrelated hero sections, or decorative gradients.
@@ -106,9 +109,10 @@ Stop or narrow when:
 - "interface" means module/API/type/method shape rather than user-facing UI or interaction
 - implementation starts before the design intent can explain each major region's user purpose
 - animation, AI autonomy, destructive action, or async work has no feedback or correction map
+- important operations have no perceivable feedback, or motion is the only way important information is communicated
 - anti-goals are missing while the surface is at high risk of generic AI output
 - `Must not break` conditions are missing for a risky user-facing surface
 
 ## Verification
 
-Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, `Must not break` conditions, anti-slop constraints when relevant, purpose trace, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.
+Before claiming the design direction is ready, name the evidence: existing product context, user task, selected assumptions, `Must not break` conditions, anti-slop constraints when relevant, purpose trace, interaction feedback map when relevant, human alignment gate, rendered/prototype artifact if available, and unresolved judgment items.

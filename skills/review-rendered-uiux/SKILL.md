@@ -1,6 +1,6 @@
 ---
 name: review-rendered-uiux
-description: "Use when reviewing, verifying, QAing, or improving rendered UI/UX with screenshots, browser checks, Playwright, independent evaluator evidence, accessibility, responsive behavior, interaction states, visual polish, SaaS landing page contracts, product proof, CTA/navigation hierarchy, AI-slop patterns, layout overlap, or viewport/state evidence. Trigger on UI review, visual QA, screenshot review, accessibility, responsive check, product proof review, landing page review, or rendered design quality."
+description: "Use when reviewing, verifying, QAing, or improving rendered UI/UX with screenshots, browser checks, Playwright, independent evaluator evidence, motion feedback, transition meaning, microinteractions, accessibility, responsive behavior, interaction states, visual polish, SaaS landing page contracts, product proof, CTA/navigation hierarchy, AI-slop patterns, layout overlap, or viewport/state evidence. Trigger on UI review, visual QA, screenshot review, accessibility, responsive check, product proof review, landing page review, or rendered design quality."
 ---
 
 # Review Rendered UI/UX
@@ -33,25 +33,28 @@ If no screenshot, URL, prototype, local app, Storybook, or source files are avai
 3. Review desktop and mobile viewports for layout stability, text fit, hierarchy, and task clarity.
 4. Name the `Must not break` conditions before judging polish.
 5. Exercise important states: default, hover, focus, active, disabled, loading, empty, error, success, and reduced motion where relevant.
-6. For user-facing workflow claims, exercise the real interaction path with browser/Playwright when available; do not accept screenshot-only evidence for "works" claims.
-7. Run available automated checks without overstating them: axe, Lighthouse, Playwright screenshots, visual regression, keyboard smoke tests.
-8. Apply only the relevant rubric:
+6. For important actions, verify the feedback loop: the action is acknowledged, the state change is visible, and any motion explains status, causality, continuity, hierarchy, or affordance.
+7. For user-facing workflow claims, exercise the real interaction path with browser/Playwright when available; do not accept screenshot-only evidence for "works" claims.
+8. Run available automated checks without overstating them: axe, Lighthouse, Playwright screenshots, visual regression, keyboard smoke tests.
+9. Apply only the relevant rubric:
    - baseline rendered review: `references/objective-quality-checklist.md`
    - generic AI-looking UI: `references/ai-slop-rejection-checklist.md`
    - SaaS/product landing pages: `references/saas-landing-rendered-contract-review.md`
    - stateful/async/agent UI: `references/interaction-truthfulness-check.md`
+   - motion/transition feedback: `references/motion-feedback-contract.md`
    - live/local implementation review: `references/rendered-ui-review-protocol.md`
    - source-only warning signs: `references/code-smell-to-ui-failure-map.md`
    - visual contrast examples: `references/ai-slop-example-gallery.md` or `references/visual-example-index.md`
    - subjective scoring: `references/heuristic-review-rubric.md`
-9. Load at most one or two reference files unless the review is explicitly broad.
-10. Report issues by severity and tie each issue to a user impact.
+10. Load at most one or two reference files unless the review is explicitly broad.
+11. Report issues by severity and tie each issue to a user impact.
 
 ## Default Output
 
 ```text
 Rendered artifact: screenshot | browser | local app | prototype | missing
 Interaction evidence: clicked | typed | navigated | state_checked | not_run
+Motion feedback contract: pass | fail | not_applicable | not_run
 Objective checks passed: ...
 AI slop signals: ...
 Contract failures: ...
@@ -68,7 +71,7 @@ Decision: ready | narrow | stop
 Use these categories unless the user requests a different format:
 
 - `must fix`: broken task completion, unreadable content, misleading state, accessibility blocker, layout overlap, clipped controls, fake product proof, or motion that prevents use.
-- `should fix`: weak hierarchy, avoidable cognitive load, generic AI styling, repeated template sections, weak product proof, domain mismatch, unclear copy, inconsistent spacing, incomplete states, or questionable interaction timing.
+- `should fix`: weak hierarchy, avoidable cognitive load, generic AI styling, repeated template sections, weak product proof, domain mismatch, unclear copy, inconsistent spacing, incomplete states, missing action feedback, or questionable interaction timing.
 - `human judgment needed`: brand tone, taste, novelty, emotional feel, market positioning, and whether the design is distinctive enough.
 
 ## Objective Rejection Rules
@@ -80,6 +83,8 @@ Reject the design as not ready when any of these are true:
 - Text overlaps, clips, wraps badly, or becomes unreadable at common viewport sizes.
 - UI state lies about system state or progress.
 - The review claims a workflow works from screenshots without exercising the real interaction path.
+- Important user actions have no visible feedback, or the only feedback is inaccessible motion.
+- Animation direction, origin, easing, or timing contradicts the state change, navigation hierarchy, or user action.
 - Motion steals attention without clarifying what changed.
 - The interface looks like a generic AI template with no intentional brand or product fit.
 - Major interactive elements cannot be reached or understood by keyboard and visible focus.
@@ -94,6 +99,7 @@ Stop or narrow when:
 - code inspection is used as the only evidence for polished, ready, or well-designed UI
 - screenshot-only evidence is used to claim buttons, forms, routes, or agent workflows actually work
 - major viewports, interaction states, keyboard access, or loading/error/empty states are untested
+- motion is judged from static screenshots when the claim depends on transition meaning or feedback timing
 - objective failures are being reframed as taste preferences instead of must-fix issues
 - the review ignores obvious AI-slop signals because the pixels look "modern"
 - `Must not break` conditions are missing for a readiness or polish claim
@@ -102,6 +108,7 @@ Stop or narrow when:
 
 - Treating accessibility scores as complete UX review.
 - Reviewing screenshots without checking interaction states.
+- Treating animation as polish instead of feedback, causality, continuity, hierarchy, or status.
 - Calling something "clean" when it is merely empty.
 - Accepting purple gradients, dramatic shadows, or template SaaS cards as a substitute for design intent.
 - Treating code smell as final proof instead of an early warning that still needs rendered verification.
@@ -109,7 +116,7 @@ Stop or narrow when:
 
 ## Verification
 
-Before claiming a UI is polished, ready, works, or improved, name the evidence: rendered artifact, `Must not break` conditions, desktop/mobile viewport checks, real interactions exercised, accessibility or keyboard result, console/network status when available, AI slop signals reviewed, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
+Before claiming a UI is polished, ready, works, or improved, name the evidence: rendered artifact, `Must not break` conditions, desktop/mobile viewport checks, real interactions exercised, motion feedback contract when relevant, accessibility or keyboard result, console/network status when available, AI slop signals reviewed, objective rejection criteria, must-fix issues, should-fix risks, human judgment still needed, and explicit not-run status.
 
 ## Handoffs
 
